@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Understanding the Guessing Machines — an interactive course on AI &amp; LLMs</title>
+<meta name="description" content="A 12-week self-paced interactive course on AI and LLMs — epistemology first, machinery second. No math or CS background assumed.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔮</text></svg>">
+<link rel="stylesheet" href="css/base-theme-and-design-tokens.css">
+<link rel="stylesheet" href="css/layout-sidebar-and-navigation.css">
+<link rel="stylesheet" href="css/content-components-and-cards.css">
+<link rel="stylesheet" href="css/interactive-widget-styles.css">
+</head>
+<body>
+<a class="skip-link" href="#app">Skip to content</a>
+<button id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+<nav id="sidebar" class="sidebar" aria-label="Course navigation"></nav>
+<div id="sidebar-scrim" class="sidebar-scrim" hidden></div>
+<main id="app" class="main-content" tabindex="-1"></main>
+
+<!-- Core: helpers + persistent progress -->
+<script src="js/dom-helpers-and-namespace.js"></script>
+<script src="js/progress-store-local-storage.js"></script>
+
+<!-- Interactive widgets (register into GM.widgets) -->
+<script src="js/widgets/cloze-guessing-game-widget.js"></script>
+<script src="js/widgets/shannon-letter-guessing-widget.js"></script>
+<script src="js/widgets/twenty-questions-splitter-widget.js"></script>
+<script src="js/widgets/prediction-difficulty-ladder-widget.js"></script>
+<script src="js/widgets/compression-relay-summary-widget.js"></script>
+<script src="js/widgets/rule-induction-game-widget.js"></script>
+<script src="js/widgets/ascription-transcript-game-widget.js"></script>
+<script src="js/widgets/calibration-interval-quiz-widget.js"></script>
+<script src="js/widgets/chat-memory-learning-vs-recalling-widget.js"></script>
+<script src="js/widgets/temperature-knob-lab-widget.js"></script>
+<script src="js/widgets/hallucination-elicitation-lab-widget.js"></script>
+<script src="js/widgets/jargon-reveal-set-piece-widget.js"></script>
+<script src="js/widgets/gradient-descent-hand-crank-widget.js"></script>
+<script src="js/widgets/attention-relevance-visualizer-widget.js"></script>
+<script src="js/widgets/induction-head-pattern-demo-widget.js"></script>
+<script src="js/widgets/capstone-500-word-editor-widget.js"></script>
+
+<!-- Curriculum content (register into GM.weeks) -->
+<script src="js/data/jargon-dictionary-entries.js"></script>
+<script src="js/data/arc1-prediction-before-machines-weeks.js"></script>
+<script src="js/data/arc2-what-counts-as-knowing-weeks.js"></script>
+<script src="js/data/arc3-the-machine-weeks.js"></script>
+<script src="js/data/arc4-under-the-hood-weeks.js"></script>
+
+<!-- Views + router -->
+<script src="js/views/home-overview-and-principles-view.js"></script>
+<script src="js/views/week-session-view.js"></script>
+<script src="js/views/jargon-dictionary-view.js"></script>
+<script src="js/app-router-and-sidebar-navigation.js"></script>
+</body>
+</html>

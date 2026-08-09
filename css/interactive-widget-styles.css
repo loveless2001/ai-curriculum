@@ -1,0 +1,109 @@
+/* Shared styles for interactive exercise widgets. */
+.gm-widget {
+  background: var(--bg-raised); border: 1.5px solid var(--teal);
+  border-radius: var(--radius); padding: 1.2rem 1.4rem; margin: 1.4rem 0;
+  font-family: var(--font-sans); box-shadow: var(--shadow);
+}
+.gm-widget-title { display: flex; align-items: center; gap: .5em; font-weight: 700; font-size: .95rem; margin: 0 0 .2rem; color: var(--teal); }
+.gm-widget-sub { font-size: .84rem; color: var(--muted); margin: 0 0 1rem; }
+.gm-widget input[type="text"], .gm-widget input[type="number"], .gm-widget textarea, .gm-widget select {
+  font-family: var(--font-sans); font-size: .95rem; color: var(--ink);
+  background: var(--bg); border: 1px solid var(--line-strong); border-radius: 7px;
+  padding: .45em .7em; max-width: 100%;
+}
+.gm-widget textarea { width: 100%; resize: vertical; line-height: 1.5; }
+.gm-widget input:focus, .gm-widget textarea:focus, .gm-widget select:focus { outline: 2px solid var(--teal); outline-offset: 1px; }
+.gm-row { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; margin: .6rem 0; }
+
+/* Distribution bars (candidate words, probabilities) */
+.dist-row { display: grid; grid-template-columns: 7.5em 1fr 3.2em; gap: .6em; align-items: center; margin: .3em 0; font-size: .88rem; }
+.dist-word { font-family: var(--font-mono); font-size: .82rem; text-align: right; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dist-track { background: var(--bg-inset); border-radius: 4px; height: 1.15em; overflow: hidden; }
+.dist-fill { height: 100%; background: var(--teal); border-radius: 4px; transition: width .35s ease; min-width: 2px; }
+.dist-fill.accent { background: var(--accent); }
+.dist-pct { font-family: var(--font-mono); font-size: .76rem; color: var(--muted); }
+
+/* Feedback states */
+.feedback { border-radius: 8px; padding: .7em 1em; margin: .8rem 0; font-size: .92rem; }
+.feedback.good { background: var(--good-soft); color: var(--good); }
+.feedback.bad { background: var(--bad-soft); color: var(--bad); }
+.feedback.info { background: var(--teal-soft); color: var(--teal); }
+.feedback.warn { background: var(--gold-soft); color: var(--gold); }
+
+.chip {
+  display: inline-block; font-size: .8rem; padding: .25em .8em; border-radius: 99px;
+  background: var(--bg-inset); border: 1px solid var(--line-strong); cursor: pointer; user-select: none;
+}
+.chip:hover { border-color: var(--teal); }
+.chip.selected { background: var(--teal-soft); border-color: var(--teal); color: var(--teal); font-weight: 600; }
+.chip.static { cursor: default; }
+
+/* Machine voice: simulated model output */
+.machine-out {
+  font-family: var(--font-mono); font-size: .85rem; line-height: 1.6;
+  background: var(--bg-inset); border: 1px solid var(--line);
+  border-left: 3px solid var(--teal); border-radius: 6px; padding: .8em 1em; margin: .5rem 0;
+  white-space: pre-wrap;
+}
+.machine-tag { font-size: .68rem; text-transform: uppercase; letter-spacing: .08em; color: var(--teal); display: block; margin-bottom: .3em; }
+
+/* Letter keyboard (Shannon game) */
+.letter-grid { display: flex; flex-wrap: wrap; gap: .3rem; margin: .6rem 0; }
+.letter-key {
+  font-family: var(--font-mono); font-size: .9rem; width: 2.1em; height: 2.1em;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--bg); border: 1px solid var(--line-strong); border-radius: 6px; cursor: pointer;
+}
+.letter-key:hover:not(:disabled) { border-color: var(--accent); }
+.letter-key:disabled { opacity: .3; cursor: not-allowed; }
+.revealed-text { font-family: var(--font-mono); font-size: 1rem; letter-spacing: .12em; background: var(--bg-inset); padding: .6em .8em; border-radius: 6px; word-break: break-all; }
+.guess-count-strip { display: flex; flex-wrap: wrap; gap: 2px; margin-top: .5rem; }
+.guess-count-cell { font-family: var(--font-mono); font-size: .68rem; min-width: 1.5em; text-align: center; padding: .2em .1em; border-radius: 3px; background: var(--bg-inset); }
+
+/* Ranking ladder */
+.ladder-item { display: flex; align-items: center; gap: .6rem; background: var(--bg); border: 1px solid var(--line-strong); border-radius: 8px; padding: .5em .8em; margin: .4rem 0; font-size: .9rem; }
+.ladder-item .ladder-btns { margin-left: auto; display: flex; gap: .3rem; }
+
+/* Slider */
+.gm-slider { display: flex; align-items: center; gap: .8rem; margin: .8rem 0; }
+.gm-slider input[type="range"] { flex: 1; accent-color: var(--accent); }
+.gm-slider .slider-val { font-family: var(--font-mono); font-size: .9rem; min-width: 4.5em; text-align: center; background: var(--bg-inset); border-radius: 6px; padding: .2em .4em; }
+
+/* Jargon reveal flip cards */
+.jargon-row { display: grid; grid-template-columns: 1fr auto 1fr; gap: .7rem; align-items: center; margin: .5rem 0; }
+.jargon-folk { text-align: right; font-family: var(--font-serif); font-style: italic; }
+.jargon-tech { font-family: var(--font-mono); font-size: .85rem; color: var(--teal); font-weight: 600; }
+.jargon-tech.hidden-term { filter: blur(6px); user-select: none; transition: filter .5s ease; }
+.jargon-arrow { color: var(--muted); }
+
+/* SVG plots */
+.gm-plot { width: 100%; height: auto; display: block; margin: .6rem 0; }
+.gm-plot .plot-line { stroke: var(--teal); stroke-width: 2.5; fill: none; }
+.gm-plot .plot-axis { stroke: var(--line-strong); stroke-width: 1; }
+.gm-plot .plot-ball { fill: var(--accent); }
+.gm-plot text { font-family: var(--font-sans); font-size: 11px; fill: var(--muted); }
+
+/* Attention visualizer */
+.attn-sentence { display: flex; flex-wrap: wrap; gap: .35rem; margin: .8rem 0; }
+.attn-word { font-family: var(--font-mono); font-size: .9rem; padding: .25em .5em; border-radius: 6px; background: var(--bg-inset); cursor: pointer; border: 1px solid transparent; transition: background .2s; }
+.attn-word:hover { border-color: var(--teal); }
+.attn-word.focus { background: var(--accent); color: #fff; }
+
+/* Transcript cards (ascription game) */
+.transcript { font-size: .92rem; }
+.transcript .speaker { font-weight: 700; font-family: var(--font-sans); font-size: .8rem; }
+
+/* Log tables inside widgets */
+.gm-widget table { font-size: .85rem; }
+.gm-widget th, .gm-widget td { padding: .35em .6em; }
+
+.word-count-pill { font-family: var(--font-mono); font-size: .8rem; padding: .2em .7em; border-radius: 99px; background: var(--bg-inset); }
+.word-count-pill.over { background: var(--bad-soft); color: var(--bad); font-weight: 700; }
+.word-count-pill.good { background: var(--good-soft); color: var(--good); }
+
+@media (max-width: 640px) {
+  .dist-row { grid-template-columns: 5.5em 1fr 2.8em; }
+  .jargon-row { grid-template-columns: 1fr; text-align: left; }
+  .jargon-folk { text-align: left; }
+  .jargon-arrow { display: none; }
+}

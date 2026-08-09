@@ -1,0 +1,91 @@
+/* Design tokens + base typography. Warm paper/ink reading theme, dark-mode aware. */
+:root {
+  --bg: #f6f1e7;
+  --bg-raised: #fffdf7;
+  --bg-inset: #efe8d9;
+  --ink: #262f38;
+  --ink-soft: #55504a;
+  --muted: #837c72;
+  --line: #e0d7c4;
+  --line-strong: #c9bda3;
+  --accent: #b0521d;        /* burnt orange — actions, highlights */
+  --accent-soft: #f3dfd0;
+  --teal: #176672;          /* machine / technical voice */
+  --teal-soft: #d8e8e9;
+  --good: #3d7a3f;
+  --good-soft: #dcead8;
+  --bad: #a33b2e;
+  --bad-soft: #f0dcd6;
+  --gold: #9a7b2d;
+  --gold-soft: #f0e6c8;
+  --shadow: 0 1px 2px rgba(60, 45, 20, .06), 0 4px 16px rgba(60, 45, 20, .07);
+  --radius: 10px;
+  --font-emoji: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji";
+  --font-serif: "Charter", "Iowan Old Style", Georgia, Cambria, "Times New Roman", serif, var(--font-emoji);
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif, var(--font-emoji);
+  --font-mono: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace, var(--font-emoji);
+  --sidebar-w: 292px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #15191e;
+    --bg-raised: #1d2329;
+    --bg-inset: #10141a;
+    --ink: #e6dfd2;
+    --ink-soft: #c3bcae;
+    --muted: #8d8779;
+    --line: #2c343c;
+    --line-strong: #43505c;
+    --accent: #e0813e;
+    --accent-soft: #3a2a1c;
+    --teal: #5fb6c2;
+    --teal-soft: #16333a;
+    --good: #7cb87a;
+    --good-soft: #23361f;
+    --bad: #d97b66;
+    --bad-soft: #3d241d;
+    --gold: #cfa84e;
+    --gold-soft: #37301a;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 4px 16px rgba(0, 0, 0, .35);
+  }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-serif);
+  font-size: 1.06rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4 { font-family: var(--font-serif); line-height: 1.25; color: var(--ink); }
+h1 { font-size: 2rem; letter-spacing: -.01em; }
+h2 { font-size: 1.45rem; margin-top: 2.2rem; }
+h3 { font-size: 1.15rem; }
+p { margin: .85em 0; }
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { text-decoration-thickness: 2px; }
+strong { color: var(--ink); }
+em { color: var(--ink-soft); }
+code, .mono { font-family: var(--font-mono); font-size: .88em; }
+code { background: var(--bg-inset); padding: .1em .35em; border-radius: 4px; }
+blockquote {
+  margin: 1.2em 0; padding: .6em 1.1em;
+  border-left: 3px solid var(--accent);
+  background: var(--bg-raised); border-radius: 0 var(--radius) var(--radius) 0;
+  font-style: italic; color: var(--ink-soft);
+}
+hr { border: none; border-top: 1px solid var(--line); margin: 2.5rem 0; }
+ul, ol { padding-left: 1.4em; }
+li { margin: .4em 0; }
+table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+th, td { text-align: left; padding: .5em .8em; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-family: var(--font-sans); font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.skip-link {
+  position: absolute; left: -9999px; top: 0; z-index: 100;
+  background: var(--accent); color: #fff; padding: .5em 1em;
+}
+.skip-link:focus { left: 0; }
+::selection { background: var(--accent-soft); }
