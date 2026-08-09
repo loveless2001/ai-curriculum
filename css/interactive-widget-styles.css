@@ -52,6 +52,7 @@
 .letter-key {
   font-family: var(--font-mono); font-size: .9rem; width: 2.1em; height: 2.1em;
   display: inline-flex; align-items: center; justify-content: center;
+  color: var(--ink);
   background: var(--bg); border: 1px solid var(--line-strong); border-radius: 6px; cursor: pointer;
 }
 .letter-key:hover:not(:disabled) { border-color: var(--accent); }

@@ -1,5 +1,6 @@
 /* Design tokens + base typography. Warm paper/ink reading theme, dark-mode aware. */
 :root {
+  color-scheme: light;
   --bg: #f6f1e7;
   --bg-raised: #fffdf7;
   --bg-inset: #efe8d9;
@@ -28,6 +29,7 @@
 }
 @media (prefers-color-scheme: dark) {
   :root {
+    color-scheme: dark;
     --bg: #15191e;
     --bg-raised: #1d2329;
     --bg-inset: #10141a;
