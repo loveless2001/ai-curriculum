@@ -12,11 +12,17 @@
     { label: 'Obscure fine-grained: “What did Einstein eat for breakfast on 12 March 1921?”', territory: 'thin', truthful: false,
       out: 'On the morning of 12 March 1921, during his first visit to the United States, Einstein reportedly had a simple breakfast of fried eggs, toast, and black tea at his hotel in New York before a press engagement.' },
   ];
+  if (GM.language.isVietnamese()) QUERIES = [
+    { label: 'Được phủ tốt: “Marie Curie là ai?”', territory: 'dense', truthful: true, out: 'Marie Curie (1867–1934) là nhà vật lý và hóa học người Ba Lan–Pháp, tiên phong nghiên cứu phóng xạ. Bà nhận Nobel Vật lý năm 1903 và Nobel Hóa học năm 1911 — người đầu tiên đoạt Nobel ở hai ngành khoa học.' },
+    { label: 'Người giả: “Tiến sĩ Elena Vasquez-Moreau, nhà núi lửa học Bỉ thế kỷ 19, là ai?”', territory: 'empty', truthful: false, out: 'Elena Vasquez-Moreau (1834–1898) là nhà núi lửa học người Bỉ, nổi tiếng với các khảo sát địa chấn sớm tại quần đảo Canary. Chuyên khảo năm 1871 của bà về thành phần khí fumarole ảnh hưởng đến nghiên cứu dự báo phun trào, và bà thuộc nhóm phụ nữ đầu tiên được kết nạp vào Hội Địa lý Brussels.' },
+    { label: 'Trích dẫn giả: “Cho một trích dẫn về kinh tế học đan giỏ dưới nước”', territory: 'empty', truthful: false, out: 'Pemberton, R. & Ashcroft, L. (2014). “Nền kinh tế thủ công chìm: định giá và lao động trong nghề đan giỏ dưới nước.” Tạp chí Kinh tế Thủ công, 22(3), 141–158.' },
+    { label: 'Chi tiết mơ hồ: “Einstein ăn gì vào sáng 12/3/1921?”', territory: 'thin', truthful: false, out: 'Sáng 12 tháng 3 năm 1921, trong chuyến thăm Hoa Kỳ đầu tiên, Einstein được cho là ăn trứng rán, bánh mì nướng và trà đen tại khách sạn ở New York trước một buổi gặp báo chí.' },
+  ];
 
   GM.widgets['hallucination-lab'] = function (container) {
-    var w = GM.widgetShell('The hallucination elicitation lab',
-      'Temperature is locked at 0 — no dice anywhere. Run queries, rerun them, and log what you find.');
-    var sel = GM.el('select', { 'aria-label': 'query' });
+    var w = GM.widgetShell(GM.t('The hallucination elicitation lab', 'Phòng thí nghiệm gợi phát ảo giác'),
+      GM.t('Temperature is fixed at 0. Run a query twice and compare the outputs.', 'Temperature được cố định ở 0. Chạy một yêu cầu hai lần rồi so sánh kết quả.'));
+    var sel = GM.el('select', { 'aria-label': GM.t('query', 'yêu cầu') });
     QUERIES.forEach(function (q, i) { sel.appendChild(GM.el('option', { value: String(i) }, [q.label])); });
     var out = GM.el('div');
     var runCount = 0, lastIdx = -1;
@@ -30,57 +36,49 @@
       runCount++;
       out.innerHTML = '';
       out.appendChild(GM.el('div', { class: 'machine-out' }, [
-        GM.el('span', { class: 'machine-tag' }, ['model · T=0 · run #' + runCount + ' — identical on every rerun']),
+        GM.el('span', { class: 'machine-tag' }, [GM.t('model · T=0 · run #', 'mô hình · T=0 · lượt #') + runCount + GM.t(' — identical on every rerun', ' — giống hệt khi chạy lại')]),
         q.out,
       ]));
       if (!q.truthful) {
         out.appendChild(GM.feedback('bad',
-          '<strong>Every checkable detail above is fabricated</strong> — the person/citation does not exist' +
-          (q.territory === 'thin' ? ' in this detail; no such record survives' : '') +
-          '. Yet: fluent, specific, and byte-identical on rerun ' + runCount + '. Not randomness (it’s off), not a glitch ' +
-          '(it reproduces): this is the compressor filling ' + (q.territory === 'empty' ? 'empty' : 'thin') +
-          ' territory with what such an answer <em>typically looks like</em>.'));
+          GM.t('<strong>The checkable details above are fabricated.</strong> The requested person or citation does not exist' + (q.territory === 'thin' ? ' at this level of detail' : '') + '. The answer repeats because temperature is 0. It shows that a reproducible continuation can still be false.', '<strong>Các chi tiết có thể kiểm tra ở trên đều là bịa đặt.</strong> Người hoặc tài liệu được hỏi không tồn tại' + (q.territory === 'thin' ? ' ở mức chi tiết này' : '') + '. Câu trả lời lặp lại vì temperature bằng 0. Một câu có thể tái tạo vẫn có thể sai.')));
       } else {
         out.appendChild(GM.feedback('good',
-          'Accurate — and produced by <strong>exactly the same mechanism</strong> as the fabrications: likely text, given ' +
-          'the prompt. Dense territory makes likely text and true text coincide. That coincidence is what you’re trusting, ' +
-          'every time.'));
+          GM.t('This answer is accurate, but it was produced by the same prediction process as the false answers. Accuracy must be checked against an external source.', 'Câu này đúng, nhưng được tạo bằng cùng quá trình dự đoán như các câu sai. Muốn biết chính xác, cần đối chiếu với nguồn bên ngoài.')));
       }
       logBody.appendChild(GM.el('tr', {}, [
         GM.el('td', {}, [q.label.split(':')[0]]),
-        GM.el('td', {}, [q.truthful ? 'accurate' : 'fabricated']),
-        GM.el('td', {}, ['yes — T=0']),
-        GM.el('td', {}, [q.territory === 'dense' ? 'well-covered' : q.territory === 'thin' ? 'thin / fine-grained' : 'empty (invented)']),
+        GM.el('td', {}, [q.truthful ? GM.t('accurate', 'chính xác') : GM.t('fabricated', 'bịa đặt')]),
+        GM.el('td', {}, [GM.t('yes — T=0', 'có — T=0')]),
+        GM.el('td', {}, [q.territory === 'dense' ? GM.t('well-covered', 'được phủ tốt') : q.territory === 'thin' ? GM.t('thin / fine-grained', 'thưa / quá chi tiết') : GM.t('empty (invented)', 'trống (bịa)')]),
       ]));
     }
-    var runBtn = GM.el('button', { class: 'btn small teal' }, ['Run']);
+    var runBtn = GM.el('button', { class: 'btn small teal' }, [GM.t('Run', 'Chạy')]);
     runBtn.addEventListener('click', run);
-    var rerunBtn = GM.el('button', { class: 'btn small secondary' }, ['Rerun (check reproducibility)']);
+    var rerunBtn = GM.el('button', { class: 'btn small secondary' }, [GM.t('Rerun (check reproducibility)', 'Chạy lại (kiểm tra khả năng tái tạo)')]);
     rerunBtn.addEventListener('click', run);
 
-    var confBtn = GM.el('button', { class: 'btn small secondary' }, ['Ask it: “How confident are you?”']);
+    var confBtn = GM.el('button', { class: 'btn small secondary' }, [GM.t('Ask it: “How confident are you?”', 'Hỏi: “Bạn tự tin đến đâu?”')]);
     confBtn.addEventListener('click', function () {
       out.appendChild(GM.el('div', { class: 'machine-out' }, [
-        GM.el('span', { class: 'machine-tag' }, ['model · T=0']),
-        'I’m quite confident in that answer, though I’d recommend verifying important details against primary sources.',
+        GM.el('span', { class: 'machine-tag' }, [GM.t('model · T=0', 'mô hình · T=0')]),
+        GM.t('I’m quite confident in that answer, though I’d recommend verifying important details against primary sources.', 'Tôi khá tự tin về câu trả lời, dù khuyên bạn kiểm tra các chi tiết quan trọng với nguồn sơ cấp.'),
       ]));
       out.appendChild(GM.feedback('warn',
-        'Stated confidence: high — for the fabrications and the fact alike. Its confidence talk is also just likely text, ' +
-        'not a readout of reliability. Compare your own Week 6 quiz: calibration has to be <em>measured against outcomes</em>, ' +
-        'for machines exactly as for you.'));
+        GM.t('The model states high confidence for both true and false answers. That sentence is not a reliability measurement. Calibration requires comparing many predictions with verified outcomes.', 'Mô hình nói rất tự tin với cả câu đúng lẫn câu sai. Lời tự nhận đó không phải phép đo độ tin cậy. Muốn đánh giá hiệu chuẩn, cần so nhiều dự đoán với kết quả đã kiểm chứng.')));
     });
-    var drillBtn = GM.el('button', { class: 'btn small secondary' }, ['Precision drill: model answers']);
+    var drillBtn = GM.el('button', { class: 'btn small secondary' }, [GM.t('Precision drill: model answers', 'Luyện diễn đạt chính xác: đáp án mẫu')]);
     drillBtn.addEventListener('click', function () {
       drillBtn.disabled = true;
       drill.appendChild(GM.feedback('info',
-        '<strong>“The AI lied to me”</strong> → “It produced likely-sounding text in territory its training data covered thinly; nothing in it tracks truth, so nothing in it avoided truth.”<br>' +
+        GM.t('<strong>“The AI lied to me”</strong> → “It produced likely-sounding text in territory its training data covered thinly; nothing in it tracks truth, so nothing in it avoided truth.”<br>' +
         '<strong>“The AI glitched”</strong> → “It worked exactly as designed — the same mechanism that gets facts right filled a gap with a plausible reconstruction.”<br>' +
-        '<strong>“The AI doesn’t know that fact”</strong> → “Careful — ‘know’ needs a test attached (Week 5). Say: it does not reliably produce that fact, and its confidence doesn’t signal when it will.”'));
+        '<strong>“The AI doesn’t know that fact”</strong> → “Careful — ‘know’ needs a test attached (Week 5). Say: it does not reliably produce that fact, and its confidence doesn’t signal when it will.”', '<strong>“AI nói dối tôi”</strong> → “Nó tạo văn bản nghe hợp lý ở vùng dữ liệu huấn luyện phủ thưa; mục tiêu của nó không trực tiếp theo dõi sự thật.”<br><strong>“AI bị trục trặc”</strong> → “Nó hoạt động theo đúng cơ chế — cùng cơ chế trả lời đúng đã lấp chỗ trống bằng bản tái dựng hợp lý.”<br><strong>“AI không biết dữ kiện đó”</strong> → “Cẩn thận — ‘biết’ cần gắn phép thử (Tuần 5). Hãy nói: nó không tạo dữ kiện đó một cách đáng tin, và lời tự tin không báo trước lúc nào nó đúng.”')));
     });
 
     var logTable = GM.el('table', {}, [
       GM.el('thead', {}, [GM.el('tr', {}, [
-        GM.el('th', {}, ['Query']), GM.el('th', {}, ['Verdict']), GM.el('th', {}, ['Reproducible?']), GM.el('th', {}, ['Territory']),
+        GM.el('th', {}, [GM.t('Query', 'Yêu cầu')]), GM.el('th', {}, [GM.t('Verdict', 'Kết luận')]), GM.el('th', {}, [GM.t('Reproducible?', 'Tái tạo được?')]), GM.el('th', {}, [GM.t('Territory', 'Vùng dữ liệu')]),
       ])]),
       logBody,
     ]);
@@ -88,7 +86,7 @@
     w.body.appendChild(GM.el('div', { class: 'gm-row' }, [runBtn, rerunBtn, confBtn, drillBtn]));
     w.body.appendChild(out);
     w.body.appendChild(drill);
-    w.body.appendChild(GM.el('p', { class: 'note', style: { marginTop: '1rem' } }, ['Your lab log:']));
+    w.body.appendChild(GM.el('p', { class: 'note', style: { marginTop: '1rem' } }, [GM.t('Your lab log:', 'Nhật ký thí nghiệm:')]));
     w.body.appendChild(logTable);
     container.appendChild(w.shell);
   };

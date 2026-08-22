@@ -8,6 +8,28 @@ window.GM = {
   jargon: [],       // two-column dictionary entries
 };
 
+/* Language choice is separate from learner progress so switching languages never
+   resets checkpoints or saved work. Keep this tiny and synchronous for file://. */
+GM.language = (function () {
+  var key = 'guessing-machines-language-v1';
+  var current = 'en';
+  try { current = localStorage.getItem(key) === 'vi' ? 'vi' : 'en'; } catch (e) { /* use English */ }
+  return {
+    get: function () { return current; },
+    isVietnamese: function () { return current === 'vi'; },
+    set: function (language) {
+      current = language === 'vi' ? 'vi' : 'en';
+      try { localStorage.setItem(key, current); } catch (e) { /* keep in-memory choice */ }
+      location.reload();
+    },
+  };
+})();
+
+/* Compact bilingual helper used by the shell and interactive widgets. */
+GM.t = function (english, vietnamese) {
+  return GM.language.isVietnamese() ? vietnamese : english;
+};
+
 /* el('div', {class:'card', onclick:fn}, [children|string]) -> HTMLElement */
 GM.el = function (tag, attrs, children) {
   var node = document.createElement(tag);

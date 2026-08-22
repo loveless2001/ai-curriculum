@@ -1,7 +1,12 @@
 # Codebase Summary — Understanding the Guessing Machines
 
-Standalone interactive web curriculum implementing `outline.md` (12-week AI/LLM course).
+Standalone bilingual interactive web curriculum implementing `outline.md` (12-week AI/LLM course).
 **No build step, no server, no dependencies** — open `index.html` directly (works over `file://`).
+
+English is the default. The sidebar language switch selects English or Vietnamese,
+persists the choice in a dedicated localStorage key, and keeps learner progress and
+saved widget work shared across both editions. Vietnamese lessons are reader-first
+reconstructions; language-dependent exercises use Vietnamese prompts and examples.
 
 ## Architecture
 
@@ -21,6 +26,7 @@ js/
   app-router-and-sidebar-navigation.js  # routes: #/ , #/week/N , #/dictionary
   views/                            # home, week (4-beat session renderer), dictionary (gated)
   data/                             # GM.arcs + GM.weeks content per arc; jargon entries
+  i18n/                             # Vietnamese arc overlays loaded before views
   widgets/                          # 16 self-contained interactives, GM.widgets[name] = mount(el, opts)
 ```
 
@@ -40,6 +46,9 @@ js/
 `headless-smoke-test-all-routes.js`) verifies: all 13 routes render, dictionary
 gate, temp-0 determinism, calibration scoring, checkpoint persistence, 0 console
 errors. Re-run against `file://` after changes.
+
+Run `node tests/bilingual-localization-smoke.js` to verify both language datasets,
+all 12 Vietnamese weeks, localization load order, and all 16 widget registrations.
 
 ## Conventions
 - Kebab-case, long descriptive filenames; every file < 200 lines.

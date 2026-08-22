@@ -2,22 +2,22 @@
    the dictionary page for the rest of the course. */
 (function () {
   GM.widgets['jargon-reveal'] = function (container) {
-    var w = GM.widgetShell('The reveal',
-      'Nine weeks of folk vocabulary, one term at a time. Click each blurred term — or take them all at once.');
+    var w = GM.widgetShell(GM.t('The reveal', 'Màn bật mí'),
+      GM.t('Nine weeks of folk vocabulary, one term at a time. Click each blurred term — or take them all at once.', 'Chín tuần dùng từ đời thường, giờ mở từng thuật ngữ. Nhấp từng từ bị làm mờ — hoặc mở tất cả.'));
     var remaining = GM.jargon.length;
     var finale = GM.el('div');
     function done() {
       if (GM.store.isJargonRevealed()) return;
       GM.store.setJargonRevealed();
       finale.appendChild(GM.feedback('good',
-        '🎓 <strong>That’s the whole secret.</strong> You have been doing next-token prediction, loss minimization, ' +
-        'decoding strategy and calibration analysis for nine weeks — you were only missing the passwords. ' +
-        'The <a href="#/dictionary">two-column dictionary</a> is now unlocked in the sidebar, for keeps.'));
+        GM.t('<strong>All terms are now visible.</strong> The <a href="#/dictionary">two-column dictionary</a> links each ' +
+        'technical term to the exercise where you first used the idea.', '<strong>Tất cả thuật ngữ đã được mở.</strong> ' +
+        '<a href="#/dictionary">Từ điển hai cột</a> nối mỗi thuật ngữ kỹ thuật với bài tập nơi bạn dùng ý đó lần đầu.')));
     }
     GM.jargon.forEach(function (row) {
       var tech = GM.el('span', {
         class: 'jargon-tech' + (GM.store.isJargonRevealed() ? '' : ' hidden-term'),
-        role: 'button', tabindex: '0', title: 'click to reveal',
+        role: 'button', tabindex: '0', title: GM.t('click to reveal', 'nhấp để mở'),
       }, [row.tech]);
       function reveal() {
         if (!tech.classList.contains('hidden-term')) return;
@@ -34,14 +34,14 @@
       ]));
     });
     if (!GM.store.isJargonRevealed()) {
-      var allBtn = GM.el('button', { class: 'btn' }, ['Reveal everything']);
+      var allBtn = GM.el('button', { class: 'btn' }, [GM.t('Reveal everything', 'Mở tất cả')]);
       allBtn.addEventListener('click', function () {
         w.body.querySelectorAll('.jargon-tech').forEach(function (t) { t.classList.remove('hidden-term'); });
         remaining = 0; done();
       });
       w.body.appendChild(GM.el('div', { class: 'gm-row', style: { marginTop: '1rem' } }, [allBtn]));
     } else {
-      finale.appendChild(GM.feedback('info', 'Already revealed — the <a href="#/dictionary">dictionary</a> is yours.'));
+      finale.appendChild(GM.feedback('info', GM.t('Already revealed — the <a href="#/dictionary">dictionary</a> is yours.', 'Đã bật mí — <a href="#/dictionary">từ điển</a> thuộc về bạn.')));
     }
     w.body.appendChild(finale);
     container.appendChild(w.shell);

@@ -1,7 +1,7 @@
 /* Prediction difficulty ladder: rank events from easiest to hardest to predict,
    then reveal per-item discussion of WHAT makes each hard. */
 (function () {
-  var ITEMS = [
+  var EN_ITEMS = [
     { t: 'The next word of your national anthem', d: 'Near-perfectly predictable — the text is fixed and you’ve rehearsed it. Prediction here is pure recall of structure.' },
     { t: 'The next word after “she poured the coffee into the…”', d: 'Almost forced by grammar and habit — but not fixed. This is structure without a script.' },
     { t: 'What a close friend texts back to “dinner tonight?”', d: 'You have a rich model of one specific person — better than any stranger could do, still far from certain. Personal data narrows the field.' },
@@ -9,10 +9,19 @@
     { t: 'A fair coin flip', d: 'Irreducibly 50/50. No amount of skill or data helps. Note: hard-to-predict is not the same as complicated.' },
     { t: 'The winning lottery numbers', d: 'Like the coin but worse — vastly more possibilities, all equally likely. Maximum openness.' },
   ];
+  var VI_ITEMS = [
+    { t: 'Từ tiếp theo trong quốc ca của bạn', d: 'Gần như dự đoán hoàn hảo — văn bản cố định và bạn đã nghe nhiều lần. Dự đoán ở đây là nhớ lại cấu trúc.' },
+    { t: 'Từ tiếp theo sau “cô ấy rót cà phê vào…”', d: 'Gần như bị ngữ pháp và thói quen ép buộc — nhưng không hoàn toàn cố định. Đây là cấu trúc không có kịch bản.' },
+    { t: 'Tin nhắn một người bạn thân trả lời câu “tối nay ăn gì?”', d: 'Bạn có mô hình phong phú về một người cụ thể — tốt hơn người lạ, nhưng vẫn xa chắc chắn. Dữ liệu cá nhân thu hẹp phạm vi.' },
+    { t: 'Thời tiết ngày mai', d: 'Có thể dự đoán một phần từ hôm nay (tính liên tục và vật lý), nhưng giảm nhanh theo khoảng cách thời gian. Khó vì hệ hỗn loạn, không phải vì thiếu kịch bản.' },
+    { t: 'Một lần tung đồng xu công bằng', d: 'Không thể giảm khỏi 50/50. Kỹ năng hay dữ liệu thêm đều không giúp. Khó dự đoán không đồng nghĩa phức tạp.' },
+    { t: 'Các con số trúng xổ số', d: 'Giống đồng xu nhưng tệ hơn — vô số khả năng, tất cả ngang nhau. Mức rộng mở tối đa.' },
+  ];
+  var ITEMS = GM.language.isVietnamese() ? VI_ITEMS : EN_ITEMS;
 
   GM.widgets['ladder-rank'] = function (container) {
-    var w = GM.widgetShell('The difficulty ladder',
-      'Use ▲▼ to order: easiest to predict at top, hardest at bottom. Then reveal the discussion.');
+    var w = GM.widgetShell(GM.t('The difficulty ladder', 'Thang độ khó'),
+      GM.t('Use ▲▼ to order: easiest to predict at top, hardest at bottom. Then reveal the discussion.', 'Dùng ▲▼ để xếp: dễ dự đoán nhất ở trên, khó nhất ở dưới. Sau đó mở phần thảo luận.'));
     var order = ITEMS.map(function (_, i) { return i; });
     // Start shuffled so the ranking is real work.
     order.sort(function () { return Math.random() - 0.5; });
@@ -22,8 +31,8 @@
     function render() {
       list.innerHTML = '';
       order.forEach(function (itemIdx, pos) {
-        var up = GM.el('button', { class: 'btn small secondary', 'aria-label': 'move up' }, ['▲']);
-        var down = GM.el('button', { class: 'btn small secondary', 'aria-label': 'move down' }, ['▼']);
+        var up = GM.el('button', { class: 'btn small secondary', 'aria-label': GM.t('move up', 'di chuyển lên') }, ['▲']);
+        var down = GM.el('button', { class: 'btn small secondary', 'aria-label': GM.t('move down', 'di chuyển xuống') }, ['▼']);
         up.disabled = pos === 0; down.disabled = pos === order.length - 1;
         up.addEventListener('click', function () { swap(pos, pos - 1); });
         down.addEventListener('click', function () { swap(pos, pos + 1); });
@@ -38,17 +47,17 @@
       var t = order[a]; order[a] = order[b]; order[b] = t;
       render();
     }
-    var revealBtn = GM.el('button', { class: 'btn small' }, ['Reveal the discussion']);
+    var revealBtn = GM.el('button', { class: 'btn small' }, [GM.t('Reveal the discussion', 'Mở phần thảo luận')]);
     revealBtn.addEventListener('click', function () {
       out.innerHTML = '';
-      out.appendChild(GM.feedback('info', 'There is no single right order — what matters is that “hard to predict” turned out to have <em>different causes</em>: fixed scripts, grammatical structure, personal knowledge, chaos, and pure chance are all different rungs.'));
+      out.appendChild(GM.feedback('info', GM.t('There is no single right order — what matters is that “hard to predict” turned out to have <em>different causes</em>: fixed scripts, grammatical structure, personal knowledge, chaos, and pure chance are all different rungs.', 'Không có thứ tự đúng duy nhất — điều quan trọng là “khó dự đoán” có <em>nhiều nguyên nhân</em>: kịch bản cố định, cấu trúc ngữ pháp, hiểu biết cá nhân, hỗn loạn và ngẫu nhiên thuần túy là các bậc khác nhau.')));
       order.forEach(function (itemIdx) {
         out.appendChild(GM.el('div', { class: 'card', style: { boxShadow: 'none', padding: '.7rem 1rem' } }, [
           GM.el('strong', { style: { fontFamily: 'var(--font-sans)', fontSize: '.88rem' } }, [ITEMS[itemIdx].t]),
           GM.el('p', { style: { margin: '.3em 0 0', fontSize: '.92rem' } }, [ITEMS[itemIdx].d]),
         ]));
       });
-      out.appendChild(GM.el('p', { class: 'plant-note' }, ['Keep this ladder. In Week 7, the machine will sit somewhere on it for every prompt you give it — and in Week 8 you’ll see that a knob only matters on the open rungs.']));
+      out.appendChild(GM.el('p', { class: 'plant-note' }, [GM.t('Keep this ladder. In Week 7, the machine will sit somewhere on it for every prompt you give it — and in Week 8 you’ll see that a knob only matters on the open rungs.', 'Hãy giữ chiếc thang. Ở Tuần 7, với mỗi yêu cầu cỗ máy sẽ nằm đâu đó trên thang — và Tuần 8 cho thấy núm chọn chỉ quan trọng ở những bậc rộng mở.')]));
     });
     w.body.appendChild(list);
     w.body.appendChild(GM.el('div', { class: 'gm-row' }, [revealBtn]));

@@ -22,10 +22,17 @@
   --shadow: 0 1px 2px rgba(60, 45, 20, .06), 0 4px 16px rgba(60, 45, 20, .07);
   --radius: 10px;
   --font-emoji: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji";
-  --font-serif: "Charter", "Iowan Old Style", Georgia, Cambria, "Times New Roman", serif, var(--font-emoji);
-  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif, var(--font-emoji);
-  --font-mono: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace, var(--font-emoji);
+  --font-serif: "Noto Serif", "Times New Roman", "DejaVu Serif", serif, var(--font-emoji);
+  --font-sans: "Noto Sans", "Segoe UI", Arial, "DejaVu Sans", sans-serif, var(--font-emoji);
+  --font-mono: "Noto Sans Mono", "Cascadia Mono", "Cascadia Code", "DejaVu Sans Mono", Consolas, monospace, var(--font-emoji);
   --sidebar-w: 292px;
+}
+
+/* Vietnamese needs one font with a complete, internally consistent glyph set.
+   Using the sans stack for display text prevents the browser from mixing in a
+   fallback face for stacked diacritics such as ă, â, ê, ô, ơ, and ư. */
+html[lang="vi"] {
+  --font-serif: "Noto Sans", "Segoe UI", Arial, "DejaVu Sans", sans-serif, var(--font-emoji);
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -61,6 +68,13 @@ body {
   font-size: 1.06rem;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: var(--font-sans);
 }
 h1, h2, h3, h4 { font-family: var(--font-serif); line-height: 1.25; color: var(--ink); }
 h1 { font-size: 2rem; letter-spacing: -.01em; }

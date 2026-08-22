@@ -4,7 +4,7 @@ GM.views.week = function (main, wk) {
   var page = GM.el('div', { class: 'page' });
   var arc = GM.arcs.find(function (a) { return a.id === wk.arcId; });
 
-  page.appendChild(GM.el('p', { class: 'eyebrow' }, ['Week ' + wk.num + ' · ' + arc.shortName]));
+  page.appendChild(GM.el('p', { class: 'eyebrow' }, [GM.t('Week ', 'Tuần ') + wk.num + ' · ' + arc.shortName]));
   page.appendChild(GM.el('h1', { class: 'week-title' }, [wk.title]));
   if (wk.tagline) page.appendChild(GM.el('p', { class: 'week-tagline' }, [wk.tagline]));
 
@@ -16,10 +16,10 @@ GM.views.week = function (main, wk) {
   }
 
   var beatMeta = {
-    puzzle: { icon: '🧩', label: 'The puzzle' },
-    exercise: { icon: '🛠️', label: 'Do it yourself' },
-    naming: { icon: '🏷️', label: 'Naming what happened' },
-    checkpoint: { icon: '✅', label: 'Checkpoint' },
+    puzzle: { icon: '🧩', label: GM.t('The puzzle', 'Câu đố') },
+    exercise: { icon: '🛠️', label: GM.t('Do it yourself', 'Tự tay thử') },
+    naming: { icon: '🏷️', label: GM.t('Naming what happened', 'Gọi tên điều vừa xảy ra') },
+    checkpoint: { icon: '✅', label: GM.t('Checkpoint', 'Mốc kiểm tra') },
   };
 
   wk.beats.forEach(function (beat) {
@@ -35,7 +35,7 @@ GM.views.week = function (main, wk) {
         var mount = GM.widgets[w.name];
         if (mount) {
           try { mount(el, w.opts || {}); }
-          catch (e) { el.appendChild(GM.feedback('warn', 'This interactive failed to load: ' + GM.escapeHtml(e.message))); }
+          catch (e) { el.appendChild(GM.feedback('warn', GM.t('This interactive failed to load: ', 'Bài tương tác không tải được: ') + GM.escapeHtml(e.message))); }
         }
       });
 
@@ -56,7 +56,7 @@ function buildCheckpointBox(wk) {
   return GM.el('div', { class: 'checkpoint-box' }, [
     GM.el('label', {}, [
       checkbox,
-      GM.el('span', { html: '<strong>Self-check — be honest:</strong> ' + wk.checkpointStatement }),
+      GM.el('span', { html: GM.t('<strong>Self-check — be honest:</strong> ', '<strong>Tự kiểm tra — hãy thành thật:</strong> ') + wk.checkpointStatement }),
     ]),
   ]);
 }
@@ -64,16 +64,16 @@ function buildCheckpointBox(wk) {
 function buildPager(wk) {
   var prev = GM.weeks.find(function (w) { return w.num === wk.num - 1; });
   var next = GM.weeks.find(function (w) { return w.num === wk.num + 1; });
-  var pager = GM.el('nav', { class: 'week-pager', 'aria-label': 'Week navigation' });
+  var pager = GM.el('nav', { class: 'week-pager', 'aria-label': GM.t('Week navigation', 'Điều hướng tuần học') });
   pager.appendChild(prev
     ? GM.el('a', { href: '#/week/' + prev.num }, [
-        '← Week ' + prev.num,
+        GM.t('← Week ', '← Tuần ') + prev.num,
         GM.el('span', { class: 'pager-sub' }, [prev.short]),
       ])
-    : GM.el('a', { href: '#/' }, ['← Course overview']));
+    : GM.el('a', { href: '#/' }, [GM.t('← Course overview', '← Tổng quan khóa học')]));
   if (next) {
     pager.appendChild(GM.el('a', { href: '#/week/' + next.num, style: { textAlign: 'right' } }, [
-      'Week ' + next.num + ' →',
+      GM.t('Week ', 'Tuần ') + next.num + ' →',
       GM.el('span', { class: 'pager-sub' }, [next.short]),
     ]));
   }

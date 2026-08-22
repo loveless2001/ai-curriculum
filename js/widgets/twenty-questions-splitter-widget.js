@@ -26,10 +26,16 @@
     { q: 'Is it electronic?', key: 'electronic' },
     { q: 'Can you eat it?', key: 'edible' },
   ];
+  var VI_ITEM_NAMES = ['voi', 'cá vàng', 'cây sồi', 'cây cảnh', 'nấm', 'ngựa', 'ong', 'mèo', 'tủ lạnh', 'điện thoại thông minh', 'cây cầu', 'thìa cà phê', 'tua-bin gió', 'bánh sinh nhật', 'ti-vi', 'quả táo'];
+  var VI_QUESTIONS = ['Nó có sống không?', 'Nó có lớn hơn hộp bánh mì không?', 'Ta thường thấy nó trong nhà không?', 'Nó có phải thiết bị điện tử không?', 'Có ăn được không?'];
+  if (GM.language.isVietnamese()) {
+    ITEMS.forEach(function (item, index) { item.n = VI_ITEM_NAMES[index]; });
+    QUESTIONS.forEach(function (question, index) { question.q = VI_QUESTIONS[index]; });
+  }
 
   GM.widgets['question-splitter'] = function (container) {
-    var w = GM.widgetShell('Find the hidden item',
-      'One of these 16 items is secretly chosen. Ask questions; watch what each does to the field of possibilities.');
+    var w = GM.widgetShell(GM.t('Find the hidden item', 'Tìm vật bí mật'),
+      GM.t('One of these 16 items is secretly chosen. Ask questions; watch what each does to the field of possibilities.', 'Một trong 16 vật được chọn bí mật. Hãy hỏi và quan sát mỗi câu tác động ra sao đến tập khả năng.'));
     var target, remaining, asked;
     var chipBox = GM.el('div', { class: 'gm-row' });
     var qBox = GM.el('div', { class: 'gm-row' });
@@ -53,14 +59,13 @@
         qBox.appendChild(b);
       });
       // The famous bad opening move, always available:
-      var guessBtn = GM.el('button', { class: 'btn small secondary' }, ['Is it the ' + ITEMS[14].n + '?']);
+      var guessBtn = GM.el('button', { class: 'btn small secondary' }, [GM.t('Is it the ', 'Đó có phải ') + ITEMS[14].n + '?']);
       guessBtn.addEventListener('click', function () {
         var yes = target.n === ITEMS[14].n;
         if (!yes) remaining = remaining.filter(function (it) { return it.n !== ITEMS[14].n; });
         log.appendChild(GM.feedback(yes ? 'good' : 'warn',
-          '“Is it the television?” — answer: <strong>' + (yes ? 'yes (lucky!)' : 'no') + '</strong>. ' +
-          (yes ? 'A lottery win.' : 'This eliminated <strong>1</strong> of ' + (remaining.length + 1) +
-          ' possibilities. You could predict the answer would almost certainly be “no” — and a question whose answer you can predict teaches you almost nothing.')));
+          GM.t('“Is it the television?” — answer: <strong>' + (yes ? 'yes (lucky!)' : 'no') + '</strong>. ' + (yes ? 'A lottery win.' : 'This eliminated <strong>1</strong> of ' + (remaining.length + 1) + ' possibilities. You could predict the answer would almost certainly be “no” — and a question whose answer you can predict teaches you almost nothing.'),
+            '“Đó có phải ti-vi không?” — đáp án: <strong>' + (yes ? 'có (may mắn!)' : 'không') + '</strong>. ' + (yes ? 'Trúng xổ số.' : 'Câu này loại <strong>1</strong> trong ' + (remaining.length + 1) + ' khả năng. Bạn gần như đoán trước đáp án sẽ là “không” — câu hỏi có đáp án đoán trước hầu như không dạy được gì.'))));
         finishCheck(); renderChips();
       });
       qBox.appendChild(guessBtn);
@@ -73,21 +78,16 @@
       asked.push(q.key);
       var balance = Math.min(yesCount, before - yesCount) / before;
       log.appendChild(GM.feedback(balance > 0.3 ? 'good' : 'info',
-        '“' + q.q + '” — answer: <strong>' + (yes ? 'yes' : 'no') + '</strong>. Of ' + before + ' possibilities, ' +
-        yesCount + ' were yes / ' + (before - yesCount) + ' were no → ' + remaining.length + ' remain. ' +
-        (balance > 0.3 ? 'A near-even split: you couldn’t predict the answer, so the answer carried real information.'
-                       : 'A lopsided split: you could half-guess the answer, so it taught you less.')));
+        GM.t('“' + q.q + '” — answer: <strong>' + (yes ? 'yes' : 'no') + '</strong>. Of ' + before + ' possibilities, ' + yesCount + ' were yes / ' + (before - yesCount) + ' were no → ' + remaining.length + ' remain. ' + (balance > 0.3 ? 'A near-even split: you couldn’t predict the answer, so the answer carried real information.' : 'A lopsided split: you could half-guess the answer, so it taught you less.'),
+          '“' + q.q + '” — đáp án: <strong>' + (yes ? 'có' : 'không') + '</strong>. Trong ' + before + ' khả năng, ' + yesCount + ' trả lời có / ' + (before - yesCount) + ' trả lời không → còn ' + remaining.length + '. ' + (balance > 0.3 ? 'Chia gần đều: bạn không đoán trước được đáp án, nên nó mang thông tin thật.' : 'Chia lệch: bạn phần nào đoán trước được, nên học được ít hơn.'))));
       renderChips(); renderQuestions(); finishCheck();
     }
     function finishCheck() {
       if (remaining.length === 1) {
-        log.appendChild(GM.feedback('good', 'Narrowed to one: <strong>' + remaining[0].n +
-          '</strong>. Notice which questions did the work — the ones whose answers you couldn’t predict.'));
+        log.appendChild(GM.feedback('good', GM.t('Narrowed to one: <strong>' + remaining[0].n + '</strong>. Notice which questions did the work — the ones whose answers you couldn’t predict.', 'Đã thu hẹp còn một: <strong>' + remaining[0].n + '</strong>. Hãy để ý câu nào làm được việc — chính là câu có đáp án bạn không đoán trước.')));
         qBox.innerHTML = '';
       } else if (remaining.length > 1 && asked.length === QUESTIONS.length) {
-        log.appendChild(GM.feedback('info', 'Out of attribute questions with ' + remaining.length +
-          ' items left: ' + remaining.map(function (i) { return i.n; }).join(', ') +
-          '. These items answer every question identically — no question in the list can split them. To tell them apart you’d need a <em>new</em> question.'));
+        log.appendChild(GM.feedback('info', GM.t('Out of attribute questions with ' + remaining.length + ' items left: ' + remaining.map(function (i) { return i.n; }).join(', ') + '. These items answer every question identically — no question in the list can split them. To tell them apart you’d need a <em>new</em> question.', 'Đã hết câu hỏi thuộc tính nhưng còn ' + remaining.length + ' vật: ' + remaining.map(function (i) { return i.n; }).join(', ') + '. Chúng trả lời mọi câu giống nhau — không câu nào trong danh sách tách được. Bạn cần một câu hỏi <em>mới</em>.')));
       }
     }
     function start() {
@@ -96,10 +96,10 @@
       log.innerHTML = '';
       renderChips(); renderQuestions();
     }
-    var restart = GM.el('button', { class: 'btn small' }, ['New secret item']);
+    var restart = GM.el('button', { class: 'btn small' }, [GM.t('New secret item', 'Chọn vật bí mật mới')]);
     restart.addEventListener('click', start);
     w.body.appendChild(chipBox);
-    w.body.appendChild(GM.el('p', { class: 'note' }, ['Ask a question:']));
+    w.body.appendChild(GM.el('p', { class: 'note' }, [GM.t('Ask a question:', 'Hãy hỏi một câu:')]));
     w.body.appendChild(qBox);
     w.body.appendChild(log);
     w.body.appendChild(GM.el('div', { class: 'gm-row' }, [restart]));

@@ -2,17 +2,17 @@
    training loop, attention/circuits, alignment pipeline, capstone, exit ramp. */
 GM.arcs.push({
   id: 4,
-  name: 'Arc 4 — Under the hood, and the road onward',
+  name: 'Arc 4 — Training, attention, and chatbots',
   shortName: 'Arc 4 · Under the hood',
-  claim: 'The intuitions are built; now attach the real machinery and the real words. First gentle math appears here. This arc is a foundation-plus-exit-ramp — success means you can enter the technical literature without drowning.',
+  claim: 'This arc connects the course’s plain-language ideas to technical terms, then shows the basic training loop, attention, and instruction tuning.',
   weeks: [10, 11, 12],
 });
 
 GM.weeks.push({
   num: 10, arcId: 4, showArcBanner: true,
-  short: 'How training works — and the jargon reveal',
-  title: 'How training works, and the jargon reveal',
-  tagline: 'You’ve been doing the field’s concepts for nine weeks. Here are the passwords.',
+  short: 'How training changes a model',
+  title: 'How training changes a model',
+  tagline: 'Connect familiar ideas to the terms used in technical writing.',
   checkpointStatement: 'I can narrate the full training loop in plain words and in official vocabulary, and I can read the two-column dictionary as my own.',
   beats: [
     { kind: 'puzzle', html:
@@ -20,8 +20,7 @@ GM.weeks.push({
       '<p>Adjusted <strong>how</strong>? There are billions of numbers inside, and no programmer sets any of them by hand. ' +
       'Nobody could. So what does the adjusting?</p>' },
     { kind: 'exercise', title: 'The jargon reveal', html:
-      '<p>First, the set-piece you’ve earned. Nine weeks of folk vocabulary — and every single term has an official name in ' +
-      'the field. Reveal them one at a time:</p>',
+      '<p>You have already used these ideas in plain language. Reveal the technical term for each one:</p>',
       widget: 'jargon-reveal' },
     { kind: 'exercise', title: 'The training loop, narrated', html:
       '<div class="card"><p>Here is the entire loop, in the vocabulary you now own twice over:</p>' +
@@ -30,8 +29,8 @@ GM.weeks.push({
       '<li><strong>Measure surprise:</strong> how wrong was it? (<em>loss, cross-entropy</em>)</li>' +
       '<li><strong>Nudge:</strong> adjust every number a hair in the direction that would have made the surprise smaller.</li>' +
       '<li><strong>Repeat</strong> — trillions of times.</li></ol>' +
-      '<p>Step 4 has a name: <strong>gradient descent</strong> — “downhill in the dark, one small step at a time.” You can’t ' +
-      'see the whole landscape; you can only feel the slope under your feet.</p></div>' },
+      '<p>Step 4 is <strong>gradient descent</strong>. The training process estimates which small change will reduce the loss, ' +
+      'applies that change, and repeats.</p></div>' },
     { kind: 'exercise', title: 'Hand-run the loop yourself', html:
       '<p>The first graph of the course. Below is a “model” with <strong>one</strong> adjustable number, and its surprise ' +
       'plotted against that number. Do the training yourself: feel the slope, take a step downhill, repeat. Arithmetic only — ' +
@@ -54,9 +53,9 @@ GM.weeks.push({
 
 GM.weeks.push({
   num: 11, arcId: 4,
-  short: 'Inside the box: attention and circuits',
-  title: 'Inside the box: attention and circuits',
-  tagline: 'Opaque by default — but not sealed.',
+  short: 'Attention and internal circuits',
+  title: 'Attention and internal circuits',
+  tagline: 'Internal mechanisms are difficult to study, but some can be tested directly.',
   checkpointStatement: 'I can describe attention in one sentence without mentalist vocabulary, and recount one concrete, real mechanism found inside a real model.',
   beats: [
     { kind: 'puzzle', html:
@@ -67,8 +66,7 @@ GM.weeks.push({
     { kind: 'exercise', title: 'The relevance visualizer', html:
       '<p>Here is that mechanism, made visible. At each step, the model computes how relevant every earlier word is to the ' +
       'current guess, and blends accordingly. Click any word in the sentence to see where its guess is “looking.”</p>' +
-      '<p>Note what this is <em>not</em>: it is not “focus” in any mental sense. It is a learned, per-step relevance lookup — ' +
-      'a computation with inspectable numbers, which is exactly why we can draw it.</p>',
+      '<p>This is not human “focus.” It is a numerical calculation performed at each step, which is why the result can be displayed and inspected.</p>',
       widget: 'attention-viz' },
     { kind: 'exercise', title: 'One real circuit, end to end: induction heads', html:
       '<p>Models learn a copyable pattern: <span class="mono">…A B … A → guess B</span>. If the text earlier contained ' +
@@ -83,10 +81,9 @@ GM.weeks.push({
       'and tested. This work — <strong>interpretability</strong> — is young, and most of the box is still unmapped. Neither ' +
       '“we understand everything inside” nor “it’s an unknowable black box” is true.</p></div>' },
     { kind: 'naming', html:
-      '<p><strong>Attention:</strong> at each step, a computed weighting of how relevant every earlier word is to the current ' +
-      'guess. One sentence, no minds mentioned.</p>' +
-      '<p><strong>A circuit:</strong> a traceable internal mechanism with a testable job — induction heads are the classic ' +
-      'worked example.</p>' },
+      '<p><strong>Attention</strong> computes how strongly information from earlier tokens should affect the current token.</p>' +
+      '<p><strong>A circuit</strong> is a set of internal components proposed to perform a particular function. Researchers test ' +
+      'that proposal by observing and intervening on the components.</p>' },
     { kind: 'checkpoint', html:
       '<p>Two sentences, out loud: (1) attention, described without mentalist vocabulary; (2) the induction-head story — the ' +
       'behavior, and the fact that specific components doing it were found and watched forming.</p>' },
@@ -95,9 +92,9 @@ GM.weeks.push({
 
 GM.weeks.push({
   num: 12, arcId: 4,
-  short: 'From predictor to chatbot; the exit',
-  title: 'From predictor to chatbot; the frontier; the exit',
-  tagline: 'The personality is a trained layer, not a resident.',
+  short: 'From text predictor to chatbot',
+  title: 'From text predictor to chatbot',
+  tagline: 'Additional training turns a text predictor into an assistant-style product.',
   checkpointStatement: 'My 500-word artifact passes two tests: an outsider learns from it, and a technical reader finds nothing to correct.',
   beats: [
     { kind: 'puzzle', html:
@@ -110,9 +107,8 @@ GM.weeks.push({
       'base predictor<br>↓ &nbsp;shown examples of assistant-style responses <em>(instruction tuning)</em><br>' +
       '↓ &nbsp;adjusted using human preferences between candidate answers <em>(RLHF — named, not detailed)</em><br>' +
       'the chatbot</p>' +
-      '<p>The “personality” is a <strong>trained layer on top of the predictor, not a resident</strong>. And note: Week 5 ' +
-      'discipline applies to the persona too — “the assistant is honest/friendly/cautious” is an ascription, and it needs a ' +
-      'test attached, same as ever.</p></div>' },
+      '<p>The assistant’s style comes from training and product instructions. Claims such as “the assistant is honest” or ' +
+      '“the assistant is cautious” still need behavioral tests, just as they did in Week 5.</p></div>' },
     { kind: 'exercise', title: 'The frontier, honestly labeled as moving ground', html:
       '<div class="card"><p><strong>Reasoning models:</strong> systems trained to generate intermediate work before answering ' +
       '(<em>test-time computation</em>). This connects to Week 4: some problems need scratch paper, and one-shot next-word ' +
@@ -121,9 +117,8 @@ GM.weeks.push({
       'suddenly with scale) is real versus a measurement artifact; where the limits of the predict-text paradigm lie. Anyone ' +
       'who tells you these are settled, in either direction, is ahead of the evidence.</p></div>' },
     { kind: 'exercise', title: 'Capstone, part 1: teach one concept', html:
-      '<div class="card"><p>Before you write anything: teach one course concept to a real outsider — a friend, a colleague, a ' +
-      'family member. Then note what broke. Where did they get lost? What example saved you? What question couldn’t you ' +
-      'answer? That wreckage is the raw material for part 2.</p></div>' },
+      '<div class="card"><p>Before writing, explain one course concept to a friend, colleague, or family member. Note where ' +
+      'they became confused, which example helped, and which question you could not answer. Use those notes to plan part 2.</p></div>' },
     { kind: 'exercise', title: 'Capstone, part 2: “What an LLM is and isn’t”', html:
       '<p>The course’s final artifact and its real exam: at most <strong>500 words</strong>, for a lay reader. It passes when ' +
       'an outsider learns from it <em>and</em> a technical reader finds nothing to correct. Your draft saves automatically on ' +
@@ -145,9 +140,8 @@ GM.weeks.push({
       '<p><strong>Then:</strong> mechanistic interpretability (superposition, sparse autoencoders) and the reasoning-model ' +
       'literature — both moving fast enough that this course points at directions, not canon.</p></div>' },
     { kind: 'naming', html:
-      '<p>The last naming beat names the course itself: what you built here is not a stock of facts about one technology. ' +
-      'It’s a discipline — <strong>phenomenon first, tests attached to claims, calibration over confidence</strong> — and it ' +
-      'transfers to whatever the machines become next.</p>' },
+      '<p>The course ends with a method you can reuse: <strong>start with observable behavior, attach a test to each claim, ' +
+      'and compare confidence with results.</strong> Use it when today’s systems change.</p>' },
     { kind: 'checkpoint', html:
       '<p>Ship the artifact: show your 500 words to one outsider and, if you can find one, one technical reader. Revise until ' +
       'both tests pass. That’s the exam, and nobody grades it but reality.</p>' },

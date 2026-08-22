@@ -18,8 +18,8 @@
     sidebar.innerHTML = '';
     sidebar.appendChild(GM.el('a', { class: 'nav-brand', href: '#/' }, [
       GM.el('span', { class: 'brand-emoji' }, ['🔮']),
-      GM.el('span', { class: 'brand-title' }, ['Understanding the Guessing Machines']),
-      GM.el('span', { class: 'brand-sub' }, ['a 12-week course on AI & LLMs']),
+      GM.el('span', { class: 'brand-title' }, [GM.t('Understanding the Guessing Machines', 'Hiểu về những cỗ máy dự đoán')]),
+      GM.el('span', { class: 'brand-sub' }, [GM.t('a 12-week course on AI & LLMs', 'khóa học 12 tuần về AI và LLM')]),
     ]));
 
     var done = GM.store.completedCount();
@@ -27,12 +27,23 @@
       GM.el('div', { class: 'nav-progress-bar' }, [
         GM.el('div', { class: 'nav-progress-fill', style: { width: Math.round(done / 12 * 100) + '%' } }),
       ]),
-      GM.el('div', { class: 'nav-progress-label' }, [done + ' of 12 checkpoints passed']),
+      GM.el('div', { class: 'nav-progress-label' }, [GM.t(done + ' of 12 checkpoints passed', 'Đã hoàn thành ' + done + '/12 mốc kiểm tra')]),
     ]));
 
     sidebar.appendChild(GM.el('a', {
       class: 'nav-link' + (route.name === 'home' ? ' active' : ''), href: '#/',
-    }, [GM.el('span', { class: 'wk-num' }, ['⌂']), 'Course overview']));
+    }, [GM.el('span', { class: 'wk-num' }, ['⌂']), GM.t('Course overview', 'Tổng quan khóa học')]));
+
+    var languageBox = GM.el('div', { class: 'language-switcher', role: 'group', 'aria-label': GM.t('Language', 'Ngôn ngữ') });
+    [['en', 'English'], ['vi', 'Tiếng Việt']].forEach(function (choice) {
+      languageBox.appendChild(GM.el('button', {
+        type: 'button',
+        class: 'language-option' + (GM.language.get() === choice[0] ? ' active' : ''),
+        'aria-pressed': String(GM.language.get() === choice[0]),
+        onclick: function () { if (GM.language.get() !== choice[0]) GM.language.set(choice[0]); },
+      }, [choice[1]]));
+    });
+    sidebar.appendChild(languageBox);
 
     GM.arcs.forEach(function (arc) {
       var box = GM.el('div', { class: 'nav-arc' }, [
@@ -55,13 +66,13 @@
 
     var revealed = GM.store.isJargonRevealed();
     var dictBox = GM.el('div', { class: 'nav-arc' }, [
-      GM.el('p', { class: 'nav-arc-title' }, ['Reference']),
+      GM.el('p', { class: 'nav-arc-title' }, [GM.t('Reference', 'Tra cứu')]),
       GM.el('a', {
         class: 'nav-link' + (route.name === 'dictionary' ? ' active' : '') + (revealed ? '' : ' locked'),
         href: '#/dictionary',
       }, [
         GM.el('span', { class: 'wk-num' }, ['📖']),
-        'The two-column dictionary',
+        GM.t('The two-column dictionary', 'Từ điển hai cột'),
         revealed ? null : GM.el('span', { class: 'lock-icon' }, ['🔒']),
       ]),
     ]);
@@ -80,6 +91,20 @@
       GM.views.home(main);
     }
     renderSidebar();
+    document.documentElement.lang = GM.language.get();
+    document.title = GM.t(
+      'Understanding the Guessing Machines — an interactive course on AI & LLMs',
+      'Hiểu về những cỗ máy dự đoán — khóa học tương tác về AI và LLM'
+    );
+    var description = document.querySelector('meta[name="description"]');
+    if (description) description.content = GM.t(
+      'A 12-week self-paced interactive course on AI and LLMs — epistemology first, machinery second. No math or CS background assumed.',
+      'Khóa học tương tác 12 tuần, tự học về AI và LLM — nhận thức luận trước, máy móc sau. Không yêu cầu nền tảng toán hay khoa học máy tính.'
+    );
+    var skip = document.querySelector('.skip-link');
+    if (skip) skip.textContent = GM.t('Skip to content', 'Bỏ qua để đến nội dung');
+    toggle.setAttribute('aria-label', GM.t('Toggle navigation', 'Bật hoặc tắt điều hướng'));
+    sidebar.setAttribute('aria-label', GM.t('Course navigation', 'Điều hướng khóa học'));
     closeSidebar();
     window.scrollTo(0, 0);
   }

@@ -27,6 +27,20 @@
 .nav-progress-fill { height: 100%; background: var(--accent); border-radius: 3px; transition: width .4s ease; }
 .nav-progress-label { font-size: .72rem; color: var(--muted); margin-top: .3rem; }
 
+.language-switcher {
+  display: grid; grid-template-columns: 1fr 1fr; gap: .3rem;
+  margin: .7rem 0 1rem; padding: .25rem;
+  border: 1px solid var(--line); border-radius: 8px; background: var(--bg-inset);
+}
+.language-option {
+  border: 0; border-radius: 6px; padding: .42rem .35rem;
+  background: transparent; color: var(--ink-soft);
+  font: 700 .72rem/1.2 var(--font-sans); cursor: pointer;
+}
+.language-option:hover,
+.language-option:focus-visible { color: var(--ink); outline: 2px solid var(--teal); outline-offset: 1px; }
+.language-option.active { background: var(--bg-raised); color: var(--blue); box-shadow: 0 1px 4px rgb(16 42 67 / .12); }
+
 .nav-arc { margin-top: 1.1rem; }
 .nav-arc-title {
   font-size: .7rem; text-transform: uppercase; letter-spacing: .09em;
