@@ -68,13 +68,15 @@ Assessment philosophy throughout: you understand something when you can (a) teac
 **Puzzle.** Two messages arrive: "the sun rose this morning" and "your bank called about a large transfer." One is news, one is not. Both are short sentences. What's the difference made of?
 
 **Exercises.**
-- Twenty questions, played then dissected: why does "is it bigger than a breadbox?" beat "is it the Eiffel Tower?" Good questions are those whose answers you *cannot predict* — they split the possibilities.
-- Prediction difficulty ladder: coin flip vs tomorrow's weather vs what a close friend texts back vs the next word of a national anthem. Rank them; discuss what makes each hard or easy. (Plant: the machine will later sit somewhere on this ladder for every prompt.)
-- Surprise journaling (between-session): note three moments of genuine surprise this week and what each taught. Surprise = you learned something = your expectations moved.
+- Receiver-first ranking: compare a routine weather report, one coin toss, 100 identical tosses, a medical result, and a context-free “yes.” Name what the receiver considered possible before ranking how informative each message is.
+- Twenty questions, played then dissected: why does "is it bigger than a breadbox?" beat "is it the Eiffel Tower?" Before asking, compare the possible branches. Near-even splits are often useful because either answer narrows the field, but cost, reliability, and consequences can justify uneven questions.
+- Prediction difficulty ladder: coin flip vs tomorrow's weather vs what a close friend texts back vs the next word of a national anthem. Rank them, then complete “my uncertainty comes mainly from ___” for each. (Plant: the machine will later sit somewhere on this ladder for every prompt.)
+- Surprise journaling (between-session): record what happened, what was expected, what supported that expectation, and what changed afterward. Surprise creates an opportunity to revise an expectation; it does not guarantee that revision is warranted.
+- Misconception clinic: repair claims equating information with message length, rarity with usefulness, felt shock with a technical measure, or even splits with a universal decision rule.
 
-**Naming.** Information as reduction of uncertainty. The unexpected is informative; the expected is not. "Surprise" as a measurable quantity we'll keep using by that name until Week 10.
+**Naming.** Information as a change in a receiver's uncertainty. The same message can carry different information under different prior expectations. Felt surprise is not identical to a formal measure, which requires stated possibilities and probabilities. We keep the plain-language term until Week 10.
 
-**Checkpoint.** Learner can explain why a message everyone saw coming carries no information, and why a good question is one whose answer surprises you.
+**Checkpoint.** Learner can contrast a long low-information message with a short high-information message, diagnose a weak yes-or-no question, and explain all three using the receiver's prior expectations rather than word count or emotional drama.
 
 ## Week 3 — Maps, models, compression
 

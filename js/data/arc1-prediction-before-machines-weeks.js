@@ -49,33 +49,55 @@ GM.weeks.push({
   short: 'Surprise and information',
   title: 'Surprise and information',
   tagline: 'A message is informative when it changes what you expected.',
-  checkpointStatement: 'I can explain why a message everyone saw coming carries no information, and why a good question is one whose answer surprises you.',
+  checkpointStatement: 'I can explain why the same message can carry different amounts of information to different receivers, and why a useful question is one whose possible answers narrow the live possibilities.',
   beats: [
     { kind: 'puzzle', html:
       '<p>Two messages arrive on your phone:</p>' +
       '<blockquote>“The sun rose this morning.”<br>“Your bank called about a large transfer.”</blockquote>' +
       '<p>The second message changes what you know; the first probably does not. Their length is similar. ' +
-      '<strong>What makes one more informative?</strong> The difference depends on what you expected before reading it.</p>' },
+      '<strong>What makes one more informative?</strong> The difference depends on what you expected before reading it.</p>' +
+      '<p>Now change the receiver. A bank employee already reviewing that transfer may learn little from the second message. ' +
+      'Information is not stored inside the words alone; it appears in the relationship between a message and someone’s prior expectations.</p>' },
+    { kind: 'exercise', title: 'Predict first: information needs a receiver', html:
+      '<p>Without calculating, rank these messages from least to most informative <em>to the named receiver</em>:</p>' +
+      '<ol><li>A weather app tells a Bangkok resident in August: “It is humid.”</li>' +
+      '<li>A fair coin lands heads after one ordinary toss.</li>' +
+      '<li>A laboratory reports that the same coin landed heads 100 times in a row.</li>' +
+      '<li>A doctor tells a patient awaiting a test: “The result is negative.”</li>' +
+      '<li>A stranger texts: “Yes.”</li></ol>' +
+      '<p>The last item cannot be ranked without context: “yes” could confirm lunch or a marriage proposal. Before continuing, ' +
+      'name what each receiver thought was possible before the message arrived.</p>' },
     { kind: 'exercise', title: 'Twenty questions, dissected', html:
       '<p>In twenty questions, why does “is it bigger than a breadbox?” beat “is it the Eiffel Tower?” as an opening move? ' +
       'Play the mini-version below: find the hidden item, and watch what each question does to the field of possibilities. ' +
-      'A useful early question rules out many possibilities, whichever answer you receive.</p>',
+      'Before clicking, predict how many items will fall on the “yes” side and how many on the “no” side.</p>' +
+      '<p>A useful early question leaves two substantial branches, so either answer rules out many possibilities. A near-even ' +
+      'split is a useful starting rule, not a commandment: cost, reliability, and consequences can make an uneven question worth asking.</p>',
       widget: 'question-splitter' },
     { kind: 'exercise', title: 'The prediction difficulty ladder', html:
       '<p>Rank these from easiest to predict (top) to hardest (bottom). There’s no single right order — the point is the ' +
-      'argument you have with yourself about each one. What exactly makes one harder than another?</p>',
+      'argument you have with yourself about each one. For every item, finish the sentence: <strong>“My uncertainty comes mainly ' +
+      'from ___.”</strong> Too many alternatives, missing evidence, unstable causes, and deliberate randomness are different problems.</p>',
       widget: 'ladder-rank' },
     { kind: 'exercise', title: 'Between now and next week: surprise journaling', html:
-      '<div class="card"><p>Note <strong>three moments of genuine surprise</strong> this week — big or small — and for each, ' +
-      'write one line on what it taught you. The pattern to notice: surprise = you learned something = your expectations moved. ' +
-      'No surprise, no learning.</p></div>' },
+      '<div class="card"><p>Note <strong>three moments of genuine surprise</strong> this week — small ones are often easier to inspect. For each, answer:</p>' +
+      '<ol><li>What happened?</li><li>What did I expect instead?</li><li>What evidence supported that expectation?</li>' +
+      '<li>What changed afterward: my belief, my model, or only my mood?</li><li>If nothing changed, why not?</li></ol>' +
+      '<p>Surprise creates an opportunity to learn, not a guarantee. The event may be noise, the source may be unreliable, or your earlier expectation may still have stronger evidence.</p></div>' },
+    { kind: 'exercise', title: 'Misconception clinic', html:
+      '<div class="card"><p>Choose one claim and repair it:</p><ul>' +
+      '<li>“Longer messages contain more information.”</li><li>“Rare events are always useful.”</li>' +
+      '<li>“Feeling shocked and receiving information are the same thing.”</li><li>“The best question always divides the options exactly in half.”</li></ul>' +
+      '<p>Give a counterexample, then rewrite the claim so that it says when it is useful and where it stops.</p></div>' },
     { kind: 'naming', html:
-      '<p><strong>Information reduces uncertainty.</strong> A message tells you more when it rules out more of what you thought could happen.</p>' +
-      '<p><strong>Surprise can be measured.</strong> For now, “surprise” is enough. Week 10 introduces the technical term.</p>' +
+      '<p><strong>Information changes uncertainty.</strong> A message tells a receiver more when it rules out—or sharply lowers—the possibilities that receiver previously took seriously.</p>' +
+      '<p><strong>Surprise is relative to expectations.</strong> The same event can be routine under one person’s model and unexpected under another’s.</p>' +
+      '<p><strong>Felt surprise is not the technical measure.</strong> Emotion also depends on attention, stakes, and memory. A formal measure needs stated possibilities and probabilities. For now, the intuition is enough; Week 10 introduces the technical vocabulary.</p>' +
       '<p class="plant-note">Keep your difficulty ladder. In Week 7 you will use it to compare your predictions with a model’s.</p>' },
     { kind: 'checkpoint', html:
-      '<p>Test yourself: give an original example of (a) a long message that carries almost no information, and (b) a one-word ' +
-      'message that carries a lot. Then explain what made the difference — in plain words.</p>' },
+      '<p>Give an original example of (a) a long message carrying very little information to its receiver, (b) a one-word ' +
+      'message carrying a great deal, and (c) a relevant-sounding yes-or-no question that barely narrows the possibilities. ' +
+      'For each, name the receiver’s expectations before the message or answer. Your explanation should depend on those expectations—not word count or emotional drama alone.</p>' },
   ],
 });
 

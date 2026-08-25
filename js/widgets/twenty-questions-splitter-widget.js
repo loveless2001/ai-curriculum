@@ -64,8 +64,8 @@
         var yes = target.n === ITEMS[14].n;
         if (!yes) remaining = remaining.filter(function (it) { return it.n !== ITEMS[14].n; });
         log.appendChild(GM.feedback(yes ? 'good' : 'warn',
-          GM.t('“Is it the television?” — answer: <strong>' + (yes ? 'yes (lucky!)' : 'no') + '</strong>. ' + (yes ? 'A lottery win.' : 'This eliminated <strong>1</strong> of ' + (remaining.length + 1) + ' possibilities. You could predict the answer would almost certainly be “no” — and a question whose answer you can predict teaches you almost nothing.'),
-            '“Đó có phải ti-vi không?” — đáp án: <strong>' + (yes ? 'có (may mắn!)' : 'không') + '</strong>. ' + (yes ? 'Trúng xổ số.' : 'Câu này loại <strong>1</strong> trong ' + (remaining.length + 1) + ' khả năng. Bạn gần như đoán trước đáp án sẽ là “không” — câu hỏi có đáp án đoán trước hầu như không dạy được gì.'))));
+          GM.t('“Is it the television?” — answer: <strong>' + (yes ? 'yes (lucky!)' : 'no') + '</strong>. ' + (yes ? 'A lottery win.' : 'This eliminated <strong>1</strong> of ' + (remaining.length + 1) + ' possibilities. Before asking, “no” was overwhelmingly likely; that branch left nearly the whole field in play.'),
+            '“Đó có phải ti-vi không?” — đáp án: <strong>' + (yes ? 'có (may mắn!)' : 'không') + '</strong>. ' + (yes ? 'Trúng xổ số.' : 'Câu này loại <strong>1</strong> trong ' + (remaining.length + 1) + ' khả năng. Trước khi hỏi, đáp án “không” có khả năng áp đảo; nhánh ấy vẫn để gần như toàn bộ tập khả năng tồn tại.'))));
         finishCheck(); renderChips();
       });
       qBox.appendChild(guessBtn);
@@ -78,13 +78,13 @@
       asked.push(q.key);
       var balance = Math.min(yesCount, before - yesCount) / before;
       log.appendChild(GM.feedback(balance > 0.3 ? 'good' : 'info',
-        GM.t('“' + q.q + '” — answer: <strong>' + (yes ? 'yes' : 'no') + '</strong>. Of ' + before + ' possibilities, ' + yesCount + ' were yes / ' + (before - yesCount) + ' were no → ' + remaining.length + ' remain. ' + (balance > 0.3 ? 'A near-even split: you couldn’t predict the answer, so the answer carried real information.' : 'A lopsided split: you could half-guess the answer, so it taught you less.'),
-          '“' + q.q + '” — đáp án: <strong>' + (yes ? 'có' : 'không') + '</strong>. Trong ' + before + ' khả năng, ' + yesCount + ' trả lời có / ' + (before - yesCount) + ' trả lời không → còn ' + remaining.length + '. ' + (balance > 0.3 ? 'Chia gần đều: bạn không đoán trước được đáp án, nên nó mang thông tin thật.' : 'Chia lệch: bạn phần nào đoán trước được, nên học được ít hơn.'))));
+        GM.t('“' + q.q + '” — answer: <strong>' + (yes ? 'yes' : 'no') + '</strong>. Of ' + before + ' possibilities, ' + yesCount + ' were yes / ' + (before - yesCount) + ' were no → ' + remaining.length + ' remain. ' + (balance > 0.3 ? 'A near-even split: before asking, both branches were substantial, so either answer would narrow the field.' : 'A lopsided split: one answer was much more likely and would leave most possibilities in play.'),
+          '“' + q.q + '” — đáp án: <strong>' + (yes ? 'có' : 'không') + '</strong>. Trong ' + before + ' khả năng, ' + yesCount + ' trả lời có / ' + (before - yesCount) + ' trả lời không → còn ' + remaining.length + '. ' + (balance > 0.3 ? 'Chia gần đều: trước khi hỏi, cả hai nhánh đều đáng kể, nên đáp án nào cũng giúp thu hẹp tập khả năng.' : 'Chia lệch: một đáp án có khả năng cao hơn nhiều và sẽ để lại phần lớn các khả năng.'))));
       renderChips(); renderQuestions(); finishCheck();
     }
     function finishCheck() {
       if (remaining.length === 1) {
-        log.appendChild(GM.feedback('good', GM.t('Narrowed to one: <strong>' + remaining[0].n + '</strong>. Notice which questions did the work — the ones whose answers you couldn’t predict.', 'Đã thu hẹp còn một: <strong>' + remaining[0].n + '</strong>. Hãy để ý câu nào làm được việc — chính là câu có đáp án bạn không đoán trước.')));
+        log.appendChild(GM.feedback('good', GM.t('Narrowed to one: <strong>' + remaining[0].n + '</strong>. Notice which questions did the work—the ones whose possible answers divided the live field.', 'Đã thu hẹp còn một: <strong>' + remaining[0].n + '</strong>. Hãy để ý câu nào làm được việc—đó là những câu có các đáp án khả dĩ chia được tập khả năng đang xét.')));
         qBox.innerHTML = '';
       } else if (remaining.length > 1 && asked.length === QUESTIONS.length) {
         log.appendChild(GM.feedback('info', GM.t('Out of attribute questions with ' + remaining.length + ' items left: ' + remaining.map(function (i) { return i.n; }).join(', ') + '. These items answer every question identically — no question in the list can split them. To tell them apart you’d need a <em>new</em> question.', 'Đã hết câu hỏi thuộc tính nhưng còn ' + remaining.length + ' vật: ' + remaining.map(function (i) { return i.n; }).join(', ') + '. Chúng trả lời mọi câu giống nhau — không câu nào trong danh sách tách được. Bạn cần một câu hỏi <em>mới</em>.')));

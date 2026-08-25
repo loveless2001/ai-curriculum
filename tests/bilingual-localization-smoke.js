@@ -42,6 +42,11 @@ var english = load('en').GM;
 assert.strictEqual(english.weeks.length, 12);
 assert.strictEqual(english.weeks[0].title, 'How context shapes a guess');
 assert.strictEqual(english.arcs[0].shortName, 'Arc 1 · Prediction');
+var englishWeek2 = english.weeks.find(function (week) { return week.num === 2; });
+assert.strictEqual(englishWeek2.beats.length, 8);
+assert.strictEqual(englishWeek2.beats[1].title, 'Predict first: information needs a receiver');
+assert.match(englishWeek2.checkpointStatement, /same message can carry different amounts of information/);
+assert.doesNotMatch(englishWeek2.beats.map(function (beat) { return beat.html || ''; }).join(' '), /No surprise, no learning/);
 
 var widgetFiles = fs.readdirSync(path.join(root, 'js/widgets')).sort().map(function (name) { return 'js/widgets/' + name; });
 var vietnameseContext = load('vi', widgetFiles);
@@ -53,6 +58,11 @@ assert.strictEqual(Object.keys(vietnamese.widgets).length, 16);
 assert.strictEqual(vietnamese.weeks[0].title, 'Ngữ cảnh định hướng dự đoán như thế nào');
 assert.strictEqual(vietnamese.weeks[11].title, 'Từ bộ dự đoán văn bản đến chatbot');
 assert.strictEqual(vietnamese.jargon[0].folk, 'trò đoán');
+var vietnameseWeek2 = vietnamese.weeks.find(function (week) { return week.num === 2; });
+assert.strictEqual(vietnameseWeek2.beats.length, 8);
+assert.strictEqual(vietnameseWeek2.beats[1].title, 'Dự đoán trước: thông tin cần một người nhận');
+assert.match(vietnameseWeek2.checkpointStatement, /cùng một thông điệp/);
+assert.doesNotMatch(vietnameseWeek2.beats.map(function (beat) { return beat.html || ''; }).join(' '), /Không bất ngờ, không học hỏi/);
 
 vietnamese.weeks.forEach(function (week) {
   var text = [week.title, week.tagline, week.checkpointStatement]
