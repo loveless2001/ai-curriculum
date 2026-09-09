@@ -33,12 +33,12 @@
     w.body.appendChild(GM.el('div', { class: 'gm-row' }, [pill, savedNote, copyBtn]));
     w.body.appendChild(ta);
     w.body.appendChild(GM.el('div', { class: 'card', style: { boxShadow: 'none' } }, [
-      GM.el('p', { class: 'note', style: { marginTop: 0 } }, [GM.t('The artifact passes when both boxes can be honestly ticked:', 'Bài viết đạt khi bạn có thể thành thật đánh dấu cả hai ô:')]),
+      GM.el('p', { class: 'note', style: { marginTop: 0 } }, [GM.t('Record feedback received; leave a box unchecked if that review is still pending:', 'Ghi nhận phản hồi đã có; để trống ô nếu vẫn đang chờ lượt đọc đó:')]),
       GM.el('label', { style: { display: 'flex', gap: '.5em', margin: '.3em 0', fontSize: '.92rem' } }, [
         GM.el('input', { type: 'checkbox' }), GM.el('span', {}, [GM.t('An outsider read it and learned something they could repeat back.', 'Một người ngoài đọc và học được điều họ có thể kể lại.')]),
       ]),
       GM.el('label', { style: { display: 'flex', gap: '.5em', margin: '.3em 0', fontSize: '.92rem' } }, [
-        GM.el('input', { type: 'checkbox' }), GM.el('span', {}, [GM.t('A technical reader found nothing to correct.', 'Một độc giả kỹ thuật không tìm thấy điều cần sửa.')]),
+        GM.el('input', { type: 'checkbox' }), GM.el('span', {}, [GM.t('A technical reader checked the claims, and I addressed their corrections.', 'Người có chuyên môn đã kiểm tra các khẳng định và tôi đã xử lý góp ý.')]),
       ]),
       GM.el('p', { class: 'note' }, [GM.t('Need an outline? Explain what the model predicts, how training differs from use, how scores become selected tokens, why fluent errors occur, and what evidence would support a claim about understanding.', 'Cần dàn ý? Hãy giải thích mô hình dự đoán gì, huấn luyện khác sử dụng ra sao, điểm số trở thành token được chọn thế nào, vì sao có câu sai nhưng trôi chảy, và bằng chứng nào hỗ trợ một khẳng định về hiểu biết.')]),
     ]));

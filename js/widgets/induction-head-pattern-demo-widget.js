@@ -3,7 +3,7 @@
 (function () {
   GM.widgets['induction-demo'] = function (container) {
     var w = GM.widgetShell(GM.t('The paired-name induction test', 'Phép thử suy ra cặp tên'),
-      GM.t('Invent a first and last name nobody has ever written down. The machine will see the pair once — then complete the pattern.', 'Bịa một tên và họ chưa ai từng viết. Máy sẽ thấy cặp đó một lần — rồi hoàn tất mẫu.'));
+      GM.t('Enter a pair of names. A programmed rule copies the second name when the first appears again.', 'Nhập một cặp tên. Quy tắc lập trình sẵn chép tên thứ hai khi tên thứ nhất xuất hiện lại.'));
     var a = GM.el('input', { type: 'text', placeholder: GM.t('first name (e.g. Blicket)', 'tên (vd: Blicket)'), value: 'Blicket' });
     var b = GM.el('input', { type: 'text', placeholder: GM.t('last name (e.g. Farnsworth)', 'họ (vd: Farnsworth)'), value: 'Vantorbeck' });
     var out = GM.el('div');
@@ -17,18 +17,13 @@
         GM.t('At the conference I was introduced to ', 'Ở hội nghị, tôi được giới thiệu với ') + A + ' ' + B + GM.t(', who gave the opening talk. Later that evening, I ran into ', ', người trình bày khai mạc. Tối hôm đó, tôi gặp lại ') + A + ' ▊',
       ]));
       out.appendChild(GM.el('div', { class: 'machine-out' }, [
-        GM.el('span', { class: 'machine-tag' }, [GM.t('model’s top guess for the next word', 'dự đoán từ tiếp theo cao nhất của máy')]),
-        B + GM.t('   (by a wide margin)', '   (vượt xa lựa chọn khác)'),
+        GM.el('span', { class: 'machine-tag' }, [GM.t('programmed completion', 'phần điền theo quy tắc')]),
+        B,
       ]));
       out.appendChild(GM.feedback('info',
-        GM.t('“' + A + ' ' + B + '” appears in no training data — you invented it seconds ago. The model is running a learned, ' +
-        'general pattern: <span class="mono">…A B … A → guess B</span>. Whatever followed this token last time it appeared, ' +
-        'guess it again.', '“' + A + ' ' + B + '” không có trong dữ liệu huấn luyện — bạn vừa bịa ra. Mô hình đang chạy mẫu tổng quát đã học: <span class="mono">…A B … A → đoán B</span>. Thứ từng theo sau token này lần trước sẽ được đoán lại.')));
+        GM.t('The demo copies your second entry using <span class="mono">A B … A → B</span>. No training occurs here, and inventing a name does not prove that it never appeared elsewhere.', 'Mô phỏng chép mục thứ hai theo <span class="mono">A B … A → B</span>. Không có huấn luyện ở đây; tự nghĩ ra tên chưa chứng minh tên đó chưa từng xuất hiện nơi khác.')));
       out.appendChild(GM.feedback('good',
-        GM.t('<strong>Why this matters:</strong> researchers located the specific internal components performing this copy ' +
-        '(nicknamed <em>induction heads</em>), watched them form partway through training, and saw this ability appear when ' +
-        'they do. Behavior you just replicated → mechanism found, traced, and tested. The box is opaque by default, ' +
-        'not sealed.', '<strong>Vì sao điều này quan trọng:</strong> các nhà nghiên cứu đã xác định các thành phần bên trong thực hiện việc sao chép (gọi là <em>induction head</em>), quan sát chúng hình thành giữa quá trình huấn luyện và thấy năng lực này xuất hiện cùng lúc. Hành vi bạn vừa tái tạo → cơ chế được tìm, lần theo và kiểm tra. Chiếc hộp mặc định khó nhìn, nhưng không bị niêm phong.')));
+        GM.t('Researchers studied similar copying behavior inside neural networks. The Week 11 study tests which components cause it. This programmed demo illustrates the behavior only.', 'Các nhà nghiên cứu đã khảo sát hành vi sao chép tương tự trong mạng nơ-ron. Nghiên cứu ở Tuần 11 kiểm tra thành phần nào gây ra nó. Mô phỏng lập trình sẵn này chỉ minh họa hành vi.')));
     });
     w.body.appendChild(GM.el('div', { class: 'gm-row' }, [a, b, btn]));
     w.body.appendChild(out);

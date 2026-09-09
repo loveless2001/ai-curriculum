@@ -30,7 +30,7 @@
 
   GM.widgets['attention-viz'] = function (container) {
     var w = GM.widgetShell(GM.t('The relevance visualizer', 'Trình trực quan hóa mức liên quan'),
-      GM.t('Click any word. Shading shows how strongly the model weighs each earlier word while guessing at that position. Try “them” last.', 'Nhấp từ bất kỳ. Màu đậm cho thấy mô hình đặt trọng số lên mỗi từ trước mạnh đến đâu khi dự đoán ở vị trí đó. Hãy thử “chúng” sau cùng.'));
+      GM.t('Click any word. Shading illustrates a prepared weighting of earlier words. Try “them” last.', 'Nhấp từ bất kỳ. Màu minh họa trọng số soạn sẵn cho các từ trước. Hãy thử “chúng” sau cùng.'));
     var row = GM.el('div', { class: 'attn-sentence' });
     var detail = GM.el('div');
     var wordEls = [];
@@ -56,10 +56,7 @@
       ]));
       if (idx === TARGET) {
         detail.appendChild(GM.feedback('info',
-          GM.t('“them” leans hardest on <strong>“keys”</strong> — nine words back, past a decoy noun (“lamp”) and a nearer one ' +
-          '(“table”). This is the answer to the puzzle: at every step, a computed relevance lookup decides which earlier ' +
-          'words matter <em>now</em>, and it learned to link pronouns to the things they stand for. No “focus” in any mental ' +
-          'sense — numbers you are currently looking at.', '“chúng” dựa mạnh nhất vào <strong>“khóa”</strong> — cách nhiều từ, vượt qua danh từ gây nhiễu “đèn” và từ gần hơn “bàn”. Đây là đáp án câu đố: ở mỗi bước, phép tra cứu mức liên quan quyết định từ nào trước đó quan trọng <em>ngay lúc này</em>, và mô hình đã học liên kết đại từ với đối tượng được chỉ. Không có “tập trung” theo nghĩa tâm trí — chỉ có các con số bạn đang nhìn.')));
+          GM.t('In this illustration, <strong>“them”</strong> is linked most strongly to <strong>“keys”</strong>. We chose these weights to show the idea; they are not evidence of what a real model learned.', 'Trong minh họa này, <strong>“chúng”</strong> được nối mạnh nhất với <strong>“khóa”</strong>. Chúng tôi chọn các trọng số để minh họa; chúng không phải bằng chứng về điều mô hình thật đã học.')));
       }
     }
     WORDS.forEach(function (word, i) {

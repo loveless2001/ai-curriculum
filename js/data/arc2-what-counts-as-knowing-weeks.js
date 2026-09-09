@@ -12,33 +12,19 @@ GM.weeks.push({
   short: 'Testing recall, patterns, and rules',
   title: 'Testing recall, patterns, and rules',
   tagline: 'The same answer can come from memory, a familiar pattern, or a rule.',
-  checkpointStatement: 'I can design a simple test distinguishing a memorizer from someone who grasps a rule — and can say what the test still cannot rule out.',
+  checkpointStatement: 'I can design tests of a skill and explain what their results still cannot prove.',
   beats: [
     { kind: 'puzzle', html:
-      '<p>Two students both answer “56” to 7×8. One has memorized the times table; one can multiply. ' +
-      'Their answers are <em>identical</em>. Watching them answer tells you nothing.</p>' +
-      '<p><strong>What question exposes the difference?</strong> Try to write one down before continuing. (Hint: it won’t be ' +
-      'on the times table.)</p>' },
-    { kind: 'exercise', title: 'The rule induction game', html:
-      '<p>The machine below has a secret rule about sequences of three numbers. Probe it: enter any triple, and it tells you ' +
-      'whether the triple fits the rule. When you’re confident, lock in your guess about what the rule is.</p>' +
-      '<p>The rule is simple. The difficult part is choosing tests that could prove your first idea wrong.</p>',
+      '<p>Two students answer “56” to 7 × 8. One recalls the answer; the other calculates it. This answer alone cannot tell you which happened.</p><p><strong>What would you ask next?</strong> Try 17 × 8, then ask how they worked it out. A new question gives more evidence, but they might have practiced that one too.</p>' },
+    { kind: 'exercise', title: 'Find the hidden rule', html:
+      '<p>Enter three numbers to test a hidden rule. The game tells you whether they fit.</p><p>After each result, write your current guess. Then choose a test whose result could show that guess is wrong. Testing only examples you expect to pass can hide a mistaken rule.</p>',
       widget: 'rule-induction' },
-    { kind: 'exercise', title: 'Design-the-probe', html:
-      '<div class="card"><p>Someone claims: <em>“this person knows chemistry.”</em> Design three test questions of increasing power:</p>' +
-      '<ol><li>one a <strong>memorizer</strong> passes (recall of a stated fact),</li>' +
-      '<li>one a <strong>pattern-matcher</strong> passes (familiar problem, new numbers),</li>' +
-      '<li>one only <strong>understanding</strong> passes (novel situation the rules must be <em>applied</em> to, not matched).</li></ol>' +
-      '<p>Then the uncomfortable question: is question three even always possible? For which skills can behavior alone never ' +
-      'fully separate the three? Keep your answer — Week 5 turns it into a discipline.</p></div>' },
+    { kind: 'exercise', title: 'Build a stronger test', html:
+      '<p>Try three tests of multiplication:</p><ol><li>Recall: “What is 7 × 8?”</li><li>New numbers: “What is 17 × 8?”</li><li>New situation: “Seven boxes hold eight cups each. Two cups break. How many remain?”</li></ol><p>The last question also tests choosing the right operations. None proves understanding by itself. Design a similar set for a skill you know.</p>' },
     { kind: 'naming', html:
-      '<p><strong>Generalization</strong> means applying what was learned to a new case. Novel cases help distinguish recall from use of a rule.</p>' +
-      '<p><strong>Interpolation</strong> stays among familiar examples. <strong>Extrapolation</strong> goes beyond them.</p>' +
-      '<p>No short behavioral test proves understanding. A system may learn the test itself. A good result increases confidence; ' +
-      'it does not remove every alternative explanation.</p>' },
+      '<p><strong>Generalization</strong> means using something learned on a new case. The student who can multiply unfamiliar numbers shows more than recall of one answer.</p><p>If you practiced numbers from 1 to 10, trying 6 is <strong>interpolation</strong>: inside that range. Trying 20 is <strong>extrapolation</strong>: beyond it. These describe where a test falls, not how someone solves it.</p>' },
     { kind: 'checkpoint', html:
-      '<p>Pick any skill you know well. Design the three-question probe for it, and then complete the sentence: “even if all ' +
-      'three are passed, this test cannot rule out ___.”</p>' },
+      '<p>Give your three test questions. Explain what each adds, then finish: “Even if all three answers are correct, I still cannot rule out ___.” Week 5 will help you test an alternative explanation.</p>' },
   ],
 });
 
@@ -47,41 +33,21 @@ GM.weeks.push({
   short: 'What behavior can show',
   title: 'What behavior can and cannot show',
   tagline: 'Good controls can separate two explanations of the same behavior.',
-  checkpointStatement: 'I can state why fluent output alone never settles “does it understand,” and can name what a stronger test would look like for a case of my choosing.',
+  checkpointStatement: 'I can give two explanations for a result and a test that could distinguish them.',
   beats: [
     { kind: 'puzzle', title: 'Clever Hans', html:
-      '<p>Berlin, around 1904. A horse named Hans answers arithmetic questions in front of crowds — tap-tap-tap with a hoof, ' +
-      'stopping at the right number. Add, subtract, even work with dates. His owner, a retired schoolteacher, isn’t cheating; ' +
-      'he believes completely, and investigations find no trickery.</p>' +
-      '<p>Then the psychologist Oskar von Pfungst runs two careful variations. He has questioners who <em>don’t know the ' +
-      'answer</em> themselves. He puts blinders on Hans so he can’t see the asker. The arithmetic dissolves. Hans, it turns out, ' +
-      'was reading micro-movements — the involuntary tension people show as the tap-count approaches the right answer, and the ' +
-      'tiny release when it arrives.</p>' +
-      '<p>Hans was responding to subtle human cues, not solving arithmetic. The decisive evidence came from changing who knew ' +
-      'the answer and what the horse could see. Those changes were <strong>controls</strong>.</p>' },
-    { kind: 'exercise', title: 'The ELIZA story', html:
-      '<div class="card"><p>1966: Joseph Weizenbaum builds ELIZA, a program with a handful of reflection tricks — turn “I am X” ' +
-      'into “why are you X?”, sprinkle in “tell me more.” Users confide in it. Some insist it understands them. Weizenbaum’s ' +
-      'own secretary asks him to leave the room so she can talk privately — <em>and she knows how it works</em>.</p>' +
-      '<p>Discussion (with a partner, or in writing): the pull to ascribe minds is in <strong>us</strong>, and knowing the trick ' +
-      'doesn’t fully disarm it. When did you last feel that pull? A pet? A car? A chatbot?</p></div>' },
-    { kind: 'exercise', title: 'The ascription spectrum', html:
-      '<div class="card"><p>Walk this ladder: <strong>thermostat → houseplant → dog → infant → adult → chatbot</strong>.</p>' +
-      '<p>For each: what do we comfortably say it “knows”? (“The thermostat knows the room is cold” — do you object?) What ' +
-      'behavioral evidence drives the comfort? Where does the vocabulary start to wobble? Mark the exact rung where you ' +
-      'hesitate — that hesitation is the topic of this course.</p></div>' },
-    { kind: 'exercise', title: 'The ascription game', html:
-      '<p>The core exercise of the whole course. Below are transcripts of behavior — some human, some machine, some from animal ' +
-      'experiments. Sources hidden. For each: argue <em>for</em> and <em>against</em> “it understands,” give your verdict, then ' +
-      'see the source and — the real point — what additional test would actually move the needle.</p>',
+      '<p>Week 4 asked whether a new question can separate recall from calculation. Here is a case where changing the test exposed an unexpected explanation.</p><p>A horse called Clever Hans appeared to answer arithmetic by tapping its hoof. Psychologist Oskar Pfungst tested what happened when the questioner did not know the answer, or Hans could not see them. Performance dropped.</p><p>Hans had been responding to small human cues. A <strong>control</strong> changes a condition to check an alternative explanation.</p>' },
+    { kind: 'exercise', title: 'A reply that sounds understanding', html:
+      '<p>ELIZA was an early program that used text rules to imitate conversation. Imagine this exchange:</p><blockquote>“I feel worried.”<br>“Why do you feel worried?”</blockquote><p>The reply fits without showing what caused the worry. Write a follow-up question that would test more than repeating your words.</p>' },
+    { kind: 'exercise', title: 'Observation or interpretation?', html:
+      '<p>Consider a thermostat, a dog, and a chatbot. For each, finish: “People say it knows ___ because it does ___.”</p><p>Separate what you observed from what you inferred. For example, turning on the heater shows a response to temperature; it does not show awareness of feeling cold.</p>' },
+    { kind: 'exercise', title: 'Compare explanations', html:
+      '<p>Read each description before revealing its source. Write one explanation of the behavior, one alternative, and one test that could separate them. After the reveal, decide whether your evidence changed or only your expectation did.</p>',
       widget: 'ascription-game' },
     { kind: 'naming', html:
-      '<p><strong>Behavior does not uniquely identify its cause.</strong> Different mechanisms can produce the same visible result.</p>' +
-      '<p><strong>Fluent output is evidence, but it is not enough by itself.</strong> People readily attribute knowledge or intention to many things.</p>' +
-      '<p><strong>A claim about understanding needs a test.</strong> The useful move is to design a control that separates competing explanations.</p>' },
+      '<p><strong>The same result can have different causes.</strong> A correct answer might come from calculation, memory, or an unnoticed clue.</p><p><strong>Test a specific claim.</strong> “It can multiply unfamiliar numbers without hints” is easier to test than “it understands everything.”</p>' },
     { kind: 'checkpoint', html:
-      '<p>Pick any system you interact with (an app, an animal, a person’s skill). State what people casually say it ' +
-      '“knows,” then design the von-Pfungst-style control that would test the claim. What would each outcome show?</p>' },
+      '<p>Choose a skill, state two explanations for a successful performance, and change one test condition to distinguish them. Predict what each explanation would lead you to observe.</p>' },
   ],
 });
 
@@ -90,38 +56,21 @@ GM.weeks.push({
   short: 'Measuring confidence',
   title: 'Measuring confidence',
   tagline: 'Compare your stated confidence with how often you are right.',
-  checkpointStatement: 'I have a measured record of my own calibration, and I can define confident wrongness and say why it’s worse than admitted ignorance.',
+  checkpointStatement: 'I can compare my confidence with my quiz results and explain the limits of a short quiz.',
   beats: [
     { kind: 'puzzle', html:
-      '<p>Before any explanation, take the quiz below. Ten questions with numeric answers. For each, give a range you are ' +
-      '<strong>90% sure</strong> contains the truth. Make the range as wide as you honestly need.</p>' +
-      '<p>A perfectly calibrated person misses about one in ten. Nearly everyone misses four or more. Let’s see.</p>',
+      '<p>Last week you tested an answer. This week you test how sure you should be of it.</p><p>For each quiz question, give a range you are <strong>90% confident</strong> contains the answer. For an unfamiliar building, you might estimate “20–60 meters tall,” rather than guess one height.</p><p>Over many such estimates, about nine in ten ranges should contain the answer. One short quiz will vary; it cannot settle how well calibrated you are.</p>',
       widget: 'calibration-quiz', widgetOpts: { round: 1 } },
     { kind: 'exercise', title: 'Recalibration round', html:
-      '<p>Now try new questions. Use what you learned from the first score. Widen a range when the evidence does not justify a narrow one.</p>',
+      '<p>Try the second set. Use wider ranges where your first estimates were too confident. Aim for honest uncertainty, not a range so wide it would cover almost anything.</p>',
       widget: 'calibration-quiz', widgetOpts: { round: 2 } },
     { kind: 'exercise', title: '“I don’t know” drills', html:
-      '<div class="card"><p>With a partner (or against yourself, written): take turns asking questions that range from knowable ' +
-      'to unknowable — “what’s the capital of Australia?”, “what will the weather be in 40 days?”, “what was my grandmother’s ' +
-      'favorite song?” Practice the three honest registers:</p>' +
-      '<ul><li>“I know: X.”</li><li>“I’d guess X, weakly.”</li><li>“I have no basis to answer.”</li></ul>' +
-      '<p>Notice which one your mouth resists. Fluent confident answering is the <em>easy</em> mode; calibrated answering is ' +
-      'the skill.</p></div>' },
-    { kind: 'exercise', title: 'Bullshit vs lying', html:
-      '<div class="card"><p>A distinction from the philosopher Harry Frankfurt, in plain language: the <strong>liar</strong> ' +
-      'tracks the truth carefully — in order to avoid it. The <strong>bullshitter</strong> speaks without regard to whether ' +
-      'what they say is true; truth just isn’t the variable being optimized.</p>' +
-      '<p>Discussion: which failure is more dangerous in an advisor — someone who lies to you, or someone who doesn’t care? ' +
-      'Why?</p>' +
-      '<p class="plant-note">Planted for Week 9: this exact distinction returns, applied to the machine. Spoiler: the machine ' +
-      'is never lying.</p></div>' },
+      '<p>Practice three answers with a partner or in writing:</p><ul><li>“I know this because ___.”</li><li>“My best guess is ___, based on ___.”</li><li>“I have no evidence for an answer.”</li></ul><p>Try “What is the capital of Australia?” and “What was my grandmother’s favorite song?” What evidence would let you answer each?</p>' },
+    { kind: 'exercise', title: 'Error, carelessness, or deception?', html:
+      '<p>A person can make an honest mistake, knowingly mislead you, or answer without checking. The same false sentence does not tell you which happened.</p><p>Example: someone gives you the wrong train time. What would distinguish an outdated timetable from an attempt to make you miss the train? Keep this distinction for Week 9.</p>' },
     { kind: 'naming', html:
-      '<p><strong>Calibration</strong> is the match between stated confidence and actual accuracy. The quiz gives you one measurement of it.</p>' +
-      '<p><strong>Confident wrongness</strong> is dangerous because the listener receives both an error and a false reason to trust it. ' +
-      '“I don’t know” leaves the uncertainty visible.</p>' +
-      '<p><strong>Calibration takes practice.</strong> Check predictions against results and adjust future confidence.</p>' },
+      '<p><strong>Calibration</strong> means stated confidence matches results over many cases. Of 100 predictions labeled “90% sure,” roughly 90 should be right.</p><p><strong>Confident wrongness</strong> makes an error harder for the listener to spot. Confidence should reflect evidence, not how easily an answer comes to mind.</p>' },
     { kind: 'checkpoint', html:
-      '<p>Your quiz results above are saved on this page. State your hit rate out loud, then define “confident wrongness” to ' +
-      'an imaginary outsider and explain why it’s worse than “I don’t know.”</p>' },
+      '<p>Report your hit rate from each round. Give one reason to widen a future estimate and explain why a short quiz is only a starting point for measuring calibration. Keep the results for Week 9.</p>' },
   ],
 });

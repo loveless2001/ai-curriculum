@@ -13,34 +13,22 @@ GM.weeks.push({
   short: 'How a language model predicts text',
   title: 'How a language model predicts text',
   tagline: 'A language model scores possible continuations of text.',
-  checkpointStatement: 'I can explain to an outsider, in one minute without jargon, what an LLM is and what the difference between training and using is.',
+  checkpointStatement: 'I can explain text prediction, training, and chat context with one example.',
   beats: [
     { kind: 'puzzle', html:
-      '<p>Below is the cloze game from Week 1 with model scores added. Compare the model’s preferred words with yours. Then ' +
-      'compare how widely the human guesses and model scores are spread for each blank.</p>' +
-      '<p><strong>What does the model calculate, and how did training change those calculations?</strong></p>' +
-      '<p class="note">This page uses a small simulation with prepared candidate lists. It demonstrates scoring and selection, ' +
-      'but it is not a full language model. You can repeat the exercise with a real model later.</p>' },
+      '<p>Return to Week 1: “She poured the coffee into the ___.” This time compare your guess with a prepared set of model scores.</p><p>A <strong>large language model (LLM)</strong> calculates which pieces of text could come next. A piece, called a <strong>token</strong>, may be a word, part of a word, or punctuation.</p><p>This exercise uses prepared examples, not a live model.</p>' },
     { kind: 'exercise', title: 'Human vs machine cloze tournament', html:
-      '<p>Play each blank yourself first, then reveal the machine’s scores next to typical human guesses. Where humans ' +
-      'disagree with each other, notice the machine also spreads its bets.</p>',
+      '<p>Fill each blank before revealing the scores. Is one answer much more likely than the rest, or do several fit? These prepared human guesses and model scores illustrate the comparison; they are not measurements from your class.</p>',
       widget: 'cloze-game', widgetOpts: { mode: 'versus' } },
     { kind: 'exercise', title: 'Learning vs recalling: the goldfish chat', html:
-      '<p>Tell the simulated model a fact and ask about it in the same conversation. Then start a new conversation and ask ' +
-      'again. This demonstrates the difference between using conversation context and changing a model through training.</p>',
+      '<p>Tell the simulation a fact, ask about it, then start a fresh conversation and ask again.</p><p>Think of a student using a note on their desk. The note helps with this question without changing what they learned during lessons. Similarly, chat context supplies information without changing the model’s trained numbers.</p><p>Some products save notes or retrieve past chats. That is separate from retraining the model.</p>',
       widget: 'chat-memory-demo' },
     { kind: 'exercise', title: 'One-minute explanations', html:
-      '<div class="card"><p>Explain what an LLM is to a partner or a voice memo in 60 seconds. Use the ideas of guessing, ' +
-      'models, and surprise. Define any technical term you use. If you say that the model “thinks,” “wants,” or “knows,” ' +
-      'state what observation would test that claim.</p></div>' },
+      '<p>Explain an LLM in 60 seconds. Include what it predicts, how training changes it, and how a conversation supplies clues. Use the note-on-the-desk example if it helps.</p>' },
     { kind: 'naming', html:
-      '<p><strong>A large language model predicts text.</strong> During training, its internal numbers are adjusted so that it ' +
-      'assigns better scores to continuations found in the training text.</p>' +
-      '<p><strong>Training and use are different stages.</strong> Training changes the model’s internal numbers. Ordinary chat ' +
-      'uses those numbers and the current conversation; it does not retrain the model.</p>' },
+      '<p><strong>Training</strong> adjusts internal numbers, called weights, using examples. <strong>Using the model</strong> applies those numbers to the current text.</p><p>To generate a reply: score possible next tokens, choose one, add it to the text, and repeat. Week 8 examines the choosing step; Week 10 examines training.</p>' },
     { kind: 'checkpoint', html:
-      '<p>Give the one-minute explanation to someone who has not taken the course. Record where they became confused. You will ' +
-      'use that note in the Week 12 capstone.</p>' },
+      '<p>Give your explanation to a beginner, or record it and listen back. Note one unclear phrase and replace it with an example. Save this draft for Week 12.</p>' },
   ],
 });
 
@@ -49,38 +37,21 @@ GM.weeks.push({
   short: 'Scores, selection, and temperature',
   title: 'Scores, selection, and temperature',
   tagline: 'Temperature changes how the next token is chosen from fixed scores.',
-  checkpointStatement: 'I can predict the effect of changing temperature on a given prompt type before running it, and can explain to an outsider why the model itself didn’t change.',
+  checkpointStatement: 'I can explain how temperature changes selection and why it does not check facts.',
   beats: [
     { kind: 'puzzle', html:
-      '<p>Same prompt, submitted five times at <strong>temperature 0</strong>: five identical answers. Same prompt at ' +
-      '<strong>high temperature</strong>: five different answers.</p>' +
-      '<p>The model’s learned numbers are unchanged between runs. <strong>Which later step does temperature affect?</strong></p>' },
+      '<p>Week 7 separated scoring from choosing. Imagine a next-word score card: “cup” 80%, “mug” 15%, “bowl” 5%.</p><p>Always choosing the top word gives “cup.” Drawing from a bag with 80 cup tickets, 15 mug tickets, and 5 bowl tickets can give other answers.</p><p><strong>Temperature</strong> changes how strongly the draw favors the higher scores. It does not retrain the model.</p>' },
     { kind: 'exercise', title: 'The knob lab', html:
-      '<p>Test a factual question, a creative request, and an ambiguous question at low and high temperature. Predict the ' +
-      'result before each run, then record what changed.</p>' +
-      '<p>Use the Week 2 ladder: temperature has more effect when several continuations have similar scores.</p>',
+      '<p>Try a factual, creative, and ambiguous prompt at low and high temperature. Predict which will vary most, then generate several times.</p><p>Use Week 2’s ranking: a prompt with several plausible continuations may show more variation. One random batch need not match your prediction.</p>',
       widget: 'temperature-lab' },
-    { kind: 'exercise', title: 'Two layers, physically separated', html:
-      '<div class="card"><p>The widget separates scoring from selection:</p>' +
-      '<ul><li>The <strong>scorer</strong> holds the card: every candidate next word, each with a weight. The scorer’s card ' +
-      'never changes for a given prompt.</li>' +
-      '<li>The <strong>chooser</strong> picks from the card by a rule: always-take-the-top, weighted dice, dice-among-the-top-few.</li></ul>' +
-      '<p>Keep the score card fixed and change only the selection rule. If working with a partner, one person can hold the ' +
-      'scores while the other follows the selection rule.</p></div>' },
+    { kind: 'exercise', title: 'The score card and the ticket bag', html:
+      '<p>Keep one score card fixed. Compare always choosing its top word with drawing tickets from the bag.</p><p>Lower temperature concentrates more tickets on the top choices; higher temperature spreads them more evenly. In this demo, temperature 0 picks the top choice.</p><p>After a token is added, the text has changed, so the next step gets a new score card.</p>' },
     { kind: 'exercise', title: 'Reproducibility test', html:
-      '<div class="card"><p>Prediction drill: which prompts will give identical output on every rerun at temperature 0, and ' +
-      'which will vary at high temperature? Write your predictions, then verify in the lab above.</p>' +
-      '<p class="note">Honest engineering note: on real large-scale systems, exact temp-0 determinism can wobble for boring ' +
-      'infrastructure reasons (batching, hardware arithmetic). The <em>contrast</em> between the two settings is what’s real ' +
-      'and robust.</p></div>' },
+      '<p>Run the same prompt twice at temperature 0, then twice at a higher setting. Compare the results.</p><p>Repeated draws can produce the same answer even at high temperature. Real services may also vary at temperature 0 if their computation or settings differ.</p>' },
     { kind: 'naming', html:
-      '<p><strong>Scoring and choosing are separate steps.</strong> The model assigns scores to possible next tokens. A decoding ' +
-      'rule then chooses one. Temperature changes that rule, not the model’s learned numbers.</p>' +
-      '<p><strong>Variation comes from selection.</strong> Lower temperature favors the highest-scoring option more strongly; ' +
-      'higher temperature gives lower-scoring options more chances.</p>' },
+      '<p><strong>Scores</strong> describe possible next tokens. <strong>Decoding</strong> is the process of choosing tokens from those scores.</p><p><strong>Temperature</strong> changes the probabilities used for selection. Higher temperature can increase variety; it does not check facts. A likely word can still be part of a false answer.</p>' },
     { kind: 'checkpoint', html:
-      '<p>Before running anything: predict, for a factual prompt and a story-opening prompt, what turning the temperature up ' +
-      'will do to each. Then run them in the lab and check. Two for two, with reasons, passes.</p>' },
+      '<p>Explain the ticket-bag example in your own words. Predict what higher temperature will do for two prompts, run several trials, and explain any mismatch. Why does lowering temperature not guarantee truth? Week 9 tests that question.</p>' },
   ],
 });
 
@@ -89,45 +60,24 @@ GM.weeks.push({
   short: 'Why fluent answers can be false',
   title: 'Why fluent answers can be false',
   tagline: 'Likely-sounding text can still be false.',
-  checkpointStatement: 'I can produce a reproducible hallucination on demand, explain in course vocabulary why it happens, and correct someone who calls it “lying” or “glitching.”',
+  checkpointStatement: 'I can separate repeatability from truth, propose a fact check, and state what a scripted example cannot show.',
   beats: [
     { kind: 'puzzle', html:
-      '<p>Set the temperature to 0 — the reproducible setting, no dice anywhere. Now ask the machine for the biography of a ' +
-      'plausible-sounding person who <em>does not exist</em>.</p>' +
-      '<p>It answers. Fluently. In detail. And <strong>identically on every rerun.</strong></p>' +
-      '<p>The output is reproducible, so sampling alone does not explain the error. What does?</p>' },
-    { kind: 'exercise', title: 'The hallucination elicitation lab', html:
-      '<p>Test invented biographies, fake citations, and details that are unlikely to be documented. For each response, note ' +
-      'whether it repeats, whether its claims can be verified, and how well the topic is documented. Compare these results ' +
-      'with questions about widely documented facts.</p>',
+      '<p>Week 8 showed that choosing the top answer removes the random draw. Does that make the answer true?</p><p>The lab below contains a prepared false biography. Run it twice. It repeats exactly because the text is scripted.</p><p>This illustrates that repeatability and truth are different. It does not show how often a real model makes this error; a real model might refuse the request or correct its premise.</p>' },
+    { kind: 'exercise', title: 'Check a fluent answer', html:
+      '<p>Compare the prepared biography, citation, and historical detail with the factual example. Record whether each answer repeats and what evidence would be needed to verify it.</p><p>Separate “we wrote this as a fictional example” from “we searched and found no source.” Failure to find a source alone does not prove a claim false.</p>',
       widget: 'hallucination-lab' },
-    { kind: 'exercise', title: 'The compression connection', html:
-      '<div class="card"><p>Return to Week 3. A compressed representation may preserve common patterns while losing a ' +
-      'particular detail. When asked for that detail, a model can produce something typical-looking instead of something ' +
-      'supported by evidence.</p></div>' },
-    { kind: 'exercise', title: 'Frankfurt, applied', html:
-      '<div class="card"><p>Week 6’s distinction, now aimed at the machine:</p>' +
-      '<ul><li><strong>Is it lying?</strong> No. Lying requires tracking the truth in order to avoid it. Nothing in the ' +
-      'mechanism tracks truth at all.</li>' +
-      '<li><strong>Is it bullshitting?</strong> Closer: text produced without regard to truth, optimized to be <em>likely</em>.</li></ul>' +
-      '<p>Precision drill — rewrite each of these as an accurate sentence: “the AI lied to me”; “the AI glitched”; “the AI ' +
-      'doesn’t know that fact.” (Try before peeking at the lab’s model answers.)</p></div>' },
+    { kind: 'exercise', title: 'A plausible detail is not evidence', html:
+      '<p>In Week 3, “cheap and busy” did not tell you whether a restaurant had wheelchair access. Guessing that detail from similar restaurants could sound plausible and be wrong.</p><p>A language model can likewise produce a familiar-looking detail without enough support. This analogy describes one risk; it does not diagnose every false answer or reveal what was in the training data.</p>' },
+    { kind: 'exercise', title: 'Describe the error before explaining it', html:
+      '<p>Return to Week 6: a false statement alone does not establish intent. “It invented a citation” describes the output. “It tried to deceive me” adds a claim that needs evidence.</p><p>Rewrite “the AI lied” as a specific observation: “The answer named a paper I could not verify.” Then state what you would check next.</p>' },
     { kind: 'exercise', title: 'Calibration check on the machine', html:
-      '<div class="card"><p>Ask the model how confident it is in a fabricated answer. Compare that statement with the ' +
-      'verified result, then compare this process with your Week 6 quiz. Calibration is measured across predictions and outcomes.</p></div>' },
-    { kind: 'exercise', title: 'The ascription game, final round', html:
-      '<div class="card"><p>Week 5’s discipline, aimed at the machine itself: what would count as evidence that it ' +
-      '<em>knows</em> a fact, versus produces likely text about it? Design the von Pfungst controls — the machine equivalents ' +
-      'of blinders and ignorant questioners. (Some real candidates: does it give the same answer under rephrasing? Does its ' +
-      'confidence track its accuracy? Does it distinguish “I don’t know” territory from covered territory?)</p></div>' },
+      '<p>Use the confidence button after a true and a false example. The same prepared assurance appears for both.</p><p>As in Week 6, a confidence claim is not a measurement. To measure calibration on a real model, collect many answers with stated confidence and independently check their accuracy.</p>' },
+    { kind: 'exercise', title: 'Test more than consistency', html:
+      '<p>Design a test from Week 5 for a model answering factual questions. Try rephrasing, supplying a reliable source, or including a false premise.</p><p>State what each result would support. Agreement under rephrasing shows consistency, but a consistently false answer is still false.</p>' },
     { kind: 'naming', html:
-      '<p><strong>A hallucination is fluent output unsupported by the facts.</strong> The model continues a pattern even when ' +
-      'the prompt asks for a detail that is absent, rare, or confused in its learned data.</p>' +
-      '<p><strong>The same prediction process produces correct and incorrect answers.</strong> Better data, tools, and training ' +
-      'can reduce errors, but users still need to verify claims where accuracy matters.</p>' },
+      '<p><strong>Hallucination</strong> is generated content that is false or unsupported, such as an invented citation. It need not sound confident.</p><p>Predicting text can produce correct and incorrect claims. Data, training, context, and tools affect accuracy. Verify important claims against evidence outside the answer.</p>' },
     { kind: 'checkpoint', html:
-      '<p>Produce a reproducible confident error in the lab, then explain — in course vocabulary only — why the same mechanism ' +
-      'produces both this and the right answers. Finally, correct this sentence out loud: “the AI lied to me about that ' +
-      'citation.”</p>' },
+      '<p>Choose one false example. Explain why repeating it does not make it true, identify the unsupported detail, and propose a check. State what this scripted exercise cannot tell you about a real model.</p>' },
   ],
 });

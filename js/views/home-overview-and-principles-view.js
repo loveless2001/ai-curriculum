@@ -10,14 +10,12 @@ GM.views.home = function (main) {
       '<p>You do not need a math or computer-science background. We begin with a familiar experience: someone stops halfway ' +
       'through a sentence, and a likely next word comes to mind. That simple act gives us a way to study prediction before ' +
       'we study software.</p>' +
-      '<p>The first nine weeks use ordinary language. You will work with guesses, surprise, useful maps, and rules for choosing. ' +
-      'Week 10 connects those ideas to terms such as <em>token</em>, <em>loss</em>, and <em>temperature</em>. This order keeps ' +
-      'the terminology tied to something you have already observed.</p>',
+      '<p>First practice prediction (Weeks 1–3), then learn to test answers and confidence (4–6). Apply those ideas to language ' +
+      'models (7–9), then examine training and attention (10–12). Each technical term comes with an example.</p>',
       '<p>Bạn không cần biết trước về toán hay khoa học máy tính. Khóa học bắt đầu từ một việc rất quen: ai đó nói dở một câu, ' +
       'và trong đầu bạn bật ra một từ có vẻ hợp lý. Từ trải nghiệm đó, ta tìm hiểu dự đoán trước khi tìm hiểu phần mềm.</p>' +
-      '<p>Trong chín tuần đầu, khóa học dùng từ ngữ thông thường: đoán, bất ngờ, bản đồ hữu ích và cách chọn. Đến Tuần 10, ' +
-      'những ý tưởng ấy mới được nối với các thuật ngữ như <em>token</em>, <em>loss</em> và <em>temperature</em>. Nhờ vậy, mỗi ' +
-      'thuật ngữ đều gắn với một việc bạn đã quan sát hoặc tự làm.</p>') }),
+      '<p>Đầu tiên luyện dự đoán (Tuần 1–3), rồi học kiểm tra đáp án và mức tự tin (4–6). Áp dụng các ý đó vào mô hình ' +
+      'ngôn ngữ (7–9), sau đó tìm hiểu huấn luyện và attention (10–12). Mỗi thuật ngữ kỹ thuật đều có ví dụ đi kèm.</p>') }),
     GM.el('p', {}, [GM.el('a', { class: 'btn', href: '#/week/1' }, [GM.t('Start Week 1 →', 'Bắt đầu Tuần 1 →')])]),
   ]));
 
@@ -67,12 +65,10 @@ GM.views.home = function (main) {
 
   page.appendChild(GM.el('hr'));
   page.appendChild(GM.el('div', { html: GM.t(
-    '<p class="note">Weeks 7–9 use a small <strong>simulation</strong>. It applies real probability and sampling calculations ' +
-    'to prepared word lists, so it works offline and gives predictable teaching examples. It is not a full language model. ' +
-    'The lesson marks the places where that difference matters.</p>',
-    '<p class="note">Tuần 7–9 dùng một <strong>mô phỏng nhỏ</strong>. Mô phỏng áp dụng phép tính xác suất và lấy mẫu thật lên ' +
-    'các danh sách từ đã soạn sẵn, nhờ đó chạy được ngoại tuyến và cho ví dụ ổn định. Đây không phải mô hình ngôn ngữ hoàn chỉnh; ' +
-    'bài học sẽ nói rõ khi sự khác biệt này quan trọng.</p>') }));
+    '<p class="note">All exercises work without a live language model. Some calculate probabilities or training updates; ' +
+    'others show prepared conversations, answers, or attention highlights. The lessons explain what each demonstration can show.</p>',
+    '<p class="note">Các bài tập không cần mô hình ngôn ngữ chạy thật. Một số tính xác suất hoặc bước cập nhật khi huấn luyện; ' +
+    'số khác hiển thị hội thoại, đáp án hoặc màu attention soạn sẵn. Bài học giải thích mỗi minh họa cho thấy được điều gì.</p>') }));
 
   main.appendChild(page);
 };

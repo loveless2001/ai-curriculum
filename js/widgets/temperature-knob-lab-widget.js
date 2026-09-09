@@ -30,7 +30,7 @@
 
   GM.widgets['temperature-lab'] = function (container) {
     var w = GM.widgetShell(GM.t('The knob lab', 'Phòng thí nghiệm núm chọn'),
-      GM.t('The left bars are fixed model scores. The right bars show the selection probabilities after applying your settings.', 'Các thanh bên trái là điểm cố định của mô hình. Các thanh bên phải là xác suất chọn sau khi áp dụng cài đặt.'));
+      GM.t('Choose weighted dice to explore temperature. The left bars are prepared scores. The right bars show the selection probabilities after applying your settings.', 'Chọn xúc xắc có trọng số để thử temperature. Các thanh bên trái là điểm soạn sẵn. Các thanh bên phải là xác suất chọn sau khi áp dụng cài đặt.'));
     var promptSel = GM.el('select', { 'aria-label': GM.t('prompt', 'yêu cầu') });
     PROMPTS.forEach(function (p, i) { promptSel.appendChild(GM.el('option', { value: String(i) }, [p.label])); });
     var ruleSel = GM.el('select', { 'aria-label': GM.t('choosing rule', 'quy tắc chọn') });
@@ -85,7 +85,7 @@
       ]));
       var allSame = outs.every(function (o) { return o === outs[0]; });
       samples.appendChild(GM.feedback(allSame ? 'good' : 'info', allSame
-        ? GM.t('All five selections match. The rule chose the same highest-scoring candidate each time.', 'Cả năm lần đều giống nhau. Quy tắc đã chọn cùng một ứng viên có điểm cao nhất.')
+        ? GM.t('All five selections match. This can happen by a fixed rule or by chance; matching samples alone do not tell you which.', 'Cả năm lần đều giống nhau. Có thể do quy tắc cố định hoặc trùng hợp ngẫu nhiên; chỉ nhìn kết quả chưa biết trường hợp nào.')
         : GM.t('Five runs produced ', 'Năm lượt tạo ra ') + new Set(outs).size + GM.t(' different outputs. The model scores stayed fixed; only the selection step varied.', ' đầu ra khác nhau. Điểm của mô hình không đổi; chỉ bước chọn thay đổi.')));
     });
     [promptSel, ruleSel].forEach(function (s) { s.addEventListener('change', render); });

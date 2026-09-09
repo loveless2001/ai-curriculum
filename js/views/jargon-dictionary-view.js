@@ -8,11 +8,10 @@ GM.views.dictionary = function (main) {
       GM.el('div', { class: 'lock-big' }, ['🔒']),
       GM.el('h1', {}, [GM.t('The two-column dictionary', 'Từ điển hai cột')]),
       GM.el('div', { html: GM.t(
-        '<p>This page holds the official technical name for every plain-language idea in the course.</p>' +
-        '<p><strong>It stays closed until Week 10.</strong> The course introduces each observable idea before giving it a ' +
-        'technical name. This page opens after those ideas have been used in the first nine weeks.</p>',
-        '<p>Trang này chứa tên kỹ thuật chính thức của mọi ý tưởng được gọi bằng lời thường trong khóa học.</p>' +
-        '<p><strong>Trang sẽ đóng đến Tuần 10.</strong> Khóa học giới thiệu hiện tượng quan sát được trước, rồi mới đưa ra tên kỹ thuật. Trang này mở sau khi bạn đã dùng các ý đó trong chín tuần đầu.</p>') }),
+        '<p>This table connects examples to technical terms and notes where an analogy has limits.</p>' +
+        '<p><strong>Reveal the table in Week 10.</strong> Earlier lessons define terms as needed; Week 10 brings them together.</p>',
+        '<p>Bảng này nối ví dụ với thuật ngữ kỹ thuật và chỉ ra giới hạn của cách ví von.</p>' +
+        '<p><strong>Mở bảng ở Tuần 10.</strong> Các bài trước giải thích thuật ngữ khi cần; Tuần 10 tập hợp chúng lại.</p>') }),
       GM.el('p', {}, [GM.el('a', { class: 'btn', href: '#/week/10' }, [GM.t('Go to Week 10 — the reveal', 'Đến Tuần 10 — màn bật mí')])]),
       GM.el('p', { class: 'note' }, [GM.t('Already done the course elsewhere? The reveal button in Week 10 unlocks this page any time.', 'Đã học khóa này ở nơi khác? Nút bật mí trong Tuần 10 có thể mở khóa trang này bất cứ lúc nào.')]),
     ]));
@@ -28,8 +27,8 @@ GM.views.dictionary = function (main) {
 
   var table = GM.el('table', {}, [
     GM.el('thead', {}, [GM.el('tr', {}, [
-      GM.el('th', {}, [GM.t('Folk term (Weeks 1–9)', 'Tên gọi đời thường (Tuần 1–9)')]),
-      GM.el('th', {}, [GM.t('Technical term (Weeks 10–12)', 'Thuật ngữ kỹ thuật (Tuần 10–12)')]),
+      GM.el('th', {}, [GM.t('Plain-language idea', 'Ý diễn đạt bằng lời thường')]),
+      GM.el('th', {}, [GM.t('Technical connection', 'Liên hệ với thuật ngữ kỹ thuật')]),
       GM.el('th', {}, [GM.t('Where you did it', 'Bạn đã thực hành ở đâu')]),
     ])]),
   ]);

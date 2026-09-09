@@ -70,9 +70,9 @@
       result.innerHTML = '';
       var verdict;
       if (hits >= expected) {
-        verdict = GM.feedback('good', GM.t('<strong>' + hits + ' of ' + answered + ' ranges contained the truth.</strong> At 90% confidence, ' + expected + ' was the target — you’re in calibrated territory. (Check: were the ranges honest, or so wide they said nothing?)', '<strong>' + hits + '/' + answered + ' khoảng chứa giá trị thật.</strong> Với mức tin chắc 90%, mục tiêu là ' + expected + ' — bạn đang ở vùng được hiệu chuẩn. (Hãy kiểm tra: khoảng có thành thật hay rộng đến mức không nói gì?)'));
+        verdict = GM.feedback('good', GM.t('<strong>' + hits + ' of ' + answered + ' ranges contained the reference answer.</strong> This is near or above the 90% target for this round. A short quiz cannot establish calibration; also check whether your ranges were useful.', '<strong>' + hits + '/' + answered + ' khoảng chứa đáp án tham chiếu.</strong> Kết quả gần hoặc trên mục tiêu 90% của vòng này. Bài ngắn chưa đủ kết luận về hiệu chuẩn; hãy xem các khoảng có hữu ích không.'));
       } else {
-        verdict = GM.feedback('bad', GM.t('<strong>' + hits + ' of ' + answered + ' ranges contained the truth.</strong> A calibrated 90% would land near ' + expected + '. You just measured your own overconfidence — congratulations, that measurement is rarer than it sounds. The fix isn’t knowing more trivia; it’s widening ranges until they’re honest.', '<strong>' + hits + '/' + answered + ' khoảng chứa giá trị thật.</strong> Mức 90% được hiệu chuẩn sẽ gần ' + expected + '. Bạn vừa đo được sự quá tự tin của mình — phép đo hiếm hơn tưởng tượng. Cách sửa không phải biết thêm dữ kiện vụn, mà là mở rộng khoảng cho đến khi thành thật.'));
+        verdict = GM.feedback('warn', GM.t('<strong>' + hits + ' of ' + answered + ' ranges contained the reference answer.</strong> This is below the 90% target. Your ranges may be too narrow, but a short quiz also varies by chance. Review your evidence before the next round.', '<strong>' + hits + '/' + answered + ' khoảng chứa đáp án tham chiếu.</strong> Kết quả thấp hơn mục tiêu 90%. Khoảng có thể quá hẹp, nhưng bài ngắn cũng dao động ngẫu nhiên. Xem lại căn cứ trước vòng sau.'));
       }
       result.appendChild(verdict);
       GM.store.setSaved('calibration-round-' + round, { hits: hits, answered: answered });

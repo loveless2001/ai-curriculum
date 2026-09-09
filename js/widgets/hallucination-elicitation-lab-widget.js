@@ -21,7 +21,7 @@
 
   GM.widgets['hallucination-lab'] = function (container) {
     var w = GM.widgetShell(GM.t('The hallucination elicitation lab', 'Phòng thí nghiệm gợi phát ảo giác'),
-      GM.t('Temperature is fixed at 0. Run a query twice and compare the outputs.', 'Temperature được cố định ở 0. Chạy một yêu cầu hai lần rồi so sánh kết quả.'));
+      GM.t('These answers are scripted examples, not live model output. Run a query twice and compare.', 'Đây là câu trả lời soạn sẵn, không phải đầu ra mô hình thật. Chạy hai lần rồi so sánh.'));
     var sel = GM.el('select', { 'aria-label': GM.t('query', 'yêu cầu') });
     QUERIES.forEach(function (q, i) { sel.appendChild(GM.el('option', { value: String(i) }, [q.label])); });
     var out = GM.el('div');
@@ -36,20 +36,20 @@
       runCount++;
       out.innerHTML = '';
       out.appendChild(GM.el('div', { class: 'machine-out' }, [
-        GM.el('span', { class: 'machine-tag' }, [GM.t('model · T=0 · run #', 'mô hình · T=0 · lượt #') + runCount + GM.t(' — identical on every rerun', ' — giống hệt khi chạy lại')]),
+        GM.el('span', { class: 'machine-tag' }, [GM.t('prepared example · run #', 'ví dụ soạn sẵn · lượt #') + runCount + GM.t(' — identical on every rerun', ' — giống hệt khi chạy lại')]),
         q.out,
       ]));
       if (!q.truthful) {
         out.appendChild(GM.feedback('bad',
-          GM.t('<strong>The checkable details above are fabricated.</strong> The requested person or citation does not exist' + (q.territory === 'thin' ? ' at this level of detail' : '') + '. The answer repeats because temperature is 0. It shows that a reproducible continuation can still be false.', '<strong>Các chi tiết có thể kiểm tra ở trên đều là bịa đặt.</strong> Người hoặc tài liệu được hỏi không tồn tại' + (q.territory === 'thin' ? ' ở mức chi tiết này' : '') + '. Câu trả lời lặp lại vì temperature bằng 0. Một câu có thể tái tạo vẫn có thể sai.')));
+          GM.t('This answer was written as a fictional example. It repeats because the demo returns saved text. For the historical question, the breakfast description is invented; the person is real.', 'Câu này được soạn làm ví dụ hư cấu. Nó lặp lại vì mô phỏng trả về văn bản đã lưu. Với câu lịch sử, phần bữa sáng là bịa; nhân vật là có thật.')));
       } else {
         out.appendChild(GM.feedback('good',
-          GM.t('This answer is accurate, but it was produced by the same prediction process as the false answers. Accuracy must be checked against an external source.', 'Câu này đúng, nhưng được tạo bằng cùng quá trình dự đoán như các câu sai. Muốn biết chính xác, cần đối chiếu với nguồn bên ngoài.')));
+          GM.t('This is the factual example in our prepared set. In a real model, correct and incorrect answers can both sound fluent. Check claims against independent sources.', 'Đây là ví dụ đúng trong bộ soạn sẵn. Ở mô hình thật, cả câu đúng và sai đều có thể trôi chảy. Hãy đối chiếu khẳng định với nguồn độc lập.')));
       }
       logBody.appendChild(GM.el('tr', {}, [
         GM.el('td', {}, [q.label.split(':')[0]]),
         GM.el('td', {}, [q.truthful ? GM.t('accurate', 'chính xác') : GM.t('fabricated', 'bịa đặt')]),
-        GM.el('td', {}, [GM.t('yes — T=0', 'có — T=0')]),
+        GM.el('td', {}, [GM.t('yes — scripted', 'có — soạn sẵn')]),
         GM.el('td', {}, [q.territory === 'dense' ? GM.t('well-covered', 'được phủ tốt') : q.territory === 'thin' ? GM.t('thin / fine-grained', 'thưa / quá chi tiết') : GM.t('empty (invented)', 'trống (bịa)')]),
       ]));
     }
@@ -61,19 +61,19 @@
     var confBtn = GM.el('button', { class: 'btn small secondary' }, [GM.t('Ask it: “How confident are you?”', 'Hỏi: “Bạn tự tin đến đâu?”')]);
     confBtn.addEventListener('click', function () {
       out.appendChild(GM.el('div', { class: 'machine-out' }, [
-        GM.el('span', { class: 'machine-tag' }, [GM.t('model · T=0', 'mô hình · T=0')]),
+        GM.el('span', { class: 'machine-tag' }, [GM.t('prepared example', 'ví dụ soạn sẵn')]),
         GM.t('I’m quite confident in that answer, though I’d recommend verifying important details against primary sources.', 'Tôi khá tự tin về câu trả lời, dù khuyên bạn kiểm tra các chi tiết quan trọng với nguồn sơ cấp.'),
       ]));
       out.appendChild(GM.feedback('warn',
-        GM.t('The model states high confidence for both true and false answers. That sentence is not a reliability measurement. Calibration requires comparing many predictions with verified outcomes.', 'Mô hình nói rất tự tin với cả câu đúng lẫn câu sai. Lời tự nhận đó không phải phép đo độ tin cậy. Muốn đánh giá hiệu chuẩn, cần so nhiều dự đoán với kết quả đã kiểm chứng.')));
+        GM.t('The demo returns the same confidence statement for true and false examples. That sentence is not a reliability measurement. Calibration requires comparing many predictions with verified outcomes.', 'Mô phỏng trả cùng lời tự nhận mức tự tin cho cả ví dụ đúng lẫn sai. Lời tự nhận đó không phải phép đo độ tin cậy. Muốn đánh giá hiệu chuẩn, cần so nhiều dự đoán với kết quả đã kiểm chứng.')));
     });
     var drillBtn = GM.el('button', { class: 'btn small secondary' }, [GM.t('Precision drill: model answers', 'Luyện diễn đạt chính xác: đáp án mẫu')]);
     drillBtn.addEventListener('click', function () {
       drillBtn.disabled = true;
       drill.appendChild(GM.feedback('info',
-        GM.t('<strong>“The AI lied to me”</strong> → “It produced likely-sounding text in territory its training data covered thinly; nothing in it tracks truth, so nothing in it avoided truth.”<br>' +
-        '<strong>“The AI glitched”</strong> → “It worked exactly as designed — the same mechanism that gets facts right filled a gap with a plausible reconstruction.”<br>' +
-        '<strong>“The AI doesn’t know that fact”</strong> → “Careful — ‘know’ needs a test attached (Week 5). Say: it does not reliably produce that fact, and its confidence doesn’t signal when it will.”', '<strong>“AI nói dối tôi”</strong> → “Nó tạo văn bản nghe hợp lý ở vùng dữ liệu huấn luyện phủ thưa; mục tiêu của nó không trực tiếp theo dõi sự thật.”<br><strong>“AI bị trục trặc”</strong> → “Nó hoạt động theo đúng cơ chế — cùng cơ chế trả lời đúng đã lấp chỗ trống bằng bản tái dựng hợp lý.”<br><strong>“AI không biết dữ kiện đó”</strong> → “Cẩn thận — ‘biết’ cần gắn phép thử (Tuần 5). Hãy nói: nó không tạo dữ kiện đó một cách đáng tin, và lời tự tin không báo trước lúc nào nó đúng.”')));
+        GM.t('<strong>“The AI lied”</strong> → “Its answer contained an invented citation; that alone does not establish intent.”<br>' +
+        '<strong>“The AI glitched”</strong> → “The answer was wrong. I need more evidence to explain the cause.”<br>' +
+        '<strong>“The AI knows this”</strong> → “It answered this question correctly. I would test new cases before generalizing.”', '<strong>“AI nói dối”</strong> → “Câu trả lời có trích dẫn bịa; riêng điều đó chưa chứng minh ý định.”<br><strong>“AI trục trặc”</strong> → “Câu trả lời sai. Cần thêm bằng chứng để giải thích nguyên nhân.”<br><strong>“AI biết điều này”</strong> → “Nó trả lời đúng câu này. Tôi sẽ thử trường hợp mới trước khi kết luận rộng hơn.”')));
     });
 
     var logTable = GM.el('table', {}, [
