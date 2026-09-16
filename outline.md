@@ -43,25 +43,25 @@ A weekly session can fit roughly two hours, including discussion. Self-paced lea
 
 **Next:** which details must a useful model keep? Save the prediction ranking for Week 8.
 
-## Week 3 — What models keep and omit
+## Week 3 — Remember a route. Build a map.
 
-**Try:** compare a metro map with a satellite photo; summarize a story in ten words; design neighborhood maps for lunch and pipe repairs.
+**Try:** start with a familiar A–B–C–D journey. Build a map from five explicit, bidirectional connections, then use it to plan a journey to E that was not shown as a worked example. Save the checked map for Week 4.
 
-**Explain:** a model serves a purpose by simplifying. A restaurant summary can be accurate but omit wheelchair access. Lossy compression is an analogy for one aspect of learned models, not a universal explanation of their errors.
+**Explain:** a useful model preserves relationships needed for a task, not merely fewer details. Remembering and understanding can coexist. A connection list can also be a model. A map of connections cannot yet answer questions about travel time or accessibility.
 
-**Check:** describe two models of the same subject and what each cannot answer.
+**Check:** use the model for a new journey; explain what it keeps, what it omits, and one question that requires more information. Written reflections are self-reviewed, not automatically graded.
 
-**Next:** a useful-looking answer still needs a test.
+**Next:** reuse the same model after one road closes.
 
-## Week 4 — Testing recall, patterns, and rules
+## Week 4 — The road closes. Now what?
 
-**Try:** compare a times-table question, unfamiliar numbers, and a cups-in-boxes problem. Probe the hidden number rule with examples that could disprove your current guess.
+**Try:** find a new A-to-D journey when C–D closes; compare maps whose drawings or connections change; request travel-time information before choosing the fastest route; then transfer the path-and-constraints idea to a fragile-parcel delivery problem.
 
-**Explain:** new cases test generalization. Interpolation stays inside a practiced range; extrapolation goes outside it. Neither identifies the solver's mechanism by itself.
+**Explain:** distinguish a new case using existing relationships, a changed availability fact, and a new requirement that needs additional kinds of information. Generalization extends beyond the exact worked example. A successful toy exercise is evidence of a specific performance, not proof of general intelligence.
 
-**Check:** design three questions and state what passing them would still not prove.
+**Check:** explain one relationship reused, one fact updated, and one type of information added. State what does and does not carry over to the delivery problem.
 
-**Next:** test an alternative explanation by changing a condition.
+**Next:** Week 5 asks what alternative explanations could account for a successful performance and how to distinguish them.
 
 ## Week 5 — What behavior can and cannot show
 
