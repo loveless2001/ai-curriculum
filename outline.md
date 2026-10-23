@@ -10,6 +10,8 @@ Begin with a concrete question, let the learner try it, explain the result, then
 
 Use ordinary examples before abstract claims. Treat analogies as aids with stated limits. Distinguish an observed result, a possible explanation, and evidence that tests that explanation.
 
+Each week applies its main idea to a short example from writing, planning, research, or decision-making. Learners can use the same questions on a task of their own and save notes locally.
+
 A weekly session can fit roughly two hours, including discussion. Self-paced learners can split it across sittings. Material marked optional is not needed for the checkpoint.
 
 ## Course sequence
@@ -29,6 +31,8 @@ A weekly session can fit roughly two hours, including discussion. Self-paced lea
 
 **Check:** explain why the coffee sentence is easier to complete than an open birthday wish.
 
+**Apply:** replace “make this email professional” with the reader, purpose, next action, and relevant constraints.
+
 **Next:** what do you learn when an answer arrives?
 
 ## Week 2 — Surprise and information
@@ -38,6 +42,8 @@ A weekly session can fit roughly two hours, including discussion. Self-paced lea
 **Explain:** information depends on the receiver's starting knowledge. Surprise depends on expectations; emotional shock and usefulness are different questions. Balanced questions help under stated assumptions.
 
 **Check:** contrast a long, uninformative message with a short, informative one; identify a question whose likely answer rules out little.
+
+**Apply:** decide what to ask before trying a morning shift at a drink shop; choose a missing fact that could change the decision.
 
 **Between sessions:** record three surprises and whether they justify changing an expectation. The misconception exercise is a short review, not another lecture.
 
@@ -51,6 +57,8 @@ A weekly session can fit roughly two hours, including discussion. Self-paced lea
 
 **Check:** use the model for a new journey; explain what it keeps, what it omits, and one question that requires more information. Written reflections are self-reviewed, not automatically graded.
 
+**Apply:** compare strong and weak articles, give AI three concrete writing criteria, then check and revise its draft against them.
+
 **Next:** reuse the same model after one road closes.
 
 ## Week 4 — The road closes. Now what?
@@ -60,6 +68,8 @@ A weekly session can fit roughly two hours, including discussion. Self-paced lea
 **Explain:** distinguish a new case using existing relationships, a changed availability fact, and a new requirement that needs additional kinds of information. Generalization extends beyond the exact worked example. A successful toy exercise is evidence of a specific performance, not proof of general intelligence.
 
 **Check:** explain one relationship reused, one fact updated, and one type of information added. State what does and does not carry over to the delivery problem.
+
+**Apply:** adapt a four-step new-hire process for remote work; separate what stays, what changes, and what new information is needed.
 
 **Next:** Week 5 asks what alternative explanations could account for a successful performance and how to distinguish them.
 
@@ -71,6 +81,8 @@ A weekly session can fit roughly two hours, including discussion. Self-paced lea
 
 **Check:** predict what you would observe under each explanation.
 
+**Apply:** compare fictional meeting notes with a flawed summary, then change one condition at a time to test why a new summary improved.
+
 **Next:** even after testing, how certain should you be?
 
 ## Week 6 — Measuring confidence
@@ -80,6 +92,8 @@ A weekly session can fit roughly two hours, including discussion. Self-paced lea
 **Explain:** calibration is a pattern across many predictions. A short quiz is a starting measurement, not a diagnosis. An incorrect statement alone does not establish whether someone was mistaken, careless, or deceptive.
 
 **Check:** report both hit rates, explain one adjustment, and state the short quiz's limits.
+
+**Apply:** mark claims in a vendor comparison as supported, inferred, or unknown.
 
 **Next:** carry the test-and-confidence method into the language-model lessons. Save results for Week 9.
 
@@ -93,6 +107,8 @@ Generation repeats: score possible next tokens, choose one, append it, then scor
 
 **Check:** give a one-minute explanation and save one confusing phrase to revise in Week 12. A recording is an alternative for solo learners.
 
+**Apply:** separate chat context, saved memory, and retrieved documents in a brand-voice task.
+
 **Next:** what changes when the choice rule changes?
 
 ## Week 8 — Scores, selection, and temperature
@@ -104,6 +120,8 @@ Generation repeats: score possible next tokens, choose one, append it, then scor
 Matching draws can occur by chance. Real-service output is not guaranteed identical at temperature 0. Lower temperature does not verify facts.
 
 **Check:** predict a trend, run several trials, and explain any mismatch. Do not grade a random sample as if its precise outcome were guaranteed.
+
+**Apply:** explore varied names or angles, then select and revise against criteria.
 
 **Next:** separate an answer's repeatability from its truth.
 
@@ -117,6 +135,8 @@ A scripted example demonstrates a distinction. It does not measure a live model'
 
 **Check:** identify one unsupported detail, explain why repetition is insufficient, and propose a check with a stated limit.
 
+**Apply:** correct a three-day work report using its source notes; distinguish wrong numbers from claims with no source.
+
 **Next:** how does training change the numbers that produce predictions?
 
 ## Week 10 — How training changes a model
@@ -129,6 +149,8 @@ A scripted example demonstrates a distinction. It does not measure a live model'
 
 **Check:** explain one update and the distinction between the toy and text losses.
 
+**Apply:** group customer-feedback classification errors, change one instruction, and rerun old and new cases.
+
 **Next:** inspect a calculation that uses the trained weights.
 
 ## Week 11 — Attention and internal circuits
@@ -140,6 +162,8 @@ A scripted example demonstrates a distinction. It does not measure a live model'
 Connect the copying behavior to published induction-head experiments. Changing or disabling components tests a causal explanation; a correct completion alone does not.
 
 **Check:** distinguish the behavior, our programmed demonstration, and evidence about a real circuit.
+
+**Apply:** find the exception that decides a question about a fictional return policy; require a section citation and check it against the source.
 
 **Next:** how does further training encourage assistant-style responses?
 
@@ -156,6 +180,8 @@ Connect the copying behavior to published induction-head experiments. Changing o
 5. One example or analogy, with its limit.
 
 Revise unclear or unsupported claims. Record external review as pending when no reader is available; self-review is not evidence that external review occurred.
+
+**Applied capstone:** choose one real task—writing, planning, research, comparison, meeting preparation, or customer communication—and turn its vague request into a staged process. State the desired outcome, information to preserve, criteria for each step, claims to verify, limits, and decisions reserved for a person. Test the process on at least two cases.
 
 **Optional:** extra computation before answering, then a choice of further-study paths with prerequisites. These are enrichment, not a barrier to completing the course.
 

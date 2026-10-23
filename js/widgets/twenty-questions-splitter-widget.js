@@ -35,7 +35,7 @@
 
   GM.widgets['question-splitter'] = function (container) {
     var w = GM.widgetShell(GM.t('Find the hidden item', 'Tìm vật bí mật'),
-      GM.t('One of these 16 items is secretly chosen. Ask questions; watch what each does to the field of possibilities.', 'Một trong 16 vật được chọn bí mật. Hãy hỏi và quan sát mỗi câu tác động ra sao đến tập khả năng.'));
+      GM.t('One of these 16 items is secretly chosen. Ask questions; watch what each does to the field of possibilities.', 'Máy đã chọn một trong 16 đồ vật. Hãy đặt câu hỏi và xem mỗi câu loại được bao nhiêu đáp án.'));
     var target, remaining, asked;
     var chipBox = GM.el('div', { class: 'gm-row' });
     var qBox = GM.el('div', { class: 'gm-row' });
@@ -58,15 +58,19 @@
         b.addEventListener('click', function () { ask(q); });
         qBox.appendChild(b);
       });
-      // The famous bad opening move, always available:
+      // A deliberately weak opening question for comparison with balanced splits.
+      if (asked.length > 0 || remaining.indexOf(ITEMS[14]) === -1) return;
       var guessBtn = GM.el('button', { class: 'btn small secondary' }, [GM.t('Is it the ', 'Đó có phải ') + ITEMS[14].n + '?']);
       guessBtn.addEventListener('click', function () {
-        var yes = target.n === ITEMS[14].n;
-        if (!yes) remaining = remaining.filter(function (it) { return it.n !== ITEMS[14].n; });
+        var yes = target === ITEMS[14];
+        if (yes) remaining = [target];
+        else remaining = remaining.filter(function (it) { return it !== ITEMS[14]; });
         log.appendChild(GM.feedback(yes ? 'good' : 'warn',
           GM.t('“Is it the television?” — answer: <strong>' + (yes ? 'yes (lucky!)' : 'no') + '</strong>. ' + (yes ? 'A lottery win.' : 'This eliminated <strong>1</strong> of ' + (remaining.length + 1) + ' possibilities. Before asking, “no” was overwhelmingly likely; that branch left nearly the whole field in play.'),
-            '“Đó có phải ti-vi không?” — đáp án: <strong>' + (yes ? 'có (may mắn!)' : 'không') + '</strong>. ' + (yes ? 'Trúng xổ số.' : 'Câu này loại <strong>1</strong> trong ' + (remaining.length + 1) + ' khả năng. Trước khi hỏi, đáp án “không” có khả năng áp đảo; nhánh ấy vẫn để gần như toàn bộ tập khả năng tồn tại.'))));
-        finishCheck(); renderChips();
+            '“Đó có phải ti-vi không?” — <strong>' + (yes ? 'đúng' : 'không') + '</strong>. ' + (yes ? 'Bạn đoán trúng ngay.' : 'Câu hỏi này chỉ loại được <strong>1</strong> trong ' + (remaining.length + 1) + ' đáp án. Trước khi hỏi, khả năng nhận câu trả lời “không” đã rất cao, nên hỏi xong ta vẫn còn gần như nguyên danh sách.'))));
+        renderChips();
+        if (!yes) renderQuestions();
+        finishCheck();
       });
       qBox.appendChild(guessBtn);
     }
@@ -79,15 +83,15 @@
       var balance = Math.min(yesCount, before - yesCount) / before;
       log.appendChild(GM.feedback(balance > 0.3 ? 'good' : 'info',
         GM.t('“' + q.q + '” — answer: <strong>' + (yes ? 'yes' : 'no') + '</strong>. Of ' + before + ' possibilities, ' + yesCount + ' were yes / ' + (before - yesCount) + ' were no → ' + remaining.length + ' remain. ' + (balance > 0.3 ? 'A near-even split: before asking, both branches were substantial, so either answer would narrow the field.' : 'A lopsided split: one answer was much more likely and would leave most possibilities in play.'),
-          '“' + q.q + '” — đáp án: <strong>' + (yes ? 'có' : 'không') + '</strong>. Trong ' + before + ' khả năng, ' + yesCount + ' trả lời có / ' + (before - yesCount) + ' trả lời không → còn ' + remaining.length + '. ' + (balance > 0.3 ? 'Chia gần đều: trước khi hỏi, cả hai nhánh đều đáng kể, nên đáp án nào cũng giúp thu hẹp tập khả năng.' : 'Chia lệch: một đáp án có khả năng cao hơn nhiều và sẽ để lại phần lớn các khả năng.'))));
+          '“' + q.q + '” — <strong>' + (yes ? 'có' : 'không') + '</strong>. Trong ' + before + ' đồ vật, ' + yesCount + ' vật ứng với “có” và ' + (before - yesCount) + ' vật ứng với “không” → còn lại ' + remaining.length + '. ' + (balance > 0.3 ? 'Câu hỏi chia danh sách khá đều, nên dù nhận câu trả lời nào bạn cũng loại được nhiều đáp án.' : 'Câu hỏi chia danh sách quá lệch. Nếu rơi vào phía đông hơn, bạn vẫn còn rất nhiều đáp án phải xét.'))));
       renderChips(); renderQuestions(); finishCheck();
     }
     function finishCheck() {
       if (remaining.length === 1) {
-        log.appendChild(GM.feedback('good', GM.t('Narrowed to one: <strong>' + remaining[0].n + '</strong>. Notice which questions did the work—the ones whose possible answers divided the live field.', 'Đã thu hẹp còn một: <strong>' + remaining[0].n + '</strong>. Hãy để ý câu nào làm được việc—đó là những câu có các đáp án khả dĩ chia được tập khả năng đang xét.')));
+        log.appendChild(GM.feedback('good', GM.t('Narrowed to one: <strong>' + remaining[0].n + '</strong>. Notice which questions did the work—the ones whose possible answers divided the live field.', 'Chỉ còn một đáp án: <strong>' + remaining[0].n + '</strong>. Những câu hỏi hữu ích nhất là những câu chia khá đều danh sách còn lại.')));
         qBox.innerHTML = '';
       } else if (remaining.length > 1 && asked.length === QUESTIONS.length) {
-        log.appendChild(GM.feedback('info', GM.t('Out of attribute questions with ' + remaining.length + ' items left: ' + remaining.map(function (i) { return i.n; }).join(', ') + '. These items answer every question identically — no question in the list can split them. To tell them apart you’d need a <em>new</em> question.', 'Đã hết câu hỏi thuộc tính nhưng còn ' + remaining.length + ' vật: ' + remaining.map(function (i) { return i.n; }).join(', ') + '. Chúng trả lời mọi câu giống nhau — không câu nào trong danh sách tách được. Bạn cần một câu hỏi <em>mới</em>.')));
+        log.appendChild(GM.feedback('info', GM.t('Out of attribute questions with ' + remaining.length + ' items left: ' + remaining.map(function (i) { return i.n; }).join(', ') + '. These items answer every question identically — no question in the list can split them. To tell them apart you’d need a <em>new</em> question.', 'Đã hỏi hết mà vẫn còn ' + remaining.length + ' đáp án: ' + remaining.map(function (i) { return i.n; }).join(', ') + '. Các đồ vật này trả lời giống nhau ở mọi câu trong danh sách, nên bạn cần nghĩ thêm một câu hỏi <em>mới</em> để phân biệt chúng.')));
       }
     }
     function start() {

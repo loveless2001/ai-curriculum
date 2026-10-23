@@ -7,8 +7,8 @@
         '<span class="speaker">A:</span> Why do you feel that nobody listens to you?<br>' +
         '<span class="speaker">Q:</span> My sister only talks about herself.<br>' +
         '<span class="speaker">A:</span> Tell me more about your sister.',
-      source: 'ELIZA (1966) — a program of a few reflection tricks: flip pronouns, echo, prompt for more.',
-      test: 'Break the script: say something the reflection rules mangle (“my sister is a submarine”). A listener who understands notices absurdity; a pattern-flipper reflects it back deadpan.' },
+      source: 'An illustrative exchange in the style of ELIZA’s DOCTOR script (Joseph Weizenbaum, MIT; described in 1966). It used keyword rules to reshape a user’s words and invite them to say more.',
+      test: 'Stay with the sister story, but add a new fact: “Last night my sister listened to me for an hour.” Ask whether “she only talks about herself” still fits. A reply should use the new fact, not just echo “sister.” One good reply would still not prove human-like understanding.' },
     { title: 'Transcript B', text:
         '<span class="speaker">Q:</span> Why does the big boat float when a little stone sinks?<br>' +
         '<span class="speaker">A:</span> The boat is spread out big so the water can hold it up everywhere. The stone is all squeezed into one spot, so the water can’t hold it.',
@@ -29,16 +29,16 @@
       test: 'The historical controls exactly: questioners who don’t know the answer, and blinders. If accuracy collapses, the skill was cue-reading. (It did, and it was.)' },
   ];
   if (GM.language.isVietnamese()) CASES = [
-    { title: 'Đoạn A', text: '<span class="speaker">Hỏi:</span> Gần đây tôi cảm thấy chẳng ai lắng nghe mình.<br><span class="speaker">Đáp:</span> Vì sao bạn cảm thấy không ai lắng nghe?<br><span class="speaker">Hỏi:</span> Chị tôi chỉ nói về bản thân.<br><span class="speaker">Đáp:</span> Hãy kể thêm về chị của bạn.', source: 'ELIZA (1966) — chương trình với vài thủ thuật phản chiếu: đổi đại từ, lặp lại và gợi người dùng nói thêm.', test: 'Phá kịch bản: nói điều quy tắc phản chiếu sẽ làm sai (“chị tôi là tàu ngầm”). Người hiểu nhận ra sự vô lý; bộ lật mẫu sẽ bình thản phản chiếu lại.' },
-    { title: 'Đoạn B', text: '<span class="speaker">Hỏi:</span> Vì sao tàu lớn nổi còn viên đá nhỏ chìm?<br><span class="speaker">Đáp:</span> Tàu trải rộng nên nước đỡ nó ở khắp nơi. Đá bị dồn vào một chỗ nên nước không đỡ nổi.', source: 'Một em bé năm tuổi. Sai ở chi tiết nhưng đang lần tới nguyên lý thật về lực đẩy và thể tích chiếm chỗ.', test: 'Chuyển sang trường hợp mới: “một tấm đá phẳng có nổi không?” Câu trả lời cho thấy ý tưởng “trải rộng” có thật sự làm việc hay chỉ là câu học thuộc.' },
-    { title: 'Đoạn C', text: '<span class="speaker">Hỏi:</span> Giải thích câu đùa: “Tôi bảo chiếc va-li năm nay không được đi nghỉ. Giờ tôi phải xử lý hành lý cảm xúc.”<br><span class="speaker">Đáp:</span> Sự hài hước đến từ hai nghĩa của “hành lý cảm xúc”: theo nghĩa đen là chiếc va-li có cảm xúc; theo nghĩa bóng là gánh nặng tâm lý chưa giải quyết. Câu đùa biến thành ngữ thành nghĩa đen.', source: 'Một mô hình ngôn ngữ lớn. Lưu loát, chính xác, được tạo bởi cơ chế tạo văn bản có khả năng cao.', test: 'Nước đi Tuần 4: trường hợp mới. Bịa cấu trúc câu đùa chưa từng được viết rồi hỏi cơ chế. Đồng thời thử tính nhất quán khi diễn đạt lại.' },
-    { title: 'Đoạn D', text: '<span class="speaker">Báo cáo:</span> Một con chó được dạy tên hơn 1.000 đồ chơi. Khi nghe “lấy Bamboozle” — cái tên chưa từng nghe, đặt giữa đồ quen — nó dừng lại rồi mang về món đồ lạ duy nhất.', source: 'Chaser, chó border collie trong nghiên cứu nhận thức động vật. Suy luận: từ mới → vật chưa có tên.', test: 'Đối chứng kiểu von Pfungst: kết quả còn đúng khi người hướng dẫn không biết món nào là gì? Cho người thí nghiệm ra khỏi phòng, đổi vị trí, loại trừ mùi và hướng nhìn.' },
-    { title: 'Đoạn E', text: '<span class="speaker">Báo cáo:</span> Khi được hỏi “12 cộng 7 bằng bao nhiêu?”, con ngựa gõ móng mười chín lần rồi dừng giữa tiếng vỗ tay. Nó thành công với nhiều người hỏi.', source: 'Màn biểu diễn kiểu Hans Thông minh. Kỹ năng thật — đọc tín hiệu người — bị mô tả nhầm thành số học.', test: 'Đúng các đối chứng lịch sử: người hỏi không biết đáp án và che mắt ngựa. Nếu độ chính xác sụp, kỹ năng là đọc tín hiệu. (Và nó đã sụp.)' },
+    { title: 'Đoạn A', text: '<span class="speaker">Hỏi:</span> Gần đây tôi cảm thấy chẳng ai lắng nghe mình.<br><span class="speaker">Đáp:</span> Vì sao bạn cảm thấy không ai lắng nghe?<br><span class="speaker">Hỏi:</span> Chị tôi chỉ nói về bản thân.<br><span class="speaker">Đáp:</span> Hãy kể thêm về chị của bạn.', source: 'Đoạn minh họa theo kịch bản DOCTOR của ELIZA (Joseph Weizenbaum, MIT; công bố năm 1966). Kịch bản dùng quy tắc tìm từ, đổi đại từ và hỏi lại.', test: 'Giữ chuyện người chị nhưng thêm tin mới: “Tối qua chị ấy ngồi nghe tôi kể chuyện suốt một giờ.” Hỏi: “Vậy tôi có còn chắc chị ấy chỉ nói về bản thân không?” Câu trả lời cần xét tin mới, không chỉ nhắc lại chữ “chị”. Một lần trả lời hợp lý vẫn chưa đủ kết luận nó hiểu như người.' },
+    { title: 'Đoạn B', text: '<span class="speaker">Hỏi:</span> Vì sao tàu lớn nổi còn viên đá nhỏ chìm?<br><span class="speaker">Đáp:</span> Tàu trải rộng nên nước đỡ nó ở khắp nơi. Đá bị dồn vào một chỗ nên nước không đỡ nổi.', source: 'Ví dụ mô phỏng câu trả lời của một trẻ nhỏ: chưa chính xác, nhưng đã chạm tới ý tưởng thật về lực đẩy và thể tích chiếm chỗ.', test: 'Hỏi sang trường hợp mới: “Một tấm đá thật mỏng và phẳng có nổi không?” Câu trả lời sẽ cho thấy ý “trải rộng” có thực sự được dùng để suy nghĩ hay chỉ là câu học thuộc.' },
+    { title: 'Đoạn C', text: '<span class="speaker">Hỏi:</span> Giải thích câu đùa: “Tôi kể chuyện buồn cho cái cân. Nó bảo: Chuyện này nặng thật.”<br><span class="speaker">Đáp:</span> Câu “chuyện này nặng” có hai nghĩa. Với cái cân, “nặng” gợi đến trọng lượng. Còn khi nói về chuyện buồn, “nặng” nghĩa là nghiêm trọng, khó chịu đựng. Câu đùa ghép hai nghĩa đó lại.', source: 'Ví dụ mô phỏng kiểu câu trả lời mà một mô hình ngôn ngữ lớn có thể đưa ra. Đoạn này không được lấy từ một lượt chạy thật.', test: 'Đưa một câu đùa mới với cấu trúc khác rồi hỏi lại cách gây cười. Sau đó diễn đạt cùng câu hỏi theo vài cách để xem lời giải thích có nhất quán không.' },
+    { title: 'Đoạn D', text: '<span class="speaker">Báo cáo:</span> Một con chó được dạy tên hơn 1.000 đồ chơi. Khi nghe “lấy Bamboozle” — một cái tên chưa từng nghe — giữa nhiều món quen thuộc, nó dừng lại rồi mang về món đồ lạ duy nhất.', source: 'Chaser, một chú chó border collie trong nghiên cứu về nhận thức động vật. Có vẻ nó suy ra: từ mới chỉ món đồ chưa có tên.', test: 'Lặp lại khi người hướng dẫn không biết món đồ nào là đáp án. Đổi vị trí đồ vật, cho người thí nghiệm ra khỏi phòng và loại trừ mùi hoặc hướng nhìn.' },
+    { title: 'Đoạn E', text: '<span class="speaker">Báo cáo:</span> Khi được hỏi “12 cộng 7 bằng bao nhiêu?”, con ngựa gõ móng mười chín lần rồi dừng giữa tiếng vỗ tay. Nó làm đúng với nhiều người hỏi.', source: 'Một màn biểu diễn kiểu Clever Hans. Con ngựa thực sự có kỹ năng đọc tín hiệu của con người, nhưng kỹ năng ấy bị nhầm thành khả năng làm toán.', test: 'Để người không biết đáp án đặt câu hỏi, hoặc che tầm nhìn của con ngựa. Nếu nó không còn trả lời đúng, nguyên nhân nhiều khả năng là tín hiệu từ người hỏi. Đây cũng chính là điều đã xảy ra.' },
   ];
 
   GM.widgets['ascription-game'] = function (container) {
-    var w = GM.widgetShell(GM.t('The ascription game', 'Trò quy gán'),
-      GM.t('For each transcript: argue both sides in your head, vote, then reveal. Score yourself on the quality of your proposed test, not your verdict.', 'Với mỗi đoạn: tự lập luận cả hai phía, bỏ phiếu rồi mở nguồn. Hãy đánh giá chất lượng phép thử bạn đề xuất, không phải phán đoán.'));
+    var w = GM.widgetShell(GM.t('The ascription game', 'Đoán xem ai thực sự hiểu'),
+      GM.t('For each transcript: argue both sides in your head, vote, then reveal. Score yourself on the quality of your proposed test, not your verdict.', 'Các đoạn này được viết lại để minh họa, không phải bản ghi nguyên văn. Đọc từng đoạn, chọn một phương án, rồi xem tình huống dựa trên điều gì và có thể kiểm tra thêm ra sao.'));
     CASES.forEach(function (c) {
       var verdict = null;
       var voteRow = GM.el('div', { class: 'gm-row' });
@@ -51,13 +51,13 @@
         });
         voteRow.appendChild(chip);
       });
-      var btn = GM.el('button', { class: 'btn small' }, [GM.t('Reveal source & the test', 'Mở nguồn và phép thử')]);
+      var btn = GM.el('button', { class: 'btn small' }, [GM.t('Reveal source & the test', 'Xem giải thích và cách kiểm tra')]);
       btn.addEventListener('click', function () {
         btn.disabled = true;
-        reveal.appendChild(GM.feedback('info', GM.t('<strong>Source:</strong> ', '<strong>Nguồn:</strong> ') + c.source));
-        reveal.appendChild(GM.feedback('good', GM.t('<strong>A test that would move the needle:</strong> ', '<strong>Phép thử có thể làm thay đổi kết luận:</strong> ') + c.test));
+        reveal.appendChild(GM.feedback('info', GM.t('<strong>Source:</strong> ', '<strong>Dựa trên:</strong> ') + c.source));
+        reveal.appendChild(GM.feedback('good', GM.t('<strong>A test that would move the needle:</strong> ', '<strong>Có thể kiểm tra thêm bằng cách:</strong> ') + c.test));
         if (verdict === GM.t('Can’t say without a further test', 'Chưa thể nói nếu chưa thử thêm')) {
-          reveal.appendChild(GM.el('p', { class: 'note' }, [GM.t('You picked the option this game exists to teach. “Understands” without a test attached is a feeling, not a finding.', 'Bạn đã chọn phương án mà trò chơi muốn dạy. “Hiểu” mà không gắn phép thử là cảm giác, không phải phát hiện.')]));
+          reveal.appendChild(GM.el('p', { class: 'note' }, [GM.t('You picked the option this game exists to teach. “Understands” without a test attached is a feeling, not a finding.', 'Đây là điểm chính của bài: nếu chưa nói rõ sẽ kiểm tra thế nào, nhận xét “nó hiểu” mới chỉ là ấn tượng.')]));
         }
       });
       w.body.appendChild(GM.el('div', { class: 'card transcript', style: { boxShadow: 'none' } }, [

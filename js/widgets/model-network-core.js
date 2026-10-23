@@ -47,7 +47,7 @@
     var routeEdges=route.slice(1).map(function (x,i) { return B.edge(route[i],x); });
     var svgNS='http://www.w3.org/2000/svg';
     function s(tag,attrs,text) { var n=document.createElementNS(svgNS,tag); Object.keys(attrs||{}).forEach(function(k){n.setAttribute(k,attrs[k]);}); if(text)n.textContent=text; return n; }
-    var svg=s('svg',{viewBox:'0 0 480 300',class:'br-map',role:opt.onNode ? 'group':'img','aria-label':opt.label || B.t('All direct connections shown below.','Các đường nối trực tiếp được liệt kê bên dưới.')});
+    var svg=s('svg',{viewBox:'0 0 480 300',class:'br-map',role:opt.onNode ? 'group':'img','aria-label':opt.label || B.t('All direct connections shown below.','Sơ đồ các đường nối trực tiếp.')});
     svg.appendChild(s('title',{},opt.label || B.t('Neighborhood connections','Các đường nối trong khu phố')));
     var usable=edges.filter(function(e){return blocked.indexOf(e)<0;});
     svg.appendChild(s('desc',{},B.t('Connections: ','Đường nối: ')+usable.map(function(e){return e[0]+'–'+e[1];}).join(', ')));
@@ -115,7 +115,7 @@
       state.route.push(id);state.checked=false;feedback.hidden=true;render();
     }
     function check() {
-      if(!B.pathOK(state.route,edges,blocked,opt.start,opt.end,opt.blockedNodes)){B.tell(feedback,B.t('Finish at ','Cần kết thúc ở ')+opt.end+B.t(' using the available connections.',' qua các đường đang dùng được.'),'warn');return;}
+      if(!B.pathOK(state.route,edges,blocked,opt.start,opt.end,opt.blockedNodes)){B.tell(feedback,B.t('Finish at ','Hãy đi đến ')+opt.end+B.t(' using the available connections.',' bằng những đường đang mở.'),'warn');return;}
       var message=typeof opt.success==='function'?opt.success(state.route):opt.success;
       if(opt.accept && !opt.accept(state.route)){B.tell(feedback,message,'warn');return;}
       state.checked=true;B.save(opt.key,state);B.tell(feedback,message,'good');

@@ -16,10 +16,11 @@ GM.views.week = function (main, wk) {
   }
 
   var beatMeta = {
-    puzzle: { icon: '🧩', label: GM.t('The puzzle', 'Câu đố') },
-    exercise: { icon: '🛠️', label: GM.t('Do it yourself', 'Tự tay thử') },
-    naming: { icon: '🏷️', label: GM.t('Naming what happened', 'Gọi tên điều vừa xảy ra') },
-    checkpoint: { icon: '✅', label: GM.t('Checkpoint', 'Mốc kiểm tra') },
+    puzzle: { icon: '🧩', label: GM.t('The puzzle', 'Câu hỏi mở đầu') },
+    exercise: { icon: '🛠️', label: GM.t('Do it yourself', 'Thử ngay') },
+    naming: { icon: '🏷️', label: GM.t('Naming what happened', 'Khái niệm chính') },
+    application: { icon: '🔎', label: GM.t('Apply it', 'Áp dụng') },
+    checkpoint: { icon: '✅', label: GM.t('Checkpoint', 'Tự kiểm tra') },
   };
 
   wk.beats.forEach(function (beat) {
@@ -56,7 +57,7 @@ function buildCheckpointBox(wk) {
   return GM.el('div', { class: 'checkpoint-box' }, [
     GM.el('label', {}, [
       checkbox,
-      GM.el('span', { html: GM.t('<strong>Self-check — be honest:</strong> ', '<strong>Tự kiểm tra — hãy thành thật:</strong> ') + wk.checkpointStatement }),
+      GM.el('span', { html: GM.t('<strong>Self-check — be honest:</strong> ', '<strong>Bạn đã làm được chưa?</strong> ') + wk.checkpointStatement }),
     ]),
   ]);
 }

@@ -8,7 +8,7 @@
     'hour earlier. The new interim manager, arriving Thursday, turned out to be Priya: the college roommate who, ten ' +
     'years ago, had convinced Mara to apply for this job in the first place. Mara went back to her desk, put the letter ' +
     'in a drawer, and left the send time unchanged.';
-  var STORY = GM.t(EN_STORY, 'Mara đã tập bài nói xin nghỉ việc suốt ba tuần. Cô in sẵn lá thư, gấp phẳng chiếc hộp đựng đồ bàn làm việc trong túi và soạn email chia tay với giờ gửi đã hẹn. Sáng thứ Hai, cô bước vào phòng quản lý, thư cầm trên tay — rồi thấy ông đang tự xếp đồ vào hộp. Ông vừa bị cho thôi việc một giờ trước. Quản lý tạm quyền mới đến vào thứ Năm hóa ra là Priya: bạn cùng phòng đại học, người mười năm trước đã thuyết phục Mara ứng tuyển công việc này. Mara quay về bàn, cất lá thư vào ngăn kéo và không đổi giờ gửi email.');
+  var STORY = GM.t(EN_STORY, 'Mara đã tập đi tập lại lời xin nghỉ việc suốt ba tuần. Cô in sẵn đơn, để một chiếc thùng carton xếp gọn trong túi để mang đồ cá nhân về, và hẹn giờ gửi email chia tay. Sáng thứ Hai, Mara cầm đơn bước vào phòng quản lý thì thấy ông cũng đang thu dọn đồ đạc. Ông vừa bị cho thôi việc một tiếng trước đó. Đến thứ Năm, quản lý tạm quyền mới sẽ bắt đầu công việc. Người đó lại là Priya, bạn cùng phòng thời đại học đã thuyết phục Mara nộp đơn vào công ty này mười năm trước. Mara quay về bàn, cất đơn nghỉ việc vào ngăn kéo và vẫn giữ nguyên giờ gửi email.');
   var EN_PROBES = [
     'Who the story is about, and what she planned to do?',
     'The twist that interrupted the plan (the manager’s own firing)?',
@@ -18,16 +18,16 @@
   ];
   var VI_PROBES = [
     'Câu chuyện nói về ai và cô ấy định làm gì?',
-    'Bước ngoặt làm gián đoạn kế hoạch (người quản lý cũng bị cho thôi việc)?',
-    'Sự trùng hợp (sếp mới là bạn cùng phòng cũ)?',
-    'Kết thúc — và email có còn được gửi không?',
-    'Tâm trạng của truyện (kế hoạch được tập kỹ va vào ngẫu nhiên)?',
+    'Chuyện bất ngờ khiến kế hoạch thay đổi: quản lý của Mara vừa bị cho thôi việc?',
+    'Sự trùng hợp: sếp mới chính là bạn cùng phòng cũ của Mara?',
+    'Cuối cùng Mara làm gì, và email có vẫn được gửi không?',
+    'Không khí của câu chuyện: mọi thứ được chuẩn bị kỹ nhưng lại đổi hướng vì một chuyện bất ngờ?',
   ];
   var PROBES = GM.language.isVietnamese() ? VI_PROBES : EN_PROBES;
 
   GM.widgets['compression-relay'] = function (container) {
     var w = GM.widgetShell(GM.t('Compress the story to exactly 10 words', 'Nén câu chuyện thành đúng 10 từ'),
-      GM.t('Read, then summarize in exactly ten words. Then audit your compression honestly.', 'Đọc rồi tóm tắt bằng đúng mười từ. Sau đó kiểm tra bản nén một cách thành thật.'));
+      GM.t('Read, then summarize in exactly ten words. Then audit your compression honestly.', 'Đọc câu chuyện rồi tóm tắt bằng đúng mười từ. Sau đó xem bạn đã buộc phải bỏ đi những gì.'));
     w.body.appendChild(GM.el('div', { class: 'card', style: { boxShadow: 'none' } }, [
       GM.el('p', { style: { margin: 0, fontSize: '.98rem' } }, [STORY]),
     ]));
@@ -44,11 +44,11 @@
       var n = GM.wordCount(ta.value);
       audit.innerHTML = '';
       if (n !== 10) {
-        audit.appendChild(GM.feedback('warn', GM.t('Exactly ten — that constraint is the exercise (you have ' + n + '). The pain of choosing is the point.', 'Phải đúng mười — ràng buộc ấy chính là bài tập (bạn đang có ' + n + '). Cảm giác khó chọn mới là điều cần trải nghiệm.')));
+        audit.appendChild(GM.feedback('warn', GM.t('Exactly ten — that constraint is the exercise (you have ' + n + '). The pain of choosing is the point.', 'Bài tập yêu cầu đúng mười từ; hiện bạn có ' + n + '. Việc phải cân nhắc xem nên giữ hay bỏ chi tiết nào chính là mục đích của bài này.')));
         return;
       }
       audit.appendChild(GM.el('p', {}, [GM.el('strong', {}, [GM.t('Your ten words: ', 'Mười từ của bạn: ')]), GM.el('em', {}, ['“' + ta.value.trim() + '”'])]));
-      audit.appendChild(GM.el('p', { class: 'note' }, [GM.t('Now the audit. From those ten words alone, could a stranger recover:', 'Bây giờ hãy kiểm tra. Chỉ từ mười từ ấy, người lạ có thể dựng lại:')]));
+      audit.appendChild(GM.el('p', { class: 'note' }, [GM.t('Now the audit. From those ten words alone, could a stranger recover:', 'Một người chưa đọc truyện có thể biết được những điều nào sau đây chỉ từ mười từ của bạn?')]));
       PROBES.forEach(function (p) {
         audit.appendChild(GM.el('label', { style: { display: 'flex', gap: '.5em', margin: '.3em 0', fontSize: '.92rem' } }, [
           GM.el('input', { type: 'checkbox' }), GM.el('span', {}, [p]),
@@ -57,7 +57,7 @@
       audit.appendChild(GM.feedback('info',
         GM.t('Whatever you left unchecked <strong>died in compression</strong> — and that was your editorial choice, not an accident. ' +
         'Was what survived the right thing to keep? For whom? A different reader (Mara’s manager, say) would have needed a ' +
-        'different ten words. There is no purpose-free summary, only purpose-fit ones.', 'Điều bạn không đánh dấu đã <strong>chết trong quá trình nén</strong> — đó là lựa chọn biên tập, không phải tai nạn. Thứ sống sót có phải thứ đúng để giữ không? Cho ai? Một độc giả khác, chẳng hạn quản lý của Mara, sẽ cần mười từ khác. Không có bản tóm tắt phi mục đích, chỉ có bản phù hợp mục đích.')));
+        'different ten words. There is no purpose-free summary, only purpose-fit ones.', 'Mỗi ô bỏ trống là một phần thông tin đã mất khi bạn rút gọn. Đó là hệ quả của việc bạn chọn giữ chi tiết này và bỏ chi tiết khác. Nhưng lựa chọn ấy có phù hợp với người đọc không? Chẳng hạn, quản lý của Mara có thể cần một bản tóm tắt hoàn toàn khác. Tóm tắt tốt hay không còn phụ thuộc vào nó được viết cho ai và để làm gì.')));
       audit.appendChild(GM.el('p', { class: 'note' }, [GM.t('Pair variant: send only your ten words to someone who hasn’t read the story, have them retell it back, and compare against the original.', 'Bản chơi đôi: chỉ gửi mười từ cho người chưa đọc truyện, nhờ họ kể lại rồi so với bản gốc.')]));
     });
     w.body.appendChild(GM.el('div', { class: 'gm-row' }, [pill]));

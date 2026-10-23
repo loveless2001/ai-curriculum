@@ -3,7 +3,7 @@
 (function () {
   GM.widgets['capstone-editor'] = function (container) {
     var w = GM.widgetShell(GM.t('Your 500 words', '500 từ của bạn'),
-      GM.t('Drafts save automatically on this device. Write for a lay reader; keep the technical reader honest.', 'Bản nháp tự lưu trên thiết bị. Viết cho độc giả phổ thông và đủ chính xác với độc giả kỹ thuật.'));
+      GM.t('Drafts save automatically on this device. Write for a lay reader; keep the technical reader honest.', 'Bản nháp được tự động lưu trên thiết bị này. Hãy viết sao cho người không chuyên hiểu được, nhưng vẫn đủ chính xác để người có chuyên môn đồng ý.'));
     var ta = GM.el('textarea', { rows: '14', placeholder: GM.t('What an LLM is and isn’t…', 'LLM là gì và không phải gì…') });
     ta.value = GM.store.getSaved('capstone-draft', '');
     var pill = GM.el('span', { class: 'word-count-pill' });
@@ -33,14 +33,14 @@
     w.body.appendChild(GM.el('div', { class: 'gm-row' }, [pill, savedNote, copyBtn]));
     w.body.appendChild(ta);
     w.body.appendChild(GM.el('div', { class: 'card', style: { boxShadow: 'none' } }, [
-      GM.el('p', { class: 'note', style: { marginTop: 0 } }, [GM.t('Record feedback received; leave a box unchecked if that review is still pending:', 'Ghi nhận phản hồi đã có; để trống ô nếu vẫn đang chờ lượt đọc đó:')]),
+      GM.el('p', { class: 'note', style: { marginTop: 0 } }, [GM.t('Record feedback received; leave a box unchecked if that review is still pending:', 'Đánh dấu sau khi bạn đã nhận và sửa theo từng lượt góp ý:')]),
       GM.el('label', { style: { display: 'flex', gap: '.5em', margin: '.3em 0', fontSize: '.92rem' } }, [
-        GM.el('input', { type: 'checkbox' }), GM.el('span', {}, [GM.t('An outsider read it and learned something they could repeat back.', 'Một người ngoài đọc và học được điều họ có thể kể lại.')]),
+        GM.el('input', { type: 'checkbox' }), GM.el('span', {}, [GM.t('An outsider read it and learned something they could repeat back.', 'Một người không học khóa này đã đọc và có thể giải thích lại ý chính bằng lời của họ.')]),
       ]),
       GM.el('label', { style: { display: 'flex', gap: '.5em', margin: '.3em 0', fontSize: '.92rem' } }, [
-        GM.el('input', { type: 'checkbox' }), GM.el('span', {}, [GM.t('A technical reader checked the claims, and I addressed their corrections.', 'Người có chuyên môn đã kiểm tra các khẳng định và tôi đã xử lý góp ý.')]),
+        GM.el('input', { type: 'checkbox' }), GM.el('span', {}, [GM.t('A technical reader checked the claims, and I addressed their corrections.', 'Một người có chuyên môn đã kiểm tra độ chính xác và tôi đã sửa theo góp ý của họ.')]),
       ]),
-      GM.el('p', { class: 'note' }, [GM.t('Need an outline? Explain what the model predicts, how training differs from use, how scores become selected tokens, why fluent errors occur, and what evidence would support a claim about understanding.', 'Cần dàn ý? Hãy giải thích mô hình dự đoán gì, huấn luyện khác sử dụng ra sao, điểm số trở thành token được chọn thế nào, vì sao có câu sai nhưng trôi chảy, và bằng chứng nào hỗ trợ một khẳng định về hiểu biết.')]),
+      GM.el('p', { class: 'note' }, [GM.t('Need an outline? Explain what the model predicts, how training differs from use, how scores become selected tokens, why fluent errors occur, and what evidence would support a claim about understanding.', 'Nếu chưa biết bắt đầu từ đâu, hãy lần lượt trả lời: mô hình dự đoán gì; lúc huấn luyện khác lúc sử dụng thế nào; mô hình chọn token tiếp theo ra sao; vì sao nó có thể nói sai mà vẫn rất trôi chảy; và cần bằng chứng gì trước khi kết luận rằng nó “hiểu”.')]),
     ]));
     refresh();
     container.appendChild(w.shell);

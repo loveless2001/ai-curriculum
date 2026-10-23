@@ -2,8 +2,8 @@
    context, and a fresh conversation proves the weights never moved. */
 (function () {
   GM.widgets['chat-memory-demo'] = function (container) {
-    var w = GM.widgetShell(GM.t('The goldfish chat', 'Cuộc trò chuyện cá vàng'),
-      GM.t('A scripted conversation with the simulated model. Run the steps in order and watch what “remembering” turns out to be.', 'Cuộc trò chuyện có kịch bản với mô hình mô phỏng. Chạy đúng thứ tự và xem “nhớ” thật ra là gì.'));
+    var w = GM.widgetShell(GM.t('The goldfish chat', 'Mô hình “nhớ” bằng cách nào?'),
+      GM.t('A scripted conversation with the simulated model. Run the steps in order and watch what “remembering” turns out to be.', 'Hãy bấm các nút theo thứ tự để xem vì sao mô hình trả lời được thông tin vừa nói, rồi điều gì xảy ra khi mở cuộc trò chuyện mới.'));
     var told = false;
     var chat = GM.el('div');
     var controls = GM.el('div', { class: 'gm-row' });
@@ -21,7 +21,7 @@
 
     tellBtn.addEventListener('click', function () {
       bubble('you', GM.t('My cat is named Marmalade.', 'Mèo của tôi tên Marmalade.'));
-      bubble('model', GM.t('Marmalade — great name. Noted!', 'Marmalade — tên hay đấy. Tôi ghi nhận rồi!'));
+      bubble('model', GM.t('Marmalade — great name. Noted!', 'Marmalade — tên hay đấy!'));
       told = true;
     });
     askBtn.addEventListener('click', function () {
@@ -30,7 +30,7 @@
         bubble('model', GM.t('Your cat’s name is Marmalade.', 'Mèo của bạn tên Marmalade.'));
         explain.innerHTML = '';
         explain.appendChild(GM.feedback('info',
-          GM.t('The answer uses text from the visible conversation. The application sends that conversation back to the model on each turn.', 'Câu trả lời dùng thông tin trong cuộc trò chuyện đang hiển thị. Ứng dụng gửi lại nội dung cuộc trò chuyện cho mô hình ở mỗi lượt.')));
+          GM.t('The answer uses text from the visible conversation. The application sends that conversation back to the model on each turn.', 'Mô hình trả lời được vì ứng dụng gửi lại phần trò chuyện phía trên cùng với câu hỏi mới ở mỗi lượt.')));
       } else {
         bubble('model', GM.t('I don’t have any information about your cat. If you tell me its name, I can use it in this conversation.', 'Tôi không có thông tin về mèo của bạn. Nếu bạn cho biết tên, tôi có thể dùng nó trong cuộc trò chuyện này.'));
       }
@@ -42,7 +42,7 @@
       explain.innerHTML = '';
       explain.appendChild(GM.feedback('warn',
         GM.t('The new conversation does not include the cat’s name, so the model cannot use it. Starting a normal chat did ' +
-        'not retrain the model; it only changed the text supplied for the current response.', 'Cuộc trò chuyện mới không chứa tên con mèo nên mô hình không thể dùng thông tin đó. Mở một cuộc trò chuyện thông thường không huấn luyện lại mô hình; nó chỉ thay đổi phần văn bản được đưa vào cho câu trả lời hiện tại.')));
+        'not retrain the model; it only changed the text supplied for the current response.', 'Cuộc trò chuyện mới không có tên con mèo, nên mô hình không còn thông tin để trả lời. Cuộc trò chuyện trước chỉ nằm trong ngữ cảnh được gửi kèm; nó không làm mô hình được huấn luyện lại.')));
     });
     controls.appendChild(tellBtn); controls.appendChild(askBtn); controls.appendChild(freshBtn);
     w.body.appendChild(controls);

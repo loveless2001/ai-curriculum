@@ -15,8 +15,8 @@
   }
 
   GM.widgets['gradient-descent'] = function (container) {
-    var w = GM.widgetShell(GM.t('Train a one-number model by hand', 'Tự tay huấn luyện mô hình một con số'),
-      GM.t('The model: “my guess for y is w times x.” The data: (1→2), (2→4), (3→6). Your job: adjust w until loss stops falling.', 'Mô hình: “tôi đoán y bằng w nhân x.” Dữ liệu: (1→2), (2→4), (3→6). Hãy chỉnh w đến khi loss ngừng giảm.'));
+    var w = GM.widgetShell(GM.t('Train a one-number model by hand', 'Tự huấn luyện một mô hình chỉ có một tham số'),
+      GM.t('The model: “my guess for y is w times x.” The data: (1→2), (2→4), (3→6). Your job: adjust w until loss stops falling.', 'Mô hình dùng công thức y = w × x. Dữ liệu đúng là (1→2), (2→4), (3→6). Hãy điều chỉnh w để dự đoán ngày càng ít sai hơn.'));
     var wVal = 3.6, steps = 0;
     var W_MIN = -0.5, W_MAX = 4.5;
     var svg = GM.el('div');
@@ -46,7 +46,7 @@
         '<text x="12" y="100" transform="rotate(-90 12 100)" text-anchor="middle">' + GM.t('loss', 'loss') + '</text>' +
         '<text x="' + bx + '" y="' + (by - 12) + '" text-anchor="middle">w=' + wVal.toFixed(2) + '</text>' +
         '</svg>' +
-        (offChart ? '<p class="feedback bad">' + GM.t('The ball flew off the chart — see the log.', 'Quả bóng bay khỏi đồ thị — xem nhật ký.') + '</p>' : '');
+        (offChart ? '<p class="feedback bad">' + GM.t('The ball flew off the chart — see the log.', 'Giá trị w đã vượt khỏi phạm vi đồ thị. Xem phần ghi lại các bước ở dưới.') + '</p>' : '');
       var rows = DATA.map(function (d) {
         var g = wVal * d[0];
         return '<tr><td>' + d[0] + '</td><td>' + d[1] + '</td><td>' + g.toFixed(2) + '</td><td>' + (g - d[1]).toFixed(2) + '</td></tr>';
@@ -58,8 +58,8 @@
     function feel() {
       var g = grad(wVal);
       log.insertBefore(GM.feedback('info',
-        GM.t('Slope under your feet: ', 'Độ dốc dưới chân: ') + '<span class="mono">' + g.toFixed(2) + '</span> — ' + GM.t('loss ', 'loss ') +
-        (Math.abs(g) < 0.05 ? GM.t('is flat here. You’re at the bottom.', 'phẳng ở đây. Bạn đang ở đáy.') : (g > 0 ? GM.t('rises to the right, so downhill is <strong>left</strong> (decrease w).', 'tăng về bên phải, nên xuống dốc là sang <strong>trái</strong> (giảm w).') : GM.t('rises to the left, so downhill is <strong>right</strong> (increase w).', 'tăng về bên trái, nên xuống dốc là sang <strong>phải</strong> (tăng w).')))), log.firstChild);
+        GM.t('Slope under your feet: ', 'Độ dốc tại vị trí hiện tại: ') + '<span class="mono">' + g.toFixed(2) + '</span> — ' + GM.t('loss ', 'loss ') +
+        (Math.abs(g) < 0.05 ? GM.t('is flat here. You’re at the bottom.', 'gần như không đổi. Bạn đã ở sát điểm thấp nhất.') : (g > 0 ? GM.t('rises to the right, so downhill is <strong>left</strong> (decrease w).', 'tăng khi đi sang phải, vì vậy cần đi sang <strong>trái</strong> (giảm w).') : GM.t('rises to the left, so downhill is <strong>right</strong> (increase w).', 'tăng khi đi sang trái, vì vậy cần đi sang <strong>phải</strong> (tăng w).')))), log.firstChild);
     }
     function step(lr, label) {
       var g = grad(wVal);
@@ -70,16 +70,16 @@
       log.insertBefore(GM.feedback(after < before ? 'good' : 'bad',
         GM.t('Step ', 'Bước ') + steps + ' (' + label + '): w ' + GM.t('moved by ', 'dịch ') + '<span class="mono">' + (-lr * g).toFixed(3) + '</span> → w = <span class="mono">' +
         wVal.toFixed(3) + '</span>. ' + GM.t('Loss: ', 'Loss: ') + '<span class="mono">' + before.toFixed(3) + ' → ' + after.toFixed(3) + '</span>' +
-        (after < before ? '' : GM.t(' — it went UP. Too big a step overshoots the valley and can bounce out entirely. Real training tunes the step size for exactly this reason.', ' — nó TĂNG. Bước quá lớn vượt qua thung lũng và có thể bật hẳn ra ngoài. Huấn luyện thật điều chỉnh kích thước bước chính vì lý do này.'))), log.firstChild);
+        (after < before ? '' : GM.t(' — it went UP. Too big a step overshoots the valley and can bounce out entirely. Real training tunes the step size for exactly this reason.', ' — loss lại TĂNG. Khi bước quá xa, w đi lố qua điểm tốt nhất và thậm chí có thể ngày càng lệch hơn. Đó là lý do tốc độ học phải được chọn cẩn thận khi huấn luyện mô hình thật.'))), log.firstChild);
       plot();
     }
-    var feelBtn = GM.el('button', { class: 'btn small secondary' }, [GM.t('Feel the slope', 'Cảm nhận độ dốc')]);
+    var feelBtn = GM.el('button', { class: 'btn small secondary' }, [GM.t('Feel the slope', 'Xem hướng cần đi')]);
     feelBtn.addEventListener('click', feel);
     var smallBtn = GM.el('button', { class: 'btn small' }, [GM.t('Small step downhill', 'Bước nhỏ xuống dốc')]);
     smallBtn.addEventListener('click', function () { step(0.02, GM.t('small', 'nhỏ')); });
-    var bigBtn = GM.el('button', { class: 'btn small' }, [GM.t('Bold step downhill', 'Bước mạnh xuống dốc')]);
+    var bigBtn = GM.el('button', { class: 'btn small' }, [GM.t('Bold step downhill', 'Đi một bước lớn')]);
     bigBtn.addEventListener('click', function () { step(0.08, GM.t('bold', 'mạnh')); });
-    var recklessBtn = GM.el('button', { class: 'btn small secondary' }, [GM.t('Reckless step', 'Bước liều lĩnh')]);
+    var recklessBtn = GM.el('button', { class: 'btn small secondary' }, [GM.t('Reckless step', 'Đi một bước quá lớn')]);
     recklessBtn.addEventListener('click', function () { step(0.25, GM.t('reckless', 'liều lĩnh')); });
     var resetBtn = GM.el('button', { class: 'btn small secondary' }, [GM.t('Reset', 'Đặt lại')]);
     resetBtn.addEventListener('click', function () { wVal = 3.6; steps = 0; log.innerHTML = ''; plot(); });
@@ -88,7 +88,7 @@
     w.body.appendChild(GM.el('div', { class: 'gm-row' }, [feelBtn, smallBtn, bigBtn, recklessBtn, resetBtn]));
     w.body.appendChild(log);
     w.body.appendChild(GM.el('p', { class: 'note' },
-      [GM.t('This demonstrates the update loop: predict, measure loss, adjust, repeat. Here loss is average squared error. Text models use a different loss and many more weights.', 'Bài này minh họa vòng cập nhật: dự đoán, đo loss, điều chỉnh, lặp lại. Loss ở đây là trung bình bình phương sai lệch. Mô hình văn bản dùng loss khác và nhiều trọng số hơn.')]));
+      [GM.t('This demonstrates the update loop: predict, measure loss, adjust, repeat. Here loss is average squared error. Text models use a different loss and many more weights.', 'Đây là vòng lặp cơ bản của quá trình huấn luyện: dự đoán, đo sai số, điều chỉnh rồi lặp lại. Bài này chỉ có một tham số w; mô hình ngôn ngữ dùng cách tính loss khác và có rất nhiều tham số.')]));
     plot();
     container.appendChild(w.shell);
   };

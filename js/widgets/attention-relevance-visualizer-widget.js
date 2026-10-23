@@ -2,7 +2,7 @@
    earlier word when guessing at that position. Canned weights for key positions. */
 (function () {
   var WORDS = GM.language.isVietnamese()
-    ? ['Chìa', 'khóa', 'đang', 'ở', 'trên', 'bàn', 'cạnh', 'ngọn', 'đèn', ';', 'đưa', 'chúng', 'cho', 'tôi']
+    ? ['Chìa', 'khóa', 'ở', 'trên', 'bàn', 'cạnh', 'hai', 'cuốn', 'sách', ';', 'đưa', 'nó', 'cho', 'tôi']
     : ['The', 'keys', 'are', 'on', 'the', 'table', 'next', 'to', 'the', 'lamp', ';', 'hand', 'me', 'them'];
   // Hand-prepared relevance maps (index -> {earlierIndex: weight}) for the interesting positions.
   var MAPS = {
@@ -29,8 +29,8 @@
   }
 
   GM.widgets['attention-viz'] = function (container) {
-    var w = GM.widgetShell(GM.t('The relevance visualizer', 'Trình trực quan hóa mức liên quan'),
-      GM.t('Click any word. Shading illustrates a prepared weighting of earlier words. Try “them” last.', 'Nhấp từ bất kỳ. Màu minh họa trọng số soạn sẵn cho các từ trước. Hãy thử “chúng” sau cùng.'));
+    var w = GM.widgetShell(GM.t('The relevance visualizer', 'Xem mô hình liên hệ các từ'),
+      GM.t('Click any word. Shading illustrates a prepared weighting of earlier words. Try “them” last.', 'Bấm vào một từ để xem mô phỏng chú ý đến những từ nào đứng trước. Cuối cùng, hãy thử bấm vào “nó”.'));
     var row = GM.el('div', { class: 'attn-sentence' });
     var detail = GM.el('div');
     var wordEls = [];
@@ -51,12 +51,12 @@
       detail.innerHTML = '';
       var top = Object.keys(map).sort(function (a, b) { return map[b] - map[a]; }).slice(0, 3);
       detail.appendChild(GM.el('p', { class: 'note' }, [
-        GM.t('While guessing at “', 'Khi dự đoán ở “') + WORDS[idx] + GM.t('”, the heaviest-weighted earlier words: ', '”, các từ trước có trọng số cao nhất: ') +
+        GM.t('While guessing at “', 'Khi xử lý từ “') + WORDS[idx] + GM.t('”, the heaviest-weighted earlier words: ', '”, mô hình chú ý nhiều nhất đến các từ đứng trước sau đây: ') +
         top.map(function (k) { return '“' + WORDS[k] + '” (' + Math.round(map[k] * 100) + '%)'; }).join(', ') + '.',
       ]));
       if (idx === TARGET) {
         detail.appendChild(GM.feedback('info',
-          GM.t('In this illustration, <strong>“them”</strong> is linked most strongly to <strong>“keys”</strong>. We chose these weights to show the idea; they are not evidence of what a real model learned.', 'Trong minh họa này, <strong>“chúng”</strong> được nối mạnh nhất với <strong>“khóa”</strong>. Chúng tôi chọn các trọng số để minh họa; chúng không phải bằng chứng về điều mô hình thật đã học.')));
+          GM.t('In this illustration, <strong>“them”</strong> is linked most strongly to <strong>“keys”</strong>. We chose these weights to show the idea; they are not evidence of what a real model learned.', 'Trong ví dụ này, <strong>“nó”</strong> liên hệ mạnh nhất với <strong>“khóa”</strong>. Các con số do bài học đặt sẵn để minh họa cách attention hoạt động, không phải số đo lấy từ một mô hình thật.')));
       }
     }
     WORDS.forEach(function (word, i) {
@@ -68,7 +68,7 @@
     w.body.appendChild(row);
     w.body.appendChild(detail);
     w.body.appendChild(GM.el('p', { class: 'note' },
-      [GM.t('These weights are hand-prepared for this one sentence, shaped like real attention maps; real models compute fresh ones for every sentence, at every position, in every layer — all inspectable the same way.', 'Các trọng số này được soạn cho riêng câu này theo hình dạng bản đồ attention thật; mô hình thật tính bộ mới cho mọi câu, mọi vị trí, mọi lớp — và đều có thể quan sát theo cách tương tự.')])) ;
+      [GM.t('These weights are hand-prepared for this one sentence, shaped like real attention maps; real models compute fresh ones for every sentence, at every position, in every layer — all inspectable the same way.', 'Bản đồ trên chỉ là ví dụ do bài học dựng sẵn. Với mô hình thật, attention được tính lại ở từng vị trí, từng lớp và cho từng câu mới.')])) ;
     select(TARGET);
     container.appendChild(w.shell);
   };

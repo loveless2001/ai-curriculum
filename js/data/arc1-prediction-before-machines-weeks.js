@@ -63,7 +63,7 @@ GM.weeks.push({
       widget: 'ladder-rank' },
     { kind: 'exercise', title: 'Between now and next week: surprise journaling', html:
       '<p><strong>Between sessions:</strong> record three surprises. Write what you expected, what happened, and whether you now expect something different.</p><p>Example: a late bus does not by itself prove the timetable changed. Look for more evidence before changing your view.</p>' },
-    { kind: 'exercise', title: 'Misconception clinic', html:
+    { kind: 'exercise', title: 'Check a misconception', html:
       '<p>Choose one claim and give an example that shows its limit:</p><ul><li>“Longer messages always tell us more.”</li><li>“A surprising message is always useful.”</li><li>“The best question always divides the options in half.”</li></ul><p>Then write a more accurate version in one sentence.</p>' },
     { kind: 'naming', html:
       '<p><strong>Information:</strong> what a message tells you depends on what you already knew. In the parcel example, it removes one possible delivery day.</p><p><strong>Surprise:</strong> an outcome is more surprising when you thought it less likely. Feeling shocked is different: emotion also depends on how much you care.</p><p>Week 10 uses a numerical measure of prediction surprise. No formula is needed here.</p>' },

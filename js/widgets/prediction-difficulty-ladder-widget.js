@@ -10,12 +10,12 @@
     { t: 'The winning lottery numbers', d: 'Like the coin but worse — vastly more possibilities, all equally likely. Maximum openness.' },
   ];
   var VI_ITEMS = [
-    { t: 'Từ tiếp theo trong quốc ca của bạn', d: 'Gần như dự đoán hoàn hảo — văn bản cố định và bạn đã nghe nhiều lần. Dự đoán ở đây là nhớ lại cấu trúc.' },
-    { t: 'Từ tiếp theo sau “cô ấy rót cà phê vào…”', d: 'Gần như bị ngữ pháp và thói quen ép buộc — nhưng không hoàn toàn cố định. Đây là cấu trúc không có kịch bản.' },
-    { t: 'Tin nhắn một người bạn thân trả lời câu “tối nay ăn gì?”', d: 'Bạn có mô hình phong phú về một người cụ thể — tốt hơn người lạ, nhưng vẫn xa chắc chắn. Dữ liệu cá nhân thu hẹp phạm vi.' },
-    { t: 'Thời tiết ngày mai', d: 'Có thể dự đoán một phần từ hôm nay (tính liên tục và vật lý), nhưng giảm nhanh theo khoảng cách thời gian. Khó vì hệ hỗn loạn, không phải vì thiếu kịch bản.' },
-    { t: 'Một lần tung đồng xu công bằng', d: 'Không thể giảm khỏi 50/50. Kỹ năng hay dữ liệu thêm đều không giúp. Khó dự đoán không đồng nghĩa phức tạp.' },
-    { t: 'Các con số trúng xổ số', d: 'Giống đồng xu nhưng tệ hơn — vô số khả năng, tất cả ngang nhau. Mức rộng mở tối đa.' },
+    { t: 'Từ tiếp theo trong lời quốc ca', d: 'Gần như chắc chắn, vì lời bài hát đã cố định và bạn nghe nhiều lần. Ở đây chỉ cần nhớ đúng thứ tự.' },
+    { t: 'Từ tiếp theo sau câu “cô ấy rót cà phê vào…”', d: 'Ngữ pháp và thói quen khiến chỉ còn vài cách điền tự nhiên, nhưng đáp án vẫn chưa hoàn toàn cố định.' },
+    { t: 'Bạn thân sẽ trả lời gì khi bạn nhắn “tối nay ăn gì?”', d: 'Bạn hiểu khá rõ một người cụ thể nên đoán tốt hơn người lạ. Dù vậy, bạn vẫn không thể chắc chắn.' },
+    { t: 'Thời tiết ngày mai', d: 'Thời tiết hôm nay và các quy luật vật lý giúp ta đoán được phần nào. Càng nhìn xa, dự báo càng kém vì thời tiết là một hệ hỗn loạn.' },
+    { t: 'Mặt sấp hay ngửa khi tung một đồng xu cân bằng', d: 'Xác suất luôn là 50/50. Có thêm dữ liệu hay giỏi hơn cũng không giúp đoán đúng lần tung tiếp theo. Khó đoán chưa chắc đã phức tạp.' },
+    { t: 'Dãy số trúng xổ số', d: 'Có rất nhiều dãy số có khả năng xuất hiện như nhau. Gần như không có gì để dựa vào mà thu hẹp lựa chọn.' },
   ];
   var ITEMS = GM.language.isVietnamese() ? VI_ITEMS : EN_ITEMS;
 
@@ -50,14 +50,14 @@
     var revealBtn = GM.el('button', { class: 'btn small' }, [GM.t('Reveal the discussion', 'Mở phần thảo luận')]);
     revealBtn.addEventListener('click', function () {
       out.innerHTML = '';
-      out.appendChild(GM.feedback('info', GM.t('There is no single right order — what matters is that “hard to predict” turned out to have <em>different causes</em>: fixed scripts, grammatical structure, personal knowledge, chaos, and pure chance are all different rungs.', 'Không có thứ tự đúng duy nhất — điều quan trọng là “khó dự đoán” có <em>nhiều nguyên nhân</em>: kịch bản cố định, cấu trúc ngữ pháp, hiểu biết cá nhân, hỗn loạn và ngẫu nhiên thuần túy là các bậc khác nhau.')));
+      out.appendChild(GM.feedback('info', GM.t('There is no single right order — what matters is that “hard to predict” turned out to have <em>different causes</em>: fixed scripts, grammatical structure, personal knowledge, chaos, and pure chance are all different rungs.', 'Không có một thứ tự đúng duy nhất. Điều đáng chú ý là mỗi thứ khó đoán vì một lý do khác nhau: có thứ theo mẫu cố định, có thứ phụ thuộc vào ngữ pháp, hiểu biết về một người, hệ hỗn loạn hoặc hoàn toàn do may rủi.')));
       order.forEach(function (itemIdx) {
         out.appendChild(GM.el('div', { class: 'card', style: { boxShadow: 'none', padding: '.7rem 1rem' } }, [
           GM.el('strong', { style: { fontFamily: 'var(--font-sans)', fontSize: '.88rem' } }, [ITEMS[itemIdx].t]),
           GM.el('p', { style: { margin: '.3em 0 0', fontSize: '.92rem' } }, [ITEMS[itemIdx].d]),
         ]));
       });
-      out.appendChild(GM.el('p', { class: 'plant-note' }, [GM.t('Keep this ladder. In Week 7, the machine will sit somewhere on it for every prompt you give it — and in Week 8 you’ll see that a knob only matters on the open rungs.', 'Hãy giữ chiếc thang. Ở Tuần 7, với mỗi yêu cầu cỗ máy sẽ nằm đâu đó trên thang — và Tuần 8 cho thấy núm chọn chỉ quan trọng ở những bậc rộng mở.')]));
+      out.appendChild(GM.el('p', { class: 'plant-note' }, [GM.t('Keep this ladder. In Week 7, the machine will sit somewhere on it for every prompt you give it — and in Week 8 you’ll see that a knob only matters on the open rungs.', 'Ghi lại cách xếp này. Sang Tuần 7, bạn sẽ xem mỗi câu lệnh đặt mô hình vào mức dễ hay khó đoán nào. Tuần 8 sẽ cho thấy việc chỉnh cách chọn chỉ có tác dụng khi có nhiều đáp án ngang ngửa nhau.')]));
     });
     w.body.appendChild(list);
     w.body.appendChild(GM.el('div', { class: 'gm-row' }, [revealBtn]));

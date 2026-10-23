@@ -24,8 +24,8 @@
     ],
   };
   var VI_QUESTIONS = {
-    1: ['Chiều dài sông Nile (km)', 'Năm máy in Gutenberg được phát minh', 'Độ cao Everest (m)', 'Số xương trong cơ thể người trưởng thành', 'Khoảng cách Trái Đất đến Mặt Trăng (km)', 'Năm Napoleon thất bại ở Waterloo', 'Điểm sâu nhất đại dương (m)', 'Số quốc gia ở châu Phi', 'Nhiệt độ sôi của nước trên đỉnh Everest (°C)', 'Dân số thế giới năm 1900 (tỷ người)'],
-    2: ['Tổng chiều dài mọi nhánh Vạn Lý Trường Thành (km)', 'Năm email đầu tiên được gửi', 'Khối lượng cá voi xanh trưởng thành (tấn)', 'Số phím trên đàn piano tiêu chuẩn', 'Tuổi cây sống lâu nhất đã biết (năm)', 'Tốc độ âm thanh ở mực nước biển (km/h)'],
+    1: ['Chiều dài sông Nile (km)', 'Khoảng năm Gutenberg phát minh máy in', 'Độ cao đỉnh Everest (m)', 'Số xương trong cơ thể người trưởng thành', 'Khoảng cách từ Trái Đất đến Mặt Trăng (km)', 'Năm Napoleon thất bại ở Waterloo', 'Độ sâu của điểm sâu nhất đại dương (m)', 'Số quốc gia ở châu Phi', 'Nhiệt độ sôi của nước trên đỉnh Everest (°C)', 'Dân số thế giới năm 1900 (tỷ người)'],
+    2: ['Tổng chiều dài các đoạn Vạn Lý Trường Thành (km)', 'Năm email đầu tiên được gửi', 'Khối lượng của một con cá voi xanh trưởng thành (tấn)', 'Số phím trên đàn piano tiêu chuẩn', 'Tuổi của cây còn sống lâu đời nhất từng được biết đến (năm)', 'Tốc độ âm thanh ở mực nước biển (km/h)'],
   };
   if (GM.language.isVietnamese()) Object.keys(ROUNDS).forEach(function (round) {
     ROUNDS[round].forEach(function (item, index) { item.q = VI_QUESTIONS[round][index]; });
@@ -34,8 +34,8 @@
   GM.widgets['calibration-quiz'] = function (container, opts) {
     var round = opts.round || 1;
     var qs = ROUNDS[round];
-    var w = GM.widgetShell(GM.t('Calibration quiz — round ', 'Trắc nghiệm hiệu chuẩn — vòng ') + round,
-      GM.t('For each: a low and a high bound you are 90% sure bracket the true value. Wide honest ranges beat narrow brave ones.', 'Với mỗi câu: nhập cận dưới và cận trên mà bạn tin chắc 90% là bao quanh giá trị thật. Khoảng rộng thành thật tốt hơn khoảng hẹp liều lĩnh.'));
+    var w = GM.widgetShell(GM.t('Calibration quiz — round ', 'Bài ước lượng — lượt ') + round,
+      GM.t('For each: a low and a high bound you are 90% sure bracket the true value. Wide honest ranges beat narrow brave ones.', 'Với mỗi câu, hãy nhập một khoảng mà bạn tin khoảng 90% là có chứa đáp án đúng. Nếu không chắc, chọn khoảng rộng hơn thay vì cố tỏ ra chính xác.'));
     var rows = [];
     var table = GM.el('table');
     table.appendChild(GM.el('thead', {}, [GM.el('tr', {}, [
@@ -70,9 +70,9 @@
       result.innerHTML = '';
       var verdict;
       if (hits >= expected) {
-        verdict = GM.feedback('good', GM.t('<strong>' + hits + ' of ' + answered + ' ranges contained the reference answer.</strong> This is near or above the 90% target for this round. A short quiz cannot establish calibration; also check whether your ranges were useful.', '<strong>' + hits + '/' + answered + ' khoảng chứa đáp án tham chiếu.</strong> Kết quả gần hoặc trên mục tiêu 90% của vòng này. Bài ngắn chưa đủ kết luận về hiệu chuẩn; hãy xem các khoảng có hữu ích không.'));
+        verdict = GM.feedback('good', GM.t('<strong>' + hits + ' of ' + answered + ' ranges contained the reference answer.</strong> This is near or above the 90% target for this round. A short quiz cannot establish calibration; also check whether your ranges were useful.', '<strong>' + hits + '/' + answered + ' khoảng bạn chọn có chứa đáp án đúng.</strong> Lượt này đạt gần hoặc hơn mục tiêu 90%. Tuy vậy, số câu còn ít nên chưa thể kết luận bạn đã ước lượng tốt; cũng cần xem các khoảng có rộng đến mức mất ý nghĩa không.'));
       } else {
-        verdict = GM.feedback('warn', GM.t('<strong>' + hits + ' of ' + answered + ' ranges contained the reference answer.</strong> This is below the 90% target. Your ranges may be too narrow, but a short quiz also varies by chance. Review your evidence before the next round.', '<strong>' + hits + '/' + answered + ' khoảng chứa đáp án tham chiếu.</strong> Kết quả thấp hơn mục tiêu 90%. Khoảng có thể quá hẹp, nhưng bài ngắn cũng dao động ngẫu nhiên. Xem lại căn cứ trước vòng sau.'));
+        verdict = GM.feedback('warn', GM.t('<strong>' + hits + ' of ' + answered + ' ranges contained the reference answer.</strong> This is below the 90% target. Your ranges may be too narrow, but a short quiz also varies by chance. Review your evidence before the next round.', '<strong>' + hits + '/' + answered + ' khoảng bạn chọn có chứa đáp án đúng.</strong> Con số này thấp hơn mục tiêu 90%. Có thể bạn chọn khoảng quá hẹp, nhưng cũng có thể do số câu còn ít. Trước lượt sau, hãy nới khoảng ở những câu mình không chắc.'));
       }
       result.appendChild(verdict);
       GM.store.setSaved('calibration-round-' + round, { hits: hits, answered: answered });
@@ -80,7 +80,7 @@
       if (other) {
         result.appendChild(GM.feedback('info', GM.t('Across both rounds: round 1 ', 'Qua cả hai vòng: vòng 1 ') +
           describe(round === 1 ? { hits: hits, answered: answered } : other) + GM.t(', round 2 ', ', vòng 2 ') +
-          describe(round === 2 ? { hits: hits, answered: answered } : other) + GM.t('. Did widening help? This record returns in Week 9, when you put the same question to the machine.', '. Việc mở rộng có giúp không? Hồ sơ này sẽ quay lại ở Tuần 9, khi bạn đặt cùng câu hỏi cho cỗ máy.')));
+          describe(round === 2 ? { hits: hits, answered: answered } : other) + GM.t('. Did widening help? This record returns in Week 9, when you put the same question to the machine.', '. Việc nới khoảng có giúp kết quả tốt hơn không? Hãy nhớ hai con số này; tuần 9 sẽ đặt câu hỏi tương tự với mô hình.')));
       }
     });
     function describe(r) { return r.hits + '/' + r.answered; }

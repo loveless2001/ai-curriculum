@@ -2,8 +2,8 @@
    the dictionary page for the rest of the course. */
 (function () {
   GM.widgets['jargon-reveal'] = function (container) {
-    var w = GM.widgetShell(GM.t('The reveal', 'Màn bật mí'),
-      GM.t('Nine weeks of folk vocabulary, one term at a time. Click each blurred term — or take them all at once.', 'Chín tuần dùng từ đời thường, giờ mở từng thuật ngữ. Nhấp từng từ bị làm mờ — hoặc mở tất cả.'));
+    var w = GM.widgetShell(GM.t('The reveal', 'Tên gọi kỹ thuật của những ý đã học'),
+      GM.t('Nine weeks of folk vocabulary, one term at a time. Click each blurred term — or take them all at once.', 'Trong chín tuần qua, bạn đã dùng những ý này bằng từ ngữ đời thường. Bấm vào từng ô để xem giới chuyên môn gọi chúng là gì, hoặc mở tất cả cùng lúc.'));
     var remaining = GM.jargon.length;
     var finale = GM.el('div');
     function done() {
@@ -12,7 +12,7 @@
       finale.appendChild(GM.feedback('good',
         GM.t('<strong>All terms are now visible.</strong> The <a href="#/dictionary">two-column dictionary</a> links each ' +
         'technical term to the exercise where you first used the idea.', '<strong>Tất cả thuật ngữ đã được mở.</strong> ' +
-        '<a href="#/dictionary">Từ điển hai cột</a> nối mỗi thuật ngữ kỹ thuật với bài tập nơi bạn dùng ý đó lần đầu.')));
+        '<a href="#/dictionary">Từ điển</a> cho biết mỗi thuật ngữ tương ứng với ý nào và bạn đã gặp nó ở bài tập nào.')));
     }
     GM.jargon.forEach(function (row) {
       var tech = GM.el('span', {
@@ -41,7 +41,7 @@
       });
       w.body.appendChild(GM.el('div', { class: 'gm-row', style: { marginTop: '1rem' } }, [allBtn]));
     } else {
-      finale.appendChild(GM.feedback('info', GM.t('Already revealed — the <a href="#/dictionary">dictionary</a> is yours.', 'Đã bật mí — <a href="#/dictionary">từ điển</a> thuộc về bạn.')));
+      finale.appendChild(GM.feedback('info', GM.t('Already revealed — the <a href="#/dictionary">dictionary</a> is yours.', 'Bạn đã mở các thuật ngữ. Có thể xem lại trong <a href="#/dictionary">từ điển</a>.')));
     }
     w.body.appendChild(finale);
     container.appendChild(w.shell);

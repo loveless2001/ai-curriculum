@@ -12,7 +12,7 @@
 }
 .arc-banner .arc-name { font-style: normal; font-weight: 700; color: var(--ink); font-family: var(--font-sans); font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; display: block; margin-bottom: .2rem; }
 
-/* Session beats (puzzle / exercise / naming / checkpoint) */
+/* Session beats (puzzle / exercise / naming / application / checkpoint) */
 .beat { margin: 2.2rem 0; }
 .beat-label {
   display: inline-flex; align-items: center; gap: .45em;
@@ -23,8 +23,31 @@
 .beat-puzzle .beat-label { background: var(--gold-soft); color: var(--gold); }
 .beat-exercise .beat-label { background: var(--teal-soft); color: var(--teal); }
 .beat-naming .beat-label { background: var(--accent-soft); color: var(--accent); }
+.beat-application {
+  border: 1px solid var(--line); border-radius: var(--radius);
+  background: var(--bg-raised); padding: 1.15rem 1.25rem;
+}
+.beat-application .beat-label { background: var(--gold-soft); color: var(--gold); }
 .beat-checkpoint .beat-label { background: var(--good-soft); color: var(--good); }
 .beat > h3 { margin: .1rem 0 .5rem; font-size: 1.25rem; }
+.answer-reveal { margin: .9rem 0; padding: .7rem .95rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg-raised); }
+.answer-reveal summary { cursor: pointer; color: var(--accent); font-family: var(--font-sans); font-weight: 650; }
+.answer-reveal summary:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; }
+.answer-reveal[open] summary { margin-bottom: .7rem; }
+
+.application-note-field { margin: 1rem 0; }
+.application-note-field label {
+  display: block; margin-bottom: .35rem; font-family: var(--font-sans);
+  font-size: .86rem; font-weight: 650; color: var(--ink);
+}
+.application-note-field textarea {
+  width: 100%; box-sizing: border-box; resize: vertical; min-height: 5.5rem;
+  border: 1px solid var(--line-strong); border-radius: 8px;
+  background: var(--bg); color: var(--ink); padding: .7rem .8rem;
+  font: inherit; line-height: 1.45;
+}
+.application-note-field textarea:focus { outline: 2px solid var(--accent-soft); border-color: var(--accent); }
+.application-save-status { margin-bottom: 0; }
 
 .card {
   background: var(--bg-raised); border: 1px solid var(--line);

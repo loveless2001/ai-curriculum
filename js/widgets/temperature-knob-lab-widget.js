@@ -17,20 +17,20 @@
   ];
   if (GM.language.isVietnamese()) {
     PROMPTS = [
-      { label: 'Dữ kiện: “Thủ đô của Việt Nam là”', kind: 'forced', cands: [['Hà Nội', 6.0], ['nằm', 1.2], ['một', 0.8], ['nổi tiếng', 0.5], ['Huế', 0.1]] },
+      { label: 'Dữ kiện: “Thủ đô của Việt Nam là…”', kind: 'forced', cands: [['Hà Nội', 6.0], ['Huế', 1.2], ['Đà Nẵng', 0.8], ['Hải Phòng', 0.5], ['TP.HCM', 0.1]] },
       { label: 'Sáng tạo: “Ngày xửa ngày xưa, con rồng”', kind: 'open', cands: [['ngủ', 1.4], ['gầm', 1.3], ['khóc', 1.1], ['chờ đợi', 1.0], ['hắt hơi', 0.8], ['mơ', 0.9]] },
-      { label: 'Mơ hồ: “Bộ phim hay nhất từng được làm là”', kind: 'open', cands: [['có lẽ', 1.3], ['Casablanca', 1.1], ['chủ quan', 1.2], ['không thể chọn', 1.0], ['bất kỳ phim nào', 0.8]] },
+      { label: 'Ý kiến: “Bộ phim hay nhất mọi thời đại là…”', kind: 'open', cands: [['Casablanca', 1.3], ['Titanic', 1.1], ['The Godfather', 1.2], ['Spirited Away', 1.0], ['Parasite', 0.8]] },
     ];
     RULES = [
-      { id: 'top1', label: 'luôn lấy từ đầu bảng' },
-      { id: 'dice', label: 'xúc xắc có trọng số' },
-      { id: 'top3', label: 'gieo trong 3 từ đầu' },
+      { id: 'top1', label: 'luôn chọn đáp án có điểm cao nhất' },
+      { id: 'dice', label: 'chọn ngẫu nhiên theo xác suất' },
+      { id: 'top3', label: 'chỉ chọn trong 3 từ điểm cao nhất' },
     ];
   }
 
   GM.widgets['temperature-lab'] = function (container) {
-    var w = GM.widgetShell(GM.t('The knob lab', 'Phòng thí nghiệm núm chọn'),
-      GM.t('Choose weighted dice to explore temperature. The left bars are prepared scores. The right bars show the selection probabilities after applying your settings.', 'Chọn xúc xắc có trọng số để thử temperature. Các thanh bên trái là điểm soạn sẵn. Các thanh bên phải là xác suất chọn sau khi áp dụng cài đặt.'));
+    var w = GM.widgetShell(GM.t('The knob lab', 'Thử chỉnh temperature'),
+      GM.t('Choose weighted dice to explore temperature. The left bars are prepared scores. The right bars show the selection probabilities after applying your settings.', 'Chọn cách lấy mẫu theo xác suất, rồi kéo thanh temperature. Nhóm thanh đầu là điểm ban đầu; nhóm thứ hai là xác suất chọn sau khi áp dụng thiết lập của bạn. Các con số chỉ dùng để minh họa.'));
     var promptSel = GM.el('select', { 'aria-label': GM.t('prompt', 'yêu cầu') });
     PROMPTS.forEach(function (p, i) { promptSel.appendChild(GM.el('option', { value: String(i) }, [p.label])); });
     var ruleSel = GM.el('select', { 'aria-label': GM.t('choosing rule', 'quy tắc chọn') });
@@ -59,19 +59,28 @@
       }
       return pr;
     }
+    function scoreRow(candidate, maxScore) {
+      return GM.el('div', { class: 'dist-row' }, [
+        GM.el('span', { class: 'dist-word' }, [candidate[0]]),
+        GM.el('div', { class: 'dist-track' }, [
+          GM.el('div', { class: 'dist-fill', style: { width: Math.round(candidate[1] / maxScore * 95) + '%' } }),
+        ]),
+        GM.el('span', { class: 'dist-pct' }, [candidate[1].toFixed(1)]),
+      ]);
+    }
     function render() {
       var p = current();
       tempVal.textContent = 'T = ' + parseFloat(temp.value).toFixed(1);
       scoreCard.innerHTML = ''; distCard.innerHTML = ''; samples.innerHTML = ''; note.innerHTML = '';
-      scoreCard.appendChild(GM.el('p', { class: 'note', style: { margin: '0 0 .2em' } }, [GM.t('THE SCORER’S CARD (fixed raw scores — never changes for this prompt):', 'THẺ CỦA NGƯỜI CHẤM (điểm thô cố định — không đổi với yêu cầu này):')]));
+      scoreCard.appendChild(GM.el('p', { class: 'note', style: { margin: '0 0 .2em' } }, [GM.t('THE SCORER’S CARD (fixed raw scores — never changes for this prompt):', 'ĐIỂM BAN ĐẦU (không đổi khi bạn chỉnh cách chọn):')]));
       var maxScore = Math.max.apply(null, p.cands.map(function (c) { return c[1]; }));
-      p.cands.forEach(function (c) { scoreCard.appendChild(GM.distRow(c[0], c[1] / maxScore * 0.95, false)); });
-      distCard.appendChild(GM.el('p', { class: 'note', style: { margin: '.8em 0 .2em' } }, [GM.t('THE CHOOSER’S ODDS (after your knob + rule are applied):', 'XÁC SUẤT CỦA NGƯỜI CHỌN (sau khi áp dụng núm và quy tắc):')]));
+      p.cands.forEach(function (c) { scoreCard.appendChild(scoreRow(c, maxScore)); });
+      distCard.appendChild(GM.el('p', { class: 'note', style: { margin: '.8em 0 .2em' } }, [GM.t('THE CHOOSER’S ODDS (after your knob + rule are applied):', 'XÁC SUẤT ĐƯỢC CHỌN (sau khi áp dụng temperature và cách chọn):')]));
       var pr = probs();
       p.cands.forEach(function (c, i) { distCard.appendChild(GM.distRow(c[0], pr[i], true)); });
       note.appendChild(GM.feedback('info', p.kind === 'forced'
-        ? GM.t('One candidate has a much higher score. Changing temperature has little effect here.', 'Một ứng viên có điểm cao hơn hẳn. Thay đổi temperature ít tác động trong trường hợp này.')
-        : GM.t('Several candidates have similar scores. Temperature therefore has a larger effect on which one is selected.', 'Nhiều ứng viên có điểm gần nhau. Vì vậy, temperature ảnh hưởng nhiều hơn đến lựa chọn cuối.')));
+        ? GM.t('One candidate has a much higher score. Changing temperature has little effect here.', 'Một từ có điểm vượt xa các từ còn lại, nên chỉnh temperature cũng không làm kết quả thay đổi nhiều.')
+        : GM.t('Several candidates have similar scores. Temperature therefore has a larger effect on which one is selected.', 'Có nhiều từ đạt điểm gần nhau, nên temperature sẽ ảnh hưởng rõ hơn đến từ được chọn.')));
     }
     var runBtn = GM.el('button', { class: 'btn small' }, [GM.t('Generate 5 times', 'Tạo 5 lần')]);
     runBtn.addEventListener('click', function () {
@@ -86,7 +95,7 @@
       var allSame = outs.every(function (o) { return o === outs[0]; });
       samples.appendChild(GM.feedback(allSame ? 'good' : 'info', allSame
         ? GM.t('All five selections match. This can happen by a fixed rule or by chance; matching samples alone do not tell you which.', 'Cả năm lần đều giống nhau. Có thể do quy tắc cố định hoặc trùng hợp ngẫu nhiên; chỉ nhìn kết quả chưa biết trường hợp nào.')
-        : GM.t('Five runs produced ', 'Năm lượt tạo ra ') + new Set(outs).size + GM.t(' different outputs. The model scores stayed fixed; only the selection step varied.', ' đầu ra khác nhau. Điểm của mô hình không đổi; chỉ bước chọn thay đổi.')));
+        : GM.t('Five runs produced ', 'Sau năm lượt có ') + new Set(outs).size + GM.t(' different outputs. The model scores stayed fixed; only the selection step varied.', ' kết quả khác nhau. Điểm ban đầu vẫn giữ nguyên; chỉ cách chọn làm kết quả thay đổi.')));
     });
     [promptSel, ruleSel].forEach(function (s) { s.addEventListener('change', render); });
     temp.addEventListener('input', render);

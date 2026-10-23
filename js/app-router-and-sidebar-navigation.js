@@ -72,7 +72,7 @@
         href: '#/dictionary',
       }, [
         GM.el('span', { class: 'wk-num' }, ['📖']),
-        GM.t('The two-column dictionary', 'Từ điển hai cột'),
+        GM.t('The two-column dictionary', 'Từ điển thuật ngữ'),
         revealed ? null : GM.el('span', { class: 'lock-icon' }, ['🔒']),
       ]),
     ]);
@@ -99,10 +99,10 @@
     var description = document.querySelector('meta[name="description"]');
     if (description) description.content = GM.t(
       'A 12-week self-paced interactive course on AI and LLMs — epistemology first, machinery second. No math or CS background assumed.',
-      'Khóa học tương tác 12 tuần, tự học về AI và LLM — nhận thức luận trước, máy móc sau. Không yêu cầu nền tảng toán hay khoa học máy tính.'
+      'Khóa học tương tác 12 tuần về AI và mô hình ngôn ngữ. Bắt đầu từ cách kiểm tra một câu trả lời, rồi mới đi vào cơ chế bên trong. Không yêu cầu nền tảng toán hay khoa học máy tính.'
     );
     var skip = document.querySelector('.skip-link');
-    if (skip) skip.textContent = GM.t('Skip to content', 'Bỏ qua để đến nội dung');
+    if (skip) skip.textContent = GM.t('Skip to content', 'Đi thẳng đến nội dung');
     toggle.setAttribute('aria-label', GM.t('Toggle navigation', 'Bật hoặc tắt điều hướng'));
     sidebar.setAttribute('aria-label', GM.t('Course navigation', 'Điều hướng khóa học'));
     closeSidebar();

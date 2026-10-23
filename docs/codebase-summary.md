@@ -27,7 +27,7 @@ js/
   views/                            # home, week (4-beat session renderer), dictionary (gated)
   data/                             # GM.arcs + GM.weeks content per arc; jargon entries
   i18n/                             # Vietnamese arc overlays loaded before views
-  widgets/                          # 16 self-contained interactives, GM.widgets[name] = mount(el, opts)
+  widgets/                          # self-contained interactives, GM.widgets[name] = mount(el, opts)
 ```
 
 ## Key design decisions
@@ -40,6 +40,10 @@ js/
   Week 10 reveal widget sets `jargonRevealed` in localStorage.
 - **Progress**: per-week checkpoint checkboxes → sidebar progress bar; calibration
   results and the capstone draft persist via `GM.store.setSaved`.
+- **Practical examples**: four bilingual data files add one `Apply it` section before
+  every checkpoint without changing the twelve-week conceptual order.
+- **Saved notes**: the shared notes widget stores responses for writing, planning,
+  research, comparison, and document-use examples locally.
 
 ## Testing
 `node --check` passes on all JS. Headless-Chrome smoke test (scratchpad,
@@ -48,7 +52,7 @@ gate, temp-0 determinism, calibration scoring, checkpoint persistence, 0 console
 errors. Re-run against `file://` after changes.
 
 Run `node tests/bilingual-localization-smoke.js` to verify both language datasets,
-all 12 Vietnamese weeks, localization load order, and all 16 widget registrations.
+all 12 practical examples, localization load order, and every widget registration.
 
 ## Conventions
 - Kebab-case, long descriptive filenames; every file < 200 lines.
