@@ -1,9 +1,9 @@
 /* Arc 2 (Weeks 4-6): What counting as knowing means. The course's inoculation arc. */
 GM.arcs.push({
   id: 2,
-  name: 'Arc 2 — Testing claims about understanding',
-  shortName: 'Arc 2 · Knowing',
-  claim: 'A correct answer does not reveal how it was produced. This arc shows how to test claims about knowledge, and how to state what each test cannot prove.',
+  name: 'Arc 2 — Evidence and confidence',
+  shortName: 'Arc 2 · Evidence and confidence',
+  claim: 'Try a model when conditions change, test competing explanations for a result, and compare confidence with checked outcomes.',
   weeks: [4, 5, 6],
 });
 
@@ -67,10 +67,10 @@ GM.weeks.push({
     { kind: 'exercise', title: '“I don’t know” drills', html:
       '<p>Practice three answers with a partner or in writing:</p><ul><li>“I know this because ___.”</li><li>“My best guess is ___, based on ___.”</li><li>“I have no evidence for an answer.”</li></ul><p>Try “What is the capital of Australia?” and “What was my grandmother’s favorite song?” What evidence would let you answer each?</p>' },
     { kind: 'exercise', title: 'Error, carelessness, or deception?', html:
-      '<p>A person can make an honest mistake, knowingly mislead you, or answer without checking. The same false sentence does not tell you which happened.</p><p>Example: someone gives you the wrong train time. What would distinguish an outdated timetable from an attempt to make you miss the train? Keep this distinction for Week 9.</p>' },
+      '<p>A person can make an honest mistake, knowingly mislead you, or answer without checking. The same false sentence does not tell you which happened.</p><p>Example: someone gives you the wrong train time. What would distinguish an outdated timetable from an attempt to make you miss the train? Keep this distinction for Week 8.</p>' },
     { kind: 'naming', html:
       '<p><strong>Calibration</strong> means stated confidence matches results over many cases. Of 100 predictions labeled “90% sure,” roughly 90 should be right.</p><p><strong>Confident wrongness</strong> makes an error harder for the listener to spot. Confidence should reflect evidence, not how easily an answer comes to mind.</p>' },
     { kind: 'checkpoint', html:
-      '<p>Report your hit rate from each round. Give one reason to widen a future estimate and explain why a short quiz is only a starting point for measuring calibration. Keep the results for Week 9.</p>' },
+      '<p>Report your hit rate from each round. Give one reason to widen a future estimate and explain why a short quiz is only a starting point for measuring calibration. In Week 8, use this distinction to explain why a chatbot saying “I am sure” is not a reliability measurement.</p>' },
   ],
 });

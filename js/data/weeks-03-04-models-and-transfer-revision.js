@@ -255,11 +255,6 @@
       var old = GM.weeks.find(function (w) { return w.num === updated.num; });
       if (old) Object.assign(old, updated); else GM.weeks.push(updated);
     });
-    var arc = GM.arcs && GM.arcs.find(function (a) { return a.id === 2; });
-    if (arc) {
-      arc.name = vi ? 'Chặng 2 — Dùng điều đã học vào tình huống mới' : 'Arc 2 — Use what you learned, then test the evidence';
-      arc.claim = vi ? 'Ta dùng mô hình trong tình huống mới, rồi học cách kiểm tra xem một kết quả tốt thực sự đến từ đâu.' : 'Use a model in new situations; then test alternative explanations and confidence.';
-    }
     var w5 = GM.weeks.find(function (w) { return w.num === 5; });
     if (w5 && w5.beats && w5.beats[0]) {
       w5.beats[0].html = w5.beats[0].html.replace(/^<p>[\s\S]*?<\/p>/, vi

@@ -1,4 +1,4 @@
-/* Practical examples for Weeks 7-9. Loaded after language overlays. */
+/* Practical examples for Weeks 7-8. Loaded after language overlays. */
 (function () {
   var vi = GM.language.isVietnamese();
   GM.addApplications(vi ? [
@@ -11,19 +11,13 @@
       ],
     },
     {
-      num: 8, title: 'Tìm ý rồi chọn ý',
-      html: '<p><strong>Tình huống:</strong> Khi đặt tên sản phẩm, bạn muốn nhiều ý tưởng khác nhau. Khi sửa một thông báo đã được duyệt, bạn lại muốn câu chữ ít thay đổi.</p><p><strong>Thử:</strong> tách thành hai bước: tạo nhiều phương án, rồi chọn và chỉnh theo tiêu chí. Temperature chỉ ảnh hưởng đến độ đa dạng của các phương án.</p>',
+      num: 8, id: 'arc3-task', title: 'Thử một việc từ đầu đến cuối',
+      html: '<p>Chọn một việc nhỏ: soạn email, tóm tắt cuộc họp, so hai báo giá hoặc kiểm một báo cáo. Bạn có thể dùng lại tình huống trong bài và tự đối chiếu, hoặc thử với công cụ bạn đang dùng.</p><ol><li>Nói rõ ai dùng kết quả, để làm gì và thế nào là đạt.</li><li>Liệt kê thông tin đã có, nguồn cần giữ và điều còn thiếu. Đừng biến chỗ chưa biết thành dữ kiện.</li><li>Chia thành vài bước nếu mỗi bước cần một cách kiểm khác nhau. Ghi điều phải đúng trước khi làm bước tiếp.</li><li>Thử hai trường hợp: một đủ thông tin, một thiếu thông tin quan trọng hoặc có điều kiện thay đổi. Ghi kết quả thực tế, chỗ phải sửa và phần vẫn chưa thử.</li></ol><p>Sau cùng, ghi: đã tạo gì, đã kiểm bằng gì, còn chờ gì và ai làm tiếp. Nếu cần khách đồng ý hoặc người nhận sử dụng thử, ghi đúng phần còn chờ ấy.</p>',
       fields: [
-        { label: 'Một việc cần khám phá nhiều phương án', placeholder: 'Tôi muốn nhiều góc/ý tưởng cho…' },
-        { label: 'Một việc cần ổn định, và tiêu chí chọn', placeholder: 'Sau khi chọn, kết quả phải giữ…' },
-      ],
-    },
-    {
-      num: 9, title: 'Báo cáo công việc: con số nào có nguồn?',
-      html: '<p><strong>Ba ghi chú giả:</strong> (G1) Thứ Hai: nhận 12 yêu cầu mới, xử lý 11 trong số đó. (G2) Thứ Ba: nhận 8, xử lý cả 8. (G3) Thứ Tư: nhận 10, xử lý 9 trong số đó.</p><p><strong>AI viết:</strong> “Ba ngày qua nhóm đã xử lý 30 yêu cầu, không còn việc tồn và mức hài lòng của khách tăng 20%.” Đoạn này đọc xuôi tai, nhưng ba ghi chú không nói như vậy.</p><p><strong>Thử:</strong> đánh dấu từng nhận định trong câu AI: đúng, sai hay chưa có dữ liệu. Viết lại báo cáo ngắn, dẫn G1–G3 sau mỗi con số. Nếu muốn nói về mức hài lòng, cần tìm nguồn nào trước?</p><details class="answer-reveal"><summary>Đối chiếu với ghi chú</summary><p>Nhóm <strong>nhận 30</strong> yêu cầu nhưng mới <strong>xử lý 28</strong>; còn 2 yêu cầu mới trong ba ngày này chưa xử lý. Không có dữ liệu nào về mức hài lòng. Viết trôi chảy không thay được việc cộng số và kiểm nguồn.</p></details>',
-      fields: [
-        { label: 'Viết lại báo cáo ba ngày, có dẫn G1–G3', placeholder: 'Nhóm nhận… (G1–G3), xử lý… (G1–G3)…' },
-        { label: 'Một báo cáo trong việc của bạn cần kiểm nguồn nào?', placeholder: 'Với nhận định… tôi sẽ đối chiếu với…' },
+        { label: 'Việc gì, cho ai và thế nào là đạt?', placeholder: 'Tôi cần… để… Kết quả đạt khi…' },
+        { label: 'Thông tin, nguồn và điều chưa biết', placeholder: 'Đã có… Nguồn… Còn thiếu…' },
+        { label: 'Các bước và cách kiểm trước khi chuyển tiếp', placeholder: '1… Kiểm bằng… 2… Chỉ làm tiếp khi…' },
+        { label: 'Hai lần thử, chỗ đã sửa và phần còn chờ', placeholder: 'Lần 1… Lần 2 đổi… Kết quả… Đã kiểm… Còn chờ…' },
       ],
     },
   ] : [
@@ -36,19 +30,13 @@
       ],
     },
     {
-      num: 8, title: 'Generate options, then choose',
-      html: '<p><strong>Situation:</strong> product naming benefits from variety; editing an approved notice needs stability.</p><p><strong>Do:</strong> separate generation from selection and revision against criteria. Temperature affects variety, not the criteria.</p>',
+      num: 8, id: 'arc3-task', title: 'Try one task from start to finish',
+      html: '<p>Choose a small task: draft an email, summarize a meeting, compare two quotes, or check a report. You can reuse a lesson case and check it yourself, or try your usual AI tool.</p><ol><li>Name the person using the result, its purpose, and what would count as success.</li><li>List the information you have, the sources to preserve, and what is missing. Keep unknowns explicit.</li><li>Split the work when different steps need different checks. State what must be right before each handoff.</li><li>Test two cases: one with enough information and one with an important fact missing or a condition changed. Record what happened, what you revised, and anything not yet tested.</li></ol><p>Finish by recording what was produced, how it was checked, what is pending, and who acts next. A client’s agreement or a user trial may still be needed.</p>',
       fields: [
-        { label: 'One task that benefits from varied options', placeholder: 'I want many angles or ideas for…' },
-        { label: 'One task that needs stability, plus its selection criteria', placeholder: 'After selection, the result must preserve…' },
-      ],
-    },
-    {
-      num: 9, title: 'Work report: which numbers have a source?',
-      html: '<p><strong>Three fictional notes:</strong> (N1) Monday: 12 new requests received, 11 of those resolved. (N2) Tuesday: 8 received, all 8 resolved. (N3) Wednesday: 10 received, 9 of those resolved.</p><p><strong>AI writes:</strong> “Over three days the team resolved 30 requests, has no work left open, and raised customer satisfaction by 20%.” It reads smoothly, but the notes say otherwise.</p><p><strong>Do:</strong> mark each claim as correct, wrong, or unsupported. Rewrite the short report and cite N1–N3 for each number. What source would you need before saying anything about satisfaction?</p><details class="answer-reveal"><summary>Check against the notes</summary><p>The team <strong>received 30</strong> requests but <strong>resolved 28</strong>; 2 new requests from these three days remain open. The notes say nothing about customer satisfaction. Fluent wording cannot replace arithmetic or a source check.</p></details>',
-      fields: [
-        { label: 'Rewrite the three-day report with references to N1–N3', placeholder: 'The team received… (N1–N3), resolved… (N1–N3)…' },
-        { label: 'Which source would you check for a report in your work?', placeholder: 'For the claim… I would check…' },
+        { label: 'The task, its user, and what counts as success', placeholder: 'I need… so that… Success means…' },
+        { label: 'Information, sources, and unknowns', placeholder: 'Available… Sources… Missing…' },
+        { label: 'Steps and checks before each handoff', placeholder: '1… Check with… 2… Continue only when…' },
+        { label: 'Two trials, revisions, and what is still pending', placeholder: 'Trial 1… Trial 2 changes… Result… Checked… Pending…' },
       ],
     },
   ]);

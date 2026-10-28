@@ -2,7 +2,7 @@
 
 A 12-week course for adults with no programming or advanced mathematics background.
 
-**Status:** revised teaching outline, September 2026. The bilingual website is the learner-facing course. See [the clarity and flow review](docs/course-clarity-and-flow-review.md) for changes and remaining pilot questions.
+**Status:** revised teaching outline, October 2026. The bilingual website is the learner-facing course. See [the clarity and flow review](docs/course-clarity-and-flow-review.md) for changes and remaining pilot questions.
 
 ## Teaching approach
 
@@ -18,10 +18,10 @@ A weekly session can fit roughly two hours, including discussion. Self-paced lea
 
 | Weeks | Main question | Preparation for the next part |
 | --- | --- | --- |
-| 1–3: Prediction | Which clues help, and what does a useful model leave out? | Language for describing predictions and missing details |
-| 4–6: Evidence | What can a test establish, and how should confidence match results? | A method for evaluating model answers |
-| 7–9: Language models | How do training, context, and selection produce text and errors? | Concrete processes to explain technically |
-| 10–12: Mechanisms | How are weights adjusted, how is context used, and how is an assistant trained? | A short explanation with examples and limits |
+| 1–3: Prediction and models | Which clues help, and what does a useful model leave out? | Language for describing predictions and missing details |
+| 4–6: Evidence and confidence | What can a test establish, and how should confidence match results? | A method for evaluating model answers |
+| 7–8: Working with language models | How is text generated, and when is a result ready to use? | A complete task with sources, criteria, checks, and two trials |
+| 9–12: Inside a language model | How are tokens selected, weights adjusted, context used, and assistants trained? | A revised explanation and a better-tested working process |
 
 ## Week 1 — How context shapes a guess
 
@@ -47,7 +47,7 @@ A weekly session can fit roughly two hours, including discussion. Self-paced lea
 
 **Between sessions:** record three surprises and whether they justify changing an expectation. The misconception exercise is a short review, not another lecture.
 
-**Next:** which details must a useful model keep? Save the prediction ranking for Week 8.
+**Next:** which details must a useful model keep? Save the prediction ranking for Week 9.
 
 ## Week 3 — Remember a route. Build a map.
 
@@ -95,7 +95,7 @@ A weekly session can fit roughly two hours, including discussion. Self-paced lea
 
 **Apply:** mark claims in a vendor comparison as supported, inferred, or unknown.
 
-**Next:** carry the test-and-confidence method into the language-model lessons. Save results for Week 9.
+**Next:** carry the test-and-confidence method into the language-model lessons. Week 8 uses the distinction between a confidence claim and a reliability measurement.
 
 ## Week 7 — How a language model predicts text
 
@@ -103,39 +103,45 @@ A weekly session can fit roughly two hours, including discussion. Self-paced lea
 
 **Explain:** define LLM and token before using them. Training adjusts weights. Chat context is like a note on the desk: it supplies information without itself changing those weights. Product memory or retrieval is separate from training.
 
+A chatbot may connect the model to search, calculation, or email. A written draft and a completed action require different evidence.
+
 Generation repeats: score possible next tokens, choose one, append it, then score again with the new context.
 
 **Check:** give a one-minute explanation and save one confusing phrase to revise in Week 12. A recording is an alternative for solo learners.
 
 **Apply:** separate chat context, saved memory, and retrieved documents in a brand-voice task.
 
-**Next:** what changes when the choice rule changes?
+**Next:** how do you check whether the generated result serves the task?
 
-## Week 8 — Scores, selection, and temperature
+## Week 8 — Is this AI result ready to use?
 
-**Try:** use a score card and ticket-bag analogy; compare three prompt types across temperature settings and repeated draws.
+**Try:** inspect an email that invents a reason and omits the proposed date. Check a work report against three source notes. Compare pen orders where a correct unit-price calculation leads to the wrong recommendation for the required quantity. Change a delivery fee and calculate again.
+
+**Explain:** distinguish having an output, supported facts, meeting the task criteria, and achieving an external goal. A draft is not evidence of sending; sending is not evidence of agreement. Repetition and self-reported confidence do not verify a claim. Check sources for existence, support, date, and scope. Missing evidence leaves a question open.
+
+Hallucination concerns false or unsupported generated content; a result can also fail because it uses the wrong criterion. Describe an observed error before attributing its cause or intent. Calibration requires many checked predictions. Fictional cases illustrate these distinctions, not a live model's error rate.
+
+**Apply:** choose one task, define its user and purpose, list information and unknowns, and add checks between steps. Test two cases, including a changed condition or missing fact. Record what was created, checked, revised, and left pending. Lesson cases can be checked by hand without a live AI service.
+
+**Check:** explain why correct facts may still give an unsuitable result, identify independent checks, locate the step needing revision, and describe both trials. Separate completed checks from an external outcome still pending.
+
+**Arc 3 conclusion:** combine the context and information choices from Weeks 1–3, the tests and confidence checks from Weeks 4–6, and the model/context distinction from Week 7 in one working process.
+
+**Next:** Arc 4 begins with a closer look at token selection.
+
+## Week 9 — Scores, selection, and temperature
+
+**Arc 4 opening:** return to the score-and-choose loop from Week 7 after completing the checked task in Week 8.
+
+**Try:** use a score card and ticket-bag analogy; compare three prompt types across temperature settings and repeated draws. Revisit Week 2's prediction ranking.
 
 **Explain:** temperature changes selection probabilities, not trained weights. Choose weighted dice in the widget to observe it; always choosing the top candidate overrides the temperature effect. The next generated token changes the context and therefore the next score card.
 
-Matching draws can occur by chance. Real-service output is not guaranteed identical at temperature 0. Lower temperature does not verify facts.
+Matching draws can occur by chance. Real-service output is not guaranteed identical at temperature 0. Lower temperature does not replace the factual and task checks from Week 8.
 
 **Check:** predict a trend, run several trials, and explain any mismatch. Do not grade a random sample as if its precise outcome were guaranteed.
 
 **Apply:** explore varied names or angles, then select and revise against criteria.
-
-**Next:** separate an answer's repeatability from its truth.
-
-## Week 9 — Why fluent answers can be false
-
-**Try:** inspect scripted true and false examples, compare their prepared confidence statements, and propose independent checks.
-
-**Explain:** hallucination concerns false or unsupported content; calibration concerns confidence matching accuracy. Compression offers one analogy for plausible unsupported details, not a diagnosis of every error. A false answer alone does not establish intent.
-
-A scripted example demonstrates a distinction. It does not measure a live model's error rate, training-data coverage, or internal cause. A real model may refuse a request with a false premise.
-
-**Check:** identify one unsupported detail, explain why repetition is insufficient, and propose a check with a stated limit.
-
-**Apply:** correct a three-day work report using its source notes; distinguish wrong numbers from claims with no source.
 
 **Next:** how does training change the numbers that produce predictions?
 
@@ -181,7 +187,7 @@ Connect the copying behavior to published induction-head experiments. Changing o
 
 Revise unclear or unsupported claims. Record external review as pending when no reader is available; self-review is not evidence that external review occurred.
 
-**Applied capstone:** choose one real task—writing, planning, research, comparison, meeting preparation, or customer communication—and turn its vague request into a staged process. State the desired outcome, information to preserve, criteria for each step, claims to verify, limits, and decisions reserved for a person. Test the process on at least two cases.
+**Applied capstone:** revisit the Week 8 task and two trials. Use the mechanism lessons to explain context, retrieval, training, and selection choices more precisely. Refine the steps, checks, limits, and human decisions, then test an additional case. Learners starting a new task first complete the two initial trials. Keep a successful example and a case requiring clarification or a stop.
 
 **Optional:** extra computation before answering, then a choice of further-study paths with prerequisites. These are enrichment, not a barrier to completing the course.
 
@@ -190,6 +196,8 @@ Revise unclear or unsupported claims. Record external review as pending when no 
 - Can a beginner complete each checkpoint without using an unexplained term?
 - Do Weeks 4–6 feel like increasingly useful tests, rather than three versions of the same debate?
 - Does Week 7's return to the guessing game feel like application rather than repetition?
+- Can learners finish Week 8 with a checked process and explain why correct facts may still fail to serve the task?
+- Does the Week 9 mechanism lesson connect clearly to both Week 7's generation loop and Week 8's checks?
 - Can learners tell the scripted demos apart from measurements of real models?
 - Is Week 10 manageable with arithmetic and a first reading of a graph?
 - Does the Week 12 core fit once enrichment is optional?

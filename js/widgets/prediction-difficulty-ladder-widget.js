@@ -57,7 +57,7 @@
           GM.el('p', { style: { margin: '.3em 0 0', fontSize: '.92rem' } }, [ITEMS[itemIdx].d]),
         ]));
       });
-      out.appendChild(GM.el('p', { class: 'plant-note' }, [GM.t('Keep this ladder. In Week 7, the machine will sit somewhere on it for every prompt you give it — and in Week 8 you’ll see that a knob only matters on the open rungs.', 'Ghi lại cách xếp này. Sang Tuần 7, bạn sẽ xem mỗi câu lệnh đặt mô hình vào mức dễ hay khó đoán nào. Tuần 8 sẽ cho thấy việc chỉnh cách chọn chỉ có tác dụng khi có nhiều đáp án ngang ngửa nhau.')]));
+      out.appendChild(GM.el('p', { class: 'plant-note' }, [GM.t('Keep this ranking. Week 7 compares easy and open-ended text predictions. In Week 9, you will see how temperature affects selection, especially when several candidates have similar scores.', 'Ghi lại cách xếp này. Tuần 7 sẽ so những câu dễ và khó đoán từ tiếp theo. Tuần 9 sẽ cho thấy temperature ảnh hưởng đến cách chọn ra sao, nhất là khi có nhiều đáp án đạt điểm gần nhau.')]));
     });
     w.body.appendChild(list);
     w.body.appendChild(GM.el('div', { class: 'gm-row' }, [revealBtn]));

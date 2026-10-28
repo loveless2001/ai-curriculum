@@ -3,9 +3,9 @@
   if (!GM.language.isVietnamese()) return;
 
   Object.assign(GM.arcs.find(function (arc) { return arc.id === 1; }), {
-    name: 'Chặng 1 — Ta dự đoán bằng ngữ cảnh như thế nào?',
-    shortName: 'Chặng 1 · Dự đoán',
-    claim: 'Ta bắt đầu bằng một từ còn thiếu, tìm xem manh mối nào có ích, rồi hỏi một mô hình nên giữ lại những gì.',
+    name: 'Chặng 1 — Dự đoán và mô hình',
+    shortName: 'Chặng 1 · Dự đoán và mô hình',
+    claim: 'Dùng ngữ cảnh để dự đoán, xem thông tin mới làm thay đổi dự đoán ra sao, rồi dựng một mô hình giữ được những quan hệ cần cho công việc.',
   });
 
   var weeks = {
@@ -29,7 +29,7 @@
         { html: '<p>Tuần trước, ngữ cảnh giúp bạn đoán phần còn thiếu. Tuần này ta hỏi: khi đáp án xuất hiện, bạn thực sự biết thêm được gì?</p><p>Bưu kiện của bạn sẽ đến thứ Hai hoặc thứ Ba. Nhân viên giao hàng báo: “Thứ Ba.” Người hàng xóm cũng nhận tin đó, nhưng họ đã xem lịch giao từ trước.</p><p><strong>Ai biết thêm nhiều hơn từ cùng một câu?</strong></p>' },
         { title: 'Trước và sau khi nhận tin', html: '<p>Với mỗi trường hợp, hãy nói người nhận biết gì <strong>trước</strong> và biết thêm gì <strong>sau</strong>:</p><ul><li>“Bưu kiện đến thứ Ba”, gửi cho bạn và người hàng xóm.</li><li>“Mặt ngửa”, sau một lần tung đồng xu.</li><li>“Có”, nhưng không biết câu hỏi là gì.</li></ul><p>Trường hợp nào đã đủ rõ? Trường hợp nào còn thiếu ngữ cảnh?</p>' },
         { title: 'Trò Hai mươi câu hỏi', html: '<p>Có tám đồ vật và bạn chưa có lý do để nghiêng về vật nào. Một câu hỏi chia chúng thành hai nhóm bốn. Câu khác hỏi thẳng về một vật, nên sau khi trả lời có thể còn một hoặc bảy đáp án.</p><p><strong>Câu nào thường loại được nhiều đáp án hơn?</strong> Hãy đếm số đồ vật ở mỗi phía trước khi hỏi. Khi các vật có khả năng được chọn như nhau, câu hỏi chia danh sách khá đều thường có ích hơn.</p>' },
-        { title: 'Dự đoán nào khó hơn?', html: '<p>Xếp các dự đoán từ dễ đến khó. Với mỗi mục, ghi lý do: thiếu manh mối, có quá nhiều đáp án hợp lý, hay kết quả vốn ngẫu nhiên.</p><p>Lưu lại thứ tự này. Đến tuần 8, bạn sẽ dùng nó để so sánh các kiểu yêu cầu khác nhau.</p>' },
+        { title: 'Dự đoán nào khó hơn?', html: '<p>Xếp các dự đoán từ dễ đến khó. Với mỗi mục, ghi lý do: thiếu manh mối, có quá nhiều đáp án hợp lý, hay kết quả vốn ngẫu nhiên.</p><p>Lưu lại thứ tự này. Đến tuần 9, bạn sẽ dùng nó để so sánh các kiểu yêu cầu khác nhau.</p>' },
         { title: 'Ghi lại những lần bất ngờ', html: '<p>Trước buổi học sau, hãy ghi lại ba lần bạn thấy bất ngờ: bạn đã nghĩ điều gì sẽ xảy ra, chuyện gì thực sự xảy ra, và bạn có đổi dự đoán cho lần sau không.</p><p>Ví dụ: xe buýt đến muộn một lần chưa có nghĩa là lịch chạy đã đổi.</p>' },
         { title: 'Kiểm tra một ngộ nhận', html: '<p>Chọn một khẳng định và đưa ví dụ cho thấy giới hạn của nó:</p><ul><li>“Thông điệp dài hơn luôn cho biết nhiều hơn.”</li><li>“Thông điệp bất ngờ luôn hữu ích.”</li><li>“Câu hỏi tốt nhất luôn chia đôi các khả năng.”</li></ul><p>Sau đó viết lại thành một câu chính xác hơn.</p>' },
         { html: '<p><strong>Thông tin</strong> không chỉ nằm trong bản thân câu nói; nó còn phụ thuộc vào người nghe đã biết gì. Trong ví dụ bưu kiện, câu “Thứ Ba” giúp bạn loại một ngày, nhưng không cho người hàng xóm biết thêm gì.</p><p><strong>Bất ngờ</strong> lớn hay nhỏ phụ thuộc vào điều bạn chờ đợi trước đó. Nó không hoàn toàn giống cảm giác sửng sốt, vì cảm xúc còn phụ thuộc vào việc bạn quan tâm đến kết quả đến đâu.</p><p>Tuần 10 sẽ giới thiệu một cách đo bằng số. Ở đây chưa cần công thức.</p>' },
@@ -44,7 +44,7 @@
         { html: '<p>Bản đồ tàu điện bỏ qua phần lớn đường phố và không giữ đúng khoảng cách. Ảnh vệ tinh giữ những chi tiết đó. <strong>Cái nào giúp bạn chọn ga để đổi tuyến?</strong></p><p>Tuần 2 hỏi manh mối nào giúp bớt phân vân. Tuần này hỏi mô hình cần giữ lại manh mối nào để có ích.</p>' },
         { title: 'Cuộc tiếp sức nén', html: '<p>Đọc câu chuyện rồi tóm tắt bằng <strong>đúng mười từ</strong>. Người đọc có thể biết được gì từ bản tóm tắt? Chi tiết nào họ phải đoán?</p><p>Nếu có thể, nhờ người chưa đọc truyện kể lại chỉ dựa vào bản tóm tắt của bạn.</p>' },
         { title: 'Hai bản đồ, hai việc', html: '<p>Phác hai bản đồ khu phố: một để tìm chỗ ăn trưa, một để sửa đường ống nước. Với mỗi bản đồ, nêu hai chi tiết cần giữ và hai chi tiết có thể bỏ.</p><p>Bản đồ hữu ích hay không tùy vào việc cần làm. Bản đồ quán ăn không cho thợ sửa ống biết chỗ nào cần đào.</p>' },
-        { title: 'Khi bản tóm tắt thiếu điều cần biết', html: '<p>Một đánh giá nói quán ăn “rẻ và đông”. Bạn có biết xe lăn có vào được không? Bản tóm tắt có thể đúng mà vẫn thiếu điều bạn cần.</p><p><strong>Thử:</strong> thêm một chi tiết cho người dùng xe lăn, rồi một chi tiết cho người cần tránh các loại hạt. Tuần 9 sẽ hỏi điều gì xảy ra khi mô hình điền một chi tiết nghe hợp lý nhưng thiếu bằng chứng.</p>' },
+        { title: 'Khi bản tóm tắt thiếu điều cần biết', html: '<p>Một đánh giá nói quán ăn “rẻ và đông”. Bạn có biết xe lăn có vào được không? Bản tóm tắt có thể đúng mà vẫn thiếu điều bạn cần.</p><p><strong>Thử:</strong> thêm một chi tiết cho người dùng xe lăn, rồi một chi tiết cho người cần tránh các loại hạt. Tuần 8 sẽ quay lại chuyện một thông tin có căn cứ nhưng vẫn chưa giúp giải quyết đúng việc.</p>' },
         { html: '<p><strong>Mô hình</strong> là cách mô tả hoặc một hệ thống được đơn giản hóa để giải thích hay dự đoán điều gì đó. Bản đồ là một ví dụ.</p><p><strong>Nén mất dữ liệu</strong> là rút gọn thông tin và làm mất một phần chi tiết. Bản tóm tắt mười từ làm điều này. Đây là cách ví von để hiểu mô hình đã học, chưa phải toàn bộ cơ chế của nó.</p>' },
         { html: '<p>Chọn một nơi hoặc chủ đề. Mô tả hai mô hình phục vụ hai việc khác nhau. Mỗi mô hình giữ gì và không trả lời được câu hỏi nào?</p>' },
       ],

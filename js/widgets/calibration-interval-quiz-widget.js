@@ -80,7 +80,7 @@
       if (other) {
         result.appendChild(GM.feedback('info', GM.t('Across both rounds: round 1 ', 'Qua cả hai vòng: vòng 1 ') +
           describe(round === 1 ? { hits: hits, answered: answered } : other) + GM.t(', round 2 ', ', vòng 2 ') +
-          describe(round === 2 ? { hits: hits, answered: answered } : other) + GM.t('. Did widening help? This record returns in Week 9, when you put the same question to the machine.', '. Việc nới khoảng có giúp kết quả tốt hơn không? Hãy nhớ hai con số này; tuần 9 sẽ đặt câu hỏi tương tự với mô hình.')));
+          describe(round === 2 ? { hits: hits, answered: answered } : other) + GM.t('. Did widening help? Week 8 uses this distinction when checking a chatbot’s confidence claims.', '. Việc nới khoảng có giúp kết quả tốt hơn không? Tuần 8 sẽ dùng lại ý này để kiểm tra những câu chatbot tự nhận là chắc chắn.')));
       }
     });
     function describe(r) { return r.hits + '/' + r.answered; }

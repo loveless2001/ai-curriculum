@@ -1,9 +1,9 @@
 /* Arc 1 (Weeks 1-3): Prediction before machines. Content adapted for self-paced web. */
 GM.arcs.push({
   id: 1,
-  name: 'Arc 1 — Prediction before language models',
-  shortName: 'Arc 1 · Prediction',
-  claim: 'Start with a missing word, ask which clues help, then explore what a useful model keeps and leaves out.',
+  name: 'Arc 1 — Prediction and models',
+  shortName: 'Arc 1 · Prediction and models',
+  claim: 'Use context to predict, see how new information changes expectations, and build a model that keeps the relationships a task needs.',
   weeks: [1, 2, 3],
 });
 
@@ -59,7 +59,7 @@ GM.weeks.push({
       '<p>Suppose eight items are equally likely. One question splits them into two groups of four. Another asks about just one item: its answers leave either one or seven.</p><p><strong>Which question leaves fewer items on average?</strong> Try the game. Before asking, count the items on each side. A balanced split helps when items are equally likely and questions cost the same.</p>',
       widget: 'question-splitter' },
     { kind: 'exercise', title: 'The prediction difficulty ladder', html:
-      '<p>Put the easiest predictions at the top. For each, give a reason: “I lack a clue,” “many outcomes fit,” or “the outcome is chosen at random.” Different assumptions can produce different rankings.</p><p>Keep your ranking for Week 8, when we compare easy and open-ended text predictions.</p>',
+      '<p>Put the easiest predictions at the top. For each, give a reason: “I lack a clue,” “many outcomes fit,” or “the outcome is chosen at random.” Different assumptions can produce different rankings.</p><p>Keep your ranking for Week 9, when we compare easy and open-ended text predictions.</p>',
       widget: 'ladder-rank' },
     { kind: 'exercise', title: 'Between now and next week: surprise journaling', html:
       '<p><strong>Between sessions:</strong> record three surprises. Write what you expected, what happened, and whether you now expect something different.</p><p>Example: a late bus does not by itself prove the timetable changed. Look for more evidence before changing your view.</p>' },
@@ -87,7 +87,7 @@ GM.weeks.push({
     { kind: 'exercise', title: 'Two maps, two jobs', html:
       '<p>Sketch two maps of your neighborhood: one for finding lunch, one for repairing water pipes. List two details each map needs and two it can leave out.</p><p>A useful map depends on the job. A restaurant map will not tell a plumber where to dig.</p>' },
     { kind: 'exercise', title: 'When a summary leaves out what matters', html:
-      '<p>A review says a restaurant is “cheap and busy.” Can you tell whether it has wheelchair access? The summary may be accurate and still omit what you need.</p><p><strong>Try:</strong> add one detail for a wheelchair user, then one for someone avoiding nuts. In Week 9, we will ask what happens when a model supplies a plausible detail without evidence.</p>' },
+      '<p>A review says a restaurant is “cheap and busy.” Can you tell whether it has wheelchair access? The summary may be accurate and still omit what you need.</p><p><strong>Try:</strong> add one detail for a wheelchair user, then one for someone avoiding nuts. Week 8 returns to the difference between a supported fact and information that serves the task.</p>' },
     { kind: 'naming', html:
       '<p><strong>A model</strong> is a simplified description or system used to explain or predict something. A map is one example.</p><p><strong>Lossy compression</strong> means shortening information while losing some detail. Our ten-word summary does this. It is an analogy for learned models, not a complete account of how they work.</p>' },
     { kind: 'checkpoint', html:

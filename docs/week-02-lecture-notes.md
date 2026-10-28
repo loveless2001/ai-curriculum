@@ -51,7 +51,7 @@ Ask for plain reasons:
 
 For the fair coin, assume no clue about the outcome beyond its equal chances. Do not turn that teaching assumption into a universal claim that physical measurements could never help predict a toss.
 
-Save the ranking for Week 8's comparison of text continuations.
+Save the ranking for Week 9's comparison of text continuations.
 
 ## 65–85 minutes: repair one claim
 

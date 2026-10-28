@@ -13,8 +13,9 @@ widgets per week, progress tracking, and the Week-10 jargon-reveal set-piece.
 
 ## Key decisions
 - Vanilla JS, classic `<script>` tags + `window.GM` namespace (ES modules break on `file://`).
-- Weeks 7–9 model behaviors are **simulated** with canned token distributions
-  (real softmax-with-temperature math internally) — resolves outline open issue #1 offline.
+- Offline model activities use **simulated** data. In the revised order, Week 7
+  uses prepared token scores, Week 8 checks source-based work, and Week 9 applies
+  real softmax-with-temperature math to prepared scores.
 - Solo-adapted exercises (outline assumes pairs); partner variants noted in copy.
 - localStorage: checkpoint completion, calibration results, capstone draft.
 - Jargon dictionary locked until Week 10 reveal (or explicit override).

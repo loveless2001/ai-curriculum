@@ -50,8 +50,43 @@ function load(language, extraFiles) {
 
 var english = load('en').GM;
 assert.strictEqual(english.weeks.length, 12);
+function checkCourseOrder(course) {
+  assert.deepStrictEqual(Array.from(course.arcs.find(function (arc) { return arc.id === 3; }).weeks), [7, 8]);
+  assert.deepStrictEqual(Array.from(course.arcs.find(function (arc) { return arc.id === 4; }).weeks), [9, 10, 11, 12]);
+  var applicationIds = [];
+  course.arcs.forEach(function (arc) {
+    arc.weeks.forEach(function (number, index) {
+      var week = course.weeks.find(function (item) { return item.num === number; });
+      assert.strictEqual(week.arcId, arc.id, 'week belongs to the advertised arc');
+      assert.strictEqual(!!week.showArcBanner, index === 0, 'only the first week should open its arc');
+    });
+  });
+  var week8 = course.weeks.find(function (week) { return week.num === 8; });
+  var week9 = course.weeks.find(function (week) { return week.num === 9; });
+  assert.ok(!week8.beats.some(function (beat) { return beat.widget === 'temperature-lab'; }));
+  assert.strictEqual(week9.beats.filter(function (beat) { return beat.widget === 'temperature-lab'; }).length, 1);
+  var report = week8.beats.find(function (beat) {
+    return beat.kind === 'exercise' && beat.widget === 'application-notebook';
+  });
+  assert.strictEqual(report.widgetOpts.id, 'week-9', 'report notes must retain their original storage ID');
+  assert.strictEqual(report.widgetOpts.fields.length, 2);
+  var task = week8.beats.find(function (beat) { return beat.kind === 'application'; });
+  assert.strictEqual(task.widgetOpts.id, 'arc3-task', 'the new task must not read temperature or report notes');
+  assert.strictEqual(task.widgetOpts.fields.length, 4);
+  assert.strictEqual(week9.beats.find(function (beat) { return beat.kind === 'application'; }).widgetOpts.id, 'week-8',
+    'temperature notes must follow their content to Week 9');
+  assert.strictEqual(course.jargon.find(function (entry) { return entry.tech === 'forward pass'; }).week, 7);
+  assert.strictEqual(course.jargon.find(function (entry) { return /temperature/.test(entry.tech); }).week, 9);
+  course.weeks.forEach(function (week) {
+    week.beats.filter(function (beat) { return beat.widget === 'application-notebook'; }).forEach(function (beat) {
+      applicationIds.push(beat.widgetOpts.id);
+    });
+  });
+  assert.strictEqual(new Set(applicationIds).size, applicationIds.length, 'each notebook needs its own content ID');
+}
+checkCourseOrder(english);
 assert.strictEqual(english.weeks[0].title, 'How context shapes a guess');
-assert.strictEqual(english.arcs[0].shortName, 'Arc 1 · Prediction');
+assert.strictEqual(english.arcs[0].shortName, 'Arc 1 · Prediction and models');
 var englishWeek2 = english.weeks.find(function (week) { return week.num === 2; });
 assert.strictEqual(englishWeek2.beats.length, 9);
 assert.strictEqual(englishWeek2.beats[1].title, 'Predict first: information needs a receiver');
@@ -74,7 +109,7 @@ assert.match(englishWriting.html, /Which would you use in a guide for colleagues
 assert.strictEqual(englishWriting.widgetOpts.fields.length, 3);
 assert.match(englishWeek2.beats.find(function (beat) { return beat.kind === 'application'; }).html, /drink shop[\s\S]*change the decision/);
 assert.match(english.weeks.find(function (week) { return week.num === 4; }).beats.find(function (beat) { return beat.kind === 'application'; }).html, /remote[\s\S]*personal computer/);
-assert.match(english.weeks.find(function (week) { return week.num === 9; }).beats.find(function (beat) { return beat.kind === 'application'; }).html, /N1[\s\S]*resolved 28/);
+assert.match(english.weeks.find(function (week) { return week.num === 8; }).beats[1].html, /N1[\s\S]*resolved 28/);
 assert.match(english.weeks.find(function (week) { return week.num === 10; }).beats.find(function (beat) { return beat.kind === 'application'; }).html, /Six fictional comments[\s\S]*two new ones/);
 assert.match(english.weeks.find(function (week) { return week.num === 11; }).beats.find(function (beat) { return beat.kind === 'application'; }).html, /Section 2[\s\S]*Check the policy/);
 english.weeks.forEach(function (week) {
@@ -93,6 +128,7 @@ var widgetFiles = fs.readdirSync(path.join(root, 'js/widgets')).sort()
   .map(function (name) { return 'js/widgets/' + name; });
 var vietnameseContext = load('vi', widgetFiles);
 var vietnamese = vietnameseContext.GM;
+checkCourseOrder(vietnamese);
 assert.strictEqual(vietnamese.weeks.length, 12);
 assert.strictEqual(vietnamese.arcs.length, 4);
 assert.strictEqual(vietnamese.jargon.length, 8);
@@ -122,7 +158,7 @@ assert.match(vietnameseWriting.html, /Viết cho đồng nghiệp thì bạn ch�
 assert.strictEqual(vietnameseWriting.widgetOpts.fields.length, 3);
 assert.match(vietnameseWeek2.beats.find(function (beat) { return beat.kind === 'application'; }).html, /tiệm nước[\s\S]*quyết định thay đổi/);
 assert.match(vietnamese.weeks.find(function (week) { return week.num === 4; }).beats.find(function (beat) { return beat.kind === 'application'; }).html, /làm từ xa[\s\S]*máy cá nhân/);
-assert.match(vietnamese.weeks.find(function (week) { return week.num === 9; }).beats.find(function (beat) { return beat.kind === 'application'; }).html, /G1[\s\S]*xử lý 28/);
+assert.match(vietnamese.weeks.find(function (week) { return week.num === 8; }).beats[1].html, /G1[\s\S]*xử lý 28/);
 assert.match(vietnamese.weeks.find(function (week) { return week.num === 10; }).beats.find(function (beat) { return beat.kind === 'application'; }).html, /Sáu phản hồi giả[\s\S]*Phản hồi 7 thuộc hỗ trợ/);
 assert.match(vietnamese.weeks.find(function (week) { return week.num === 11; }).beats.find(function (beat) { return beat.kind === 'application'; }).html, /Mục 2[\s\S]*Đối chiếu quy định/);
 
@@ -215,6 +251,22 @@ vietnameseContext.document = {
   dispatchEvent: function () {},
 };
 vietnameseContext.CustomEvent = function (name) { this.type = name; };
+vietnamese.store.setSaved('application-week-week-8', { 0: 'temperature note', 1: 'selection criteria' });
+vietnamese.store.setSaved('application-week-week-9', { 0: 'checked report', 1: 'original source' });
+[8, 9].forEach(function (number) {
+  var week = vietnamese.weeks.find(function (item) { return item.num === number; });
+  week.beats.filter(function (beat) { return beat.widget === 'application-notebook'; }).forEach(function (beat) {
+    var notebook = new FakeNode('div');
+    vietnamese.widgets['application-notebook'](notebook, beat.widgetOpts);
+    var fields = notebook.querySelectorAll('textarea');
+    var expected = beat.widgetOpts.id === 'week-8' ? ['temperature note', 'selection criteria']
+      : beat.widgetOpts.id === 'week-9' ? ['checked report', 'original source'] : ['', '', '', ''];
+    assert.deepStrictEqual(fields.map(function (field) { return field.value; }), expected);
+    fields[0].value = 'edited ' + beat.widgetOpts.id;
+    fields[0]._listeners.input();
+    assert.strictEqual(vietnamese.store.getSaved('application-week-' + beat.widgetOpts.id)[0], fields[0].value);
+  });
+});
 var widgetOptions = {
   'cloze-game': { mode: 'human' },
   'calibration-quiz': { round: 1 },

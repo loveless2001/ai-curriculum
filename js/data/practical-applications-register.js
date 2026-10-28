@@ -10,7 +10,7 @@ GM.addApplications = function (applications) {
       title: application.title,
       html: application.html,
       widget: 'application-notebook',
-      widgetOpts: { id: 'week-' + application.num, fields: application.fields },
+      widgetOpts: { id: application.id || 'week-' + application.num, fields: application.fields },
     };
     week.beats.splice(checkpoint < 0 ? week.beats.length : checkpoint, 0, beat);
   });

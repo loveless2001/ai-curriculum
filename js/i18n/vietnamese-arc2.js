@@ -3,9 +3,9 @@
   if (!GM.language.isVietnamese()) return;
 
   Object.assign(GM.arcs.find(function (arc) { return arc.id === 2; }), {
-    name: 'Chặng 2 — Một câu trả lời đúng cho biết được gì?',
-    shortName: 'Chặng 2 · Kiểm tra',
-    claim: 'Một câu trả lời đúng chưa cho ta biết nó được tạo ra bằng cách nào. Muốn phân biệt các khả năng, ta phải đổi cách kiểm tra.',
+    name: 'Chặng 2 — Bằng chứng và mức tự tin',
+    shortName: 'Chặng 2 · Bằng chứng và mức tự tin',
+    claim: 'Thử mô hình khi điều kiện thay đổi, tìm bằng chứng để phân biệt các cách giải thích và xem mức tự tin có khớp với kết quả không.',
   });
 
   var weeks = {
@@ -42,9 +42,9 @@
         { html: '<p>Tuần trước, bạn kiểm tra câu trả lời. Tuần này, bạn sẽ kiểm tra xem mình có đang quá tự tin hay không.</p><p>Với mỗi câu, hãy đưa ra một khoảng mà bạn tin khoảng 90% là có chứa đáp án. Chẳng hạn, nếu không biết rõ chiều cao của một tòa nhà, bạn có thể đoán “20–60 mét” thay vì chốt một con số.</p><p>Nếu làm đủ nhiều câu, khoảng chín trên mười khoảng như vậy nên chứa đáp án đúng. Một bài ngắn chỉ cho tín hiệu ban đầu, chưa đủ để kết luận.</p>' },
         { title: 'Thử lại một vòng', html: '<p>Làm bộ câu hỏi thứ hai. Nếu vòng đầu bạn chọn khoảng quá hẹp và sai nhiều, hãy nới khoảng ở những câu mình không chắc. Mục tiêu là phản ánh đúng mức độ chưa biết, chứ không phải chọn khoảng rộng đến mức đáp án nào cũng lọt vào.</p>' },
         { title: 'Tập nói “tôi không biết”', html: '<p>Thử trả lời theo ba cách:</p><ul><li>“Tôi biết điều này vì ___.”</li><li>“Tôi đoán là ___, dựa trên ___.”</li><li>“Tôi chưa có đủ căn cứ để trả lời.”</li></ul><p>Áp dụng với hai câu: “Thủ đô Australia là gì?” và “Bài hát bà tôi thích nhất là gì?” Hai câu cần những loại bằng chứng khác nhau ra sao?</p>' },
-        { title: 'Nhầm, chưa kiểm tra hay cố tình nói sai?', html: '<p>Một câu trả lời sai có thể do nhớ nhầm, chưa kiểm tra, hoặc cố tình đánh lừa. Chỉ nhìn vào câu sai thì chưa biết nguyên nhân nào đúng.</p><p>Ví dụ, ai đó báo sai giờ tàu. Bạn cần biết thêm gì để phân biệt việc họ xem nhầm lịch cũ với việc họ cố tình khiến bạn lỡ tàu? Tuần 9 sẽ quay lại điểm này.</p>' },
+        { title: 'Nhầm, chưa kiểm tra hay cố tình nói sai?', html: '<p>Một câu trả lời sai có thể do nhớ nhầm, chưa kiểm tra, hoặc cố tình đánh lừa. Chỉ nhìn vào câu sai thì chưa biết nguyên nhân nào đúng.</p><p>Ví dụ, ai đó báo sai giờ tàu. Bạn cần biết thêm gì để phân biệt việc họ xem nhầm lịch cũ với việc họ cố tình khiến bạn lỡ tàu? Tuần 8 sẽ quay lại điểm này.</p>' },
         { html: '<p><strong>Hiệu chuẩn</strong> là mức độ khớp nhau giữa sự tự tin và kết quả thực tế, xét qua nhiều lần. Nếu bạn nói “tôi chắc 90%” cho 100 dự đoán, khoảng 90 dự đoán trong số đó nên đúng.</p><p>Trả lời rất nhanh hoặc rất dứt khoát không có nghĩa là đáng tin hơn. Mức độ chắc chắn phải đi cùng bằng chứng.</p>' },
-        { html: '<p>Xem lại hai lượt vừa làm. Mỗi lượt có bao nhiêu đáp án đúng nằm trong khoảng bạn chọn? Ở lượt thứ hai, bạn đã nới khoảng cho câu nào, và vì sao?</p><p>Vài câu hỏi là quá ít để kết luận bạn có đang tự tin đúng mức hay không. Hãy lưu kết quả này; đến tuần 9 ta sẽ so nó với cách chatbot thể hiện sự tự tin.</p>' },
+        { html: '<p>Xem lại hai lượt vừa làm. Mỗi lượt có bao nhiêu đáp án đúng nằm trong khoảng bạn chọn? Ở lượt thứ hai, bạn đã nới khoảng cho câu nào, và vì sao?</p><p>Vài câu hỏi là quá ít để kết luận bạn có đang tự tin đúng mức hay không. Đến tuần 8, dùng điều này để giải thích vì sao câu “tôi rất chắc” của chatbot chưa cho biết câu trả lời đáng tin đến đâu.</p>' },
       ],
     },
   };

@@ -3,12 +3,25 @@
   if (!GM.language.isVietnamese()) return;
 
   Object.assign(GM.arcs.find(function (arc) { return arc.id === 4; }), {
-    name: 'Chặng 4 — Huấn luyện, attention và chatbot',
+    name: 'Chặng 4 — Bên trong mô hình ngôn ngữ',
     shortName: 'Chặng 4 · Bên trong mô hình',
-    claim: 'Ta nối những ví dụ quen thuộc với thuật ngữ kỹ thuật, rồi xem mô hình được huấn luyện và dùng ngữ cảnh ra sao.',
+    claim: 'Đi sâu vào cách chọn token, cách huấn luyện thay đổi trọng số, cách attention dùng ngữ cảnh và các bước huấn luyện thêm để tạo chatbot.',
   });
 
   var weeks = {
+    9: {
+      short: 'Điểm số, cách chọn và temperature', title: 'Từ điểm số đến token được chọn',
+      tagline: 'Temperature làm thay đổi cách mô hình chọn token, chứ không làm mô hình biết thêm sự thật.',
+      checkpointStatement: 'Tôi giải thích được temperature ảnh hưởng đến bước chọn token ra sao và vì sao giảm temperature không bảo đảm câu trả lời đúng.',
+      beats: [
+        { html: '<p>Chặng 3 kết thúc bằng việc kiểm xem kết quả đã dùng được chưa. Bây giờ ta đi sâu vào một bước tạo ra kết quả ấy: chọn token tiếp theo.</p><p>Tuần 7 tách hai việc: chấm điểm và chọn. Giả sử token tiếp theo có xác suất: “cốc” 80%, “ca” 15%, “bát” 5%. Nếu luôn lấy lựa chọn cao nhất, kết quả sẽ là “cốc”. Nếu bốc từ túi có 80 phiếu “cốc”, 15 phiếu “ca” và 5 phiếu “bát”, đôi khi bạn sẽ bốc trúng từ khác.</p><p><strong>Temperature</strong> làm thay đổi mức độ ưu tiên các lựa chọn điểm cao. Nó không huấn luyện lại mô hình.</p>' },
+        { title: 'Thử thay đổi temperature', html: '<p>Hãy thử ba kiểu yêu cầu: hỏi dữ kiện, viết sáng tạo và một câu hỏi mơ hồ. Chạy ở temperature thấp rồi cao. Trước khi chạy, đoán xem kiểu nào sẽ thay đổi nhiều nhất.</p><p>Xem lại cách xếp các dự đoán ở tuần 2. Yêu cầu có nhiều cách viết tiếp hợp lý thường dễ cho kết quả đa dạng hơn. Tuy vậy, vài lần chạy ngẫu nhiên có thể chưa thể hiện rõ xu hướng.</p>' },
+        { title: 'Bảng điểm và túi phiếu', html: '<p>Giữ nguyên bảng điểm rồi so sánh hai cách: luôn lấy lựa chọn cao nhất, hoặc bốc phiếu theo tỷ lệ.</p><p>Temperature thấp làm xác suất tập trung hơn vào các lựa chọn đứng đầu; temperature cao dàn xác suất ra rộng hơn. Trong mô phỏng này, temperature 0 luôn lấy lựa chọn cao nhất.</p><p>Mỗi khi thêm một token, phần văn bản hiện có thay đổi, nên mô hình phải tính một bảng điểm mới cho bước tiếp theo.</p>' },
+        { title: 'Cùng một câu hỏi, chạy nhiều lần', html: '<p>Chạy cùng một yêu cầu hai lần ở temperature 0, rồi hai lần ở mức cao hơn. Kết quả khác nhau thế nào?</p><p>Ngay cả khi bốc ngẫu nhiên, hai lượt vẫn có thể tình cờ giống nhau. Ngược lại, dịch vụ thật đôi khi vẫn cho kết quả khác ở temperature 0 vì còn nhiều cài đặt và chi tiết tính toán khác. Như ở tuần 8, lặp lại cùng một câu chưa đủ để biết câu đó đúng.</p>' },
+        { html: '<p><strong>Điểm số</strong> cho biết mô hình đang nghiêng về những token nào. <strong>Giải mã</strong> là cách biến các điểm số ấy thành token được chọn.</p><p><strong>Temperature</strong> chỉ làm thay đổi xác suất khi chọn. Tăng temperature thường khiến câu trả lời đa dạng hơn, nhưng không giúp kiểm tra dữ kiện. Một token rất dễ được chọn vẫn có thể nằm trong một câu sai.</p>' },
+        { html: '<p>Hãy giải thích lại ví dụ túi phiếu. Sau đó chọn hai yêu cầu, dự đoán temperature cao sẽ ảnh hưởng ra sao và chạy thử vài lượt. Nếu kết quả không giống dự đoán, điều gì có thể giải thích sự khác biệt? Vì sao hạ temperature không thay được các bước kiểm tra ở tuần 8?</p><p>Tuần này giữ nguyên điểm ban đầu. Tuần 10 sẽ xem huấn luyện thay đổi các trọng số tạo ra điểm ấy như thế nào.</p>' },
+      ],
+    },
     10: {
       short: 'Huấn luyện thay đổi mô hình', title: 'Huấn luyện thay đổi mô hình như thế nào?',
       tagline: 'Dự đoán, đo sai số, điều chỉnh, rồi lặp lại.',
@@ -64,10 +77,10 @@
     { folk: 'trò đoán', tech: 'dự đoán token tiếp theo', week: 1, where: 'các vòng điền từ và trò đoán chữ của Shannon' },
     { folk: 'mô hình bị tính là sai nhiều hơn khi chấm đáp án đúng quá thấp', tech: 'loss cross-entropy (khác với cảm giác bất ngờ)', week: 10, where: 'vòng huấn luyện; Tuần 2 giúp hình dung ý tưởng' },
     { folk: 'rút gọn và chấp nhận bỏ bớt chi tiết', tech: 'nén mất dữ liệu (một cách ví von cho mô hình)', week: 3, where: 'bản tóm tắt mười từ' },
-    { folk: 'tính điểm token tiếp theo', tech: 'forward pass', week: 8, where: 'bảng điểm' },
-    { folk: 'chọn từ bảng điểm', tech: 'giải mã; temperature chỉnh xác suất chọn', week: 8, where: 'ví dụ túi phiếu' },
+    { folk: 'tính điểm token tiếp theo', tech: 'forward pass', week: 7, where: 'bảng điểm trong bài điền từ' },
+    { folk: 'chọn từ bảng điểm', tech: 'giải mã; temperature chỉnh xác suất chọn', week: 9, where: 'ví dụ túi phiếu' },
     { folk: 'đổi trọng số và dùng trọng số', tech: 'huấn luyện và suy luận', week: 7, where: 'ví dụ tờ ghi chú trên bàn' },
-    { folk: 'mức tự tin không khớp với tỷ lệ trả lời đúng', tech: 'lệch hiệu chuẩn; ảo giác là một loại lỗi khác', week: 6, where: 'bài ước lượng; so sánh lại ở Tuần 9' },
+    { folk: 'mức tự tin không khớp với tỷ lệ trả lời đúng', tech: 'lệch hiệu chuẩn; ảo giác là một loại lỗi khác', week: 6, where: 'bài ước lượng; so sánh lại ở Tuần 8' },
     { folk: 'phần nào ở phía trước có liên quan đến từ đang xử lý', tech: 'attention', week: 11, where: 'bài bấm vào từng từ để xem mức liên quan' },
   ];
 })();

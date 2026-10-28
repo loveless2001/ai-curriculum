@@ -10,10 +10,10 @@ GM.views.home = function (main) {
       '<p>You do not need a math or computer-science background. We begin with a familiar experience: someone stops halfway ' +
       'through a sentence, and a likely next word comes to mind. That simple act gives us a way to study prediction before ' +
       'we study software.</p>' +
-      '<p>First practice prediction (Weeks 1–3), then learn to test answers and confidence (4–6). Apply those ideas to language ' +
-      'models (7–9), then examine training and attention (10–12). Each week also transfers its idea to ordinary work: writing, planning, research, comparison, or document use.</p>',
+      '<p>First explore prediction and build a model (Weeks 1–3), then examine evidence and confidence (4–6). Apply those ideas to language ' +
+      'models and complete a checked task (7–8), then examine token selection, training, and attention (9–12). Each week also transfers its idea to ordinary work: writing, planning, research, comparison, or document use.</p>',
       '<p>Bạn không cần biết trước về toán hay khoa học máy tính. Khóa học bắt đầu bằng một trải nghiệm rất quen: ai đó nói dở một câu, và trong đầu bạn tự bật ra một từ có vẻ hợp lý. Từ đó, ta tìm hiểu cách dự đoán hoạt động trước khi nói đến phần mềm.</p>' +
-      '<p>Tuần 1–3 nói về dự đoán. Tuần 4–6 nói về cách kiểm tra câu trả lời và mức độ chắc chắn. Tuần 7–9 áp dụng những ý này vào mô hình ngôn ngữ. Tuần 10–12 đi sâu vào huấn luyện và attention. Mỗi tuần đều có một ví dụ từ công việc thường ngày.</p>') }),
+      '<p>Tuần 1–3 nói về dự đoán và cách dựng mô hình. Tuần 4–6 nói về bằng chứng và mức tự tin. Tuần 7–8 áp dụng những ý này vào mô hình ngôn ngữ, kết thúc bằng một công việc có tiêu chí và cách kiểm. Tuần 9–12 đi sâu vào cách chọn token, huấn luyện và attention. Mỗi tuần đều có một ví dụ từ công việc thường ngày.</p>') }),
     GM.el('p', {}, [GM.el('a', { class: 'btn', href: '#/week/1' }, [GM.t('Start Week 1 →', 'Bắt đầu Tuần 1 →')])]),
   ]));
 

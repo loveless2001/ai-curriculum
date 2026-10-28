@@ -33,26 +33,34 @@ js/
 ## Key design decisions
 - **Data-driven weeks**: each week = `{num, arcId, beats[], checkpointStatement}`; beats
   declare `widget`/`widgetOpts` mounted by `week-session-view`.
-- **Simulated model** (Weeks 7–9): canned candidate lists + real softmax-with-temperature
-  math (`GM.softmaxT`) → scorer/chooser separation, temp-0 reproducibility, and
-  hallucination demos all work offline. Honesty notes in copy mark it as simulated.
+- **Arc structure**: Weeks 7–8 explain language models and finish a checked task.
+  Weeks 9–12 cover selection, training, attention, and chatbot training.
+- **Offline examples**: Week 7 uses prepared candidate lists; Week 8 uses checkable
+  source notes and order costs; Week 9 uses real softmax-with-temperature math
+  (`GM.softmaxT`) over prepared scores. The older scripted hallucination widget
+  remains registered but is no longer the Week 8 core activity.
 - **Jargon quarantine enforced in software**: `#/dictionary` renders locked until the
   Week 10 reveal widget sets `jargonRevealed` in localStorage.
 - **Progress**: per-week checkpoint checkboxes → sidebar progress bar; calibration
-  results and the capstone draft persist via `GM.store.setSaved`.
+  results and the capstone draft persist via `GM.store.setSaved`. Course-order
+  version 2 swaps the old Week 8/9 checkpoint positions once. Original notebook
+  IDs stay with the temperature and report content, preserving saved responses.
 - **Practical examples**: four bilingual data files add one `Apply it` section before
-  every checkpoint without changing the twelve-week conceptual order.
+  every checkpoint. Week 8 introduces a complete checked task; Week 12 refines it.
 - **Saved notes**: the shared notes widget stores responses for writing, planning,
   research, comparison, and document-use examples locally.
 
 ## Testing
-`node --check` passes on all JS. Headless-Chrome smoke test (scratchpad,
-`headless-smoke-test-all-routes.js`) verifies: all 13 routes render, dictionary
-gate, temp-0 determinism, calibration scoring, checkpoint persistence, 0 console
-errors. Re-run against `file://` after changes.
+Check JavaScript syntax with `node --check`. Headless Chrome QA over `file://`
+covers all 14 routes in each language, arc boundaries, dictionary rendering,
+temperature interaction, checkpoint migration, notebook persistence, mobile
+overflow, and browser errors. Inspect desktop and mobile screenshots when
+lesson markup changes.
 
 Run `node tests/bilingual-localization-smoke.js` to verify both language datasets,
 all 12 practical examples, localization load order, and every widget registration.
+Run `node tests/progress-course-order-test.js` to check the old checkpoint
+migration, note preservation, repeat loads, and storage-unavailable behavior.
 
 ## Conventions
 - Kebab-case, long descriptive filenames; every file < 200 lines.

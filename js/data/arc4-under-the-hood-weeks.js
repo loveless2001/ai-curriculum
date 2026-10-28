@@ -1,15 +1,37 @@
-/* Arc 4 (Weeks 10-12): Under the hood, and the road onward. Jargon reveal,
-   training loop, attention/circuits, alignment pipeline, capstone, exit ramp. */
+/* Arc 4 (Weeks 9-12): token selection, training, attention, and chatbots. */
 GM.arcs.push({
   id: 4,
-  name: 'Arc 4 — Training, attention, and chatbots',
-  shortName: 'Arc 4 · Under the hood',
-  claim: 'This arc connects the course’s plain-language ideas to technical terms, then shows the basic training loop, attention, and instruction tuning.',
-  weeks: [10, 11, 12],
+  name: 'Arc 4 — Inside a language model',
+  shortName: 'Arc 4 · Inside the model',
+  claim: 'Look more closely at token selection, then explore how training changes weights, how attention uses context, and how further training shapes a chatbot.',
+  weeks: [9, 10, 11, 12],
 });
 
 GM.weeks.push({
-  num: 10, arcId: 4, showArcBanner: true,
+  num: 9, arcId: 4, showArcBanner: true,
+  short: 'Scores, selection, and temperature',
+  title: 'Scores, selection, and temperature',
+  tagline: 'Temperature changes how the next token is chosen from fixed scores.',
+  checkpointStatement: 'I can explain how temperature changes selection and why it does not check facts.',
+  beats: [
+    { kind: 'puzzle', html:
+      '<p>Arc 3 ended with checking whether a result is ready to use. Now look inside one step of generating it: choosing the next token.</p><p>Week 7 separated scoring from choosing. Suppose the next-token probabilities are “cup” 80%, “mug” 15%, “bowl” 5%. Always choosing the top word gives “cup.” Drawing from a bag with 80 cup tickets, 15 mug tickets, and 5 bowl tickets can give other answers.</p><p><strong>Temperature</strong> changes how strongly the draw favors higher-scoring options. It does not retrain the model.</p>' },
+    { kind: 'exercise', title: 'The knob lab', html:
+      '<p>Try a factual, creative, and ambiguous prompt at low and high temperature. Predict which will vary most, then generate several times.</p><p>Return to Week 2’s ranking: a prompt with several plausible continuations may show more variation. One random batch need not match your prediction.</p>',
+      widget: 'temperature-lab' },
+    { kind: 'exercise', title: 'The score card and the ticket bag', html:
+      '<p>Keep one score card fixed. Compare always choosing its top word with drawing tickets from the bag.</p><p>Lower temperature concentrates more tickets on the top choices; higher temperature spreads them more evenly. In this demo, temperature 0 picks the top choice.</p><p>After a token is added, the text has changed, so the next step gets a new score card.</p>' },
+    { kind: 'exercise', title: 'Reproducibility test', html:
+      '<p>Run the same prompt twice at temperature 0, then twice at a higher setting. Compare the results.</p><p>Repeated draws can produce the same answer even at high temperature. Real services may also vary at temperature 0 if their computation or settings differ. As in Week 8, repetition alone does not establish truth.</p>' },
+    { kind: 'naming', html:
+      '<p><strong>Scores</strong> describe possible next tokens. <strong>Decoding</strong> is the process of choosing tokens from those scores.</p><p><strong>Temperature</strong> changes the probabilities used for selection. Higher temperature can increase variety; it does not check facts. A likely word can still be part of a false answer.</p>' },
+    { kind: 'checkpoint', html:
+      '<p>Explain the ticket-bag example in your own words. Predict what higher temperature will do for two prompts, run several trials, and explain any mismatch. Why does lowering temperature not replace the checks from Week 8?</p><p>This week kept the model’s scores fixed. Week 10 examines how training changes the weights that produce them.</p>' },
+  ],
+});
+
+GM.weeks.push({
+  num: 10, arcId: 4,
   short: 'How training changes a model',
   title: 'How training changes a model',
   tagline: 'Connect familiar ideas to the terms used in technical writing.',
